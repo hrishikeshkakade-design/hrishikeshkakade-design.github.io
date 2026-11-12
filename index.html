@@ -997,7 +997,7 @@ function hex(rgb){
 }
 const WEIGHTS={400:'Regular',500:'Medium',600:'Semi Bold',700:'Bold'};
 function props(){
-  const el=selected; if(!el) return;
+  const el=selected||board; /* nothing selected: show the Hello frame's properties */
   const cs=getComputedStyle(el), b=board.getBoundingClientRect(), r=el.getBoundingClientRect();
   const kind=el.dataset.kind, isCard=kind==='Sticky'||kind==='Image';
   $('pName').textContent=el.dataset.layer; $('pKind').textContent=kind;
@@ -1035,7 +1035,7 @@ canvasEl.addEventListener('pointerdown',e=>{
 });
 
 function refresh(){placeCards(); drawSel(); props()}
-placeCards(); select(board.querySelector('h1'));
+placeCards(); select(null);
 addEventListener('resize',refresh);
 if(document.fonts&&document.fonts.ready) document.fonts.ready.then(refresh);
 new MutationObserver(()=>requestAnimationFrame(props)).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});

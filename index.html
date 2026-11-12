@@ -7,7 +7,7 @@
 <title>Hrishikesh Kakade — Product Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Caveat:wght@600&display=swap">
 <style>
 html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 body{margin:0}
@@ -19,9 +19,9 @@ img{max-width:100%}
   --grid:#C9CED8; --canvas:#E9EBEF; --select:#F2560B; --select-soft:#FFE7DA; --sticky:#DDF6FF; --sticky-ink:#0E2A3A;
   --mint:#D5ECFF; --lilac:#EBDDFF; --peach:#F4DBFF;
   --cyan:#7FE7FF; --violet:#C98BFF; --grad:linear-gradient(135deg,#7FE7FF,#C98BFF);
-  --f-display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
-  --f-body:"Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --f-mono:"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --f-display:"Manrope", "Avenir Next", system-ui, sans-serif;
+  --f-body:"Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
   --r:14px;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
@@ -146,7 +146,6 @@ section{padding-block:clamp(64px,10vw,120px)}
 .board::before{content:"";position:absolute;inset:0 6%;pointer-events:none;opacity:0;transition:opacity .3s;
   --c:calc((100% - 11 * 16px) / 12);
   background:repeating-linear-gradient(90deg,color-mix(in srgb,var(--select) 7%,transparent) 0 var(--c),transparent var(--c) calc(var(--c) + 16px))}
-.board:hover::before{opacity:1}
 .hello{position:absolute;left:6%;top:9%;width:min(560px,56%);display:grid;gap:18px;z-index:1}
 .who{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;font-size:.9rem}
 .who b{font:600 .95rem var(--f-display);letter-spacing:-.01em}

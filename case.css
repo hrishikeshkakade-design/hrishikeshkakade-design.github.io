@@ -4,9 +4,9 @@
   --select:#F2560B; --select-soft:#FFE7DA; --mint:#D5ECFF; --lilac:#EBDDFF; --peach:#F4DBFF; --violet:#9B6BFF;
   --grad:linear-gradient(135deg,#7FE7FF,#C98BFF);
   --glass:color-mix(in srgb,var(--surface) 60%,transparent); --glass-edge:color-mix(in srgb,#FFFFFF 70%,var(--line));
-  --f-display:"Bricolage Grotesque","Avenir Next",system-ui,sans-serif;
-  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --f-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --f-display:"Manrope","Avenir Next",system-ui,sans-serif;
+  --f-body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
   --r:14px; --read:720px;
   color-scheme:light;
 }

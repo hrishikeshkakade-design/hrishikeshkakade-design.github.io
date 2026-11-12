@@ -10,7 +10,7 @@
 </head>
 <body>
 <!-- Content source: the "Unit Economics Cost Engine" tab of the Portfolio Case Studies doc.
-     Image spots are .ph placeholders: swap each <div class="ph"> for an <img>. -->
+     Screenshots come from the Advanced Cost Allocation Figma file and live in img/ue/. -->
 <nav class="cnav" aria-label="Case study">
   <a class="nbtn back" href="index.html#work" aria-label="Back to all work"><i class="mark" aria-hidden="true"></i><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg><span class="nlabel">All work</span></a>
   <span class="nsep" aria-hidden="true"></span>
@@ -36,7 +36,7 @@
       <a class="btn primary" href="#overview">Explore the case study ↓</a>
       <a class="btn" href="#" data-pdf="">View PDF ↗</a>
     </div>
-    <figure class="cover"><div class="ph " role="img" aria-label="Image placeholder: Cover: the full allocation canvas"><span class="ph-tag">Cover</span><span>Cover: the full allocation canvas<br>2400 × 1350</span></div><figcaption class="cover-cap">From fragmented cost data to a connected allocation model.</figcaption></figure>
+    <figure class="cover"><img class="shot" src="img/ue/cover.webp" alt="The full allocation canvas in view mode: contributors, intermediate tables and the final report" width="1920" height="1080" fetchpriority="high" decoding="async"><figcaption class="cover-cap">From fragmented cost data to a connected allocation model.</figcaption></figure>
   </header>
 
   <div class="wrap body">
@@ -64,7 +64,7 @@
         <h2>A bill says what you spent. Not what one customer costs.</h2>
         <p class="lead">Some costs map directly to a product or team. Others are shared and need to be distributed using business metrics, resource consumption or custom logic.</p>
         <p>To get from raw spend to meaningful unit economics, users need to combine data from multiple sources, map costs to business entities, apply calculations and understand how the final number was produced.</p>
-        <figure class="wide"><div class="ph r219" role="img" aria-label="Image placeholder: Existing workflow: provider bills + business data → spreadsheets / SQL → manual allocation rules → reports"><span class="ph-tag">Diagram</span><span>Existing workflow: provider bills + business data → spreadsheets / SQL → manual allocation rules → reports<br>1600 × 700</span></div><figcaption>The existing workflow, with its handoffs and engineering dependency.</figcaption></figure>
+        <figure><img class="shot" src="img/ue/workflow.webp" alt="The existing workflow: provider bills and business data go into spreadsheets and custom SQL, then manual allocation rules, then reports. When a number looks wrong, the FinOps analyst asks a data engineer, who writes and updates the spreadsheets, SQL and rules." width="1800" height="714" loading="lazy" decoding="async"><figcaption>Before: every change to the allocation logic went through a data engineer.</figcaption></figure>
         <h3>Where the workflow broke down</h3>
         <ul class="kv">
           <li><b>Scattered inputs</b><span>Important business metrics often sit outside provider billing exports.</span></li>
@@ -91,11 +91,7 @@
         <h2>The data the bill doesn't have.</h2>
         <p class="lead">Before designing the builder, I worked on the data model underneath it. Allocation depends on more than billing exports, so users needed a consistent way to bring business data into OneLens and prepare it for calculations.</p>
         <div class="cards"><div class="card"><span class="k">Entity · Target</span><h4>Things that receive cost</h4><p>Products or lines of business that become the rows of the output report.</p></div><div class="card"><span class="k">Entity · Source</span><h4>Dimensions used in rules</h4><p>Customers or other business dimensions that rules can split or filter by.</p></div><div class="card"><span class="k">Mapping</span><h4>Relationships between entities</h4><p>ID pairs such as Customer → Product, with effective dates when relationships change over time.</p></div><div class="card"><span class="k">Metric</span><h4>Usage and business numbers</h4><p>Revenue, database size or cost drivers that determine how shared costs are distributed.</p></div><div class="card"><span class="k">Derived dataset</span><h4>Transformed raw data</h4><p>Cleaned and standardised data, such as normalised usage by customer, ready for allocation.</p></div></div>
-        <div class="flowex" role="img" aria-label="Example: Customer and Product link through a Mapping; a Revenue metric and a Usage metric combine into a Derived dataset, which becomes an allocation input.">
-          <span class="k">Example · How the building blocks connect</span>
-          <div class="frow"><span class="fn ent">Customer</span><span class="fo">+</span><span class="fn ent">Product</span><span class="fo">→</span><span class="fn">Mapping: Customer → Product</span></div>
-          <div class="frow"><span class="fn met">Revenue metric</span><span class="fo">+</span><span class="fn met">Usage metric</span><span class="fo">→</span><span class="fn">Derived dataset</span><span class="fo">→</span><span class="fn out">Allocation input</span></div>
-        </div>
+        <figure><img class="shot" src="img/ue/building-blocks.webp?v=2" alt="How the building blocks connect: the Customer (source) and Product (target) entities link through a Customer to Product mapping. Revenue and Usage metrics combine into a derived dataset. The mapping and the derived dataset both feed the allocation input, and the mapping can also inform the derived dataset." width="1128" height="1015" loading="lazy" decoding="async"><figcaption>Example: how the building blocks connect.</figcaption></figure>
         <h3>Decisions that shaped the dataset experience</h3>
         <ul class="kv">
           <li><b>One list with health</b><span>Show each dataset's key, grain, input method, record count, owner and health status.</span></li>
@@ -105,8 +101,8 @@
           <li><b>Time-aware relationships</b><span>Effective dates let mappings change without rewriting historical periods.</span></li>
         </ul>
         <div class="pair">
-          <figure><span class="pill">List</span><div class="ph r43" role="img" aria-label="Image placeholder: Dataset list"><span>Dataset list<br>1200 × 900</span></div><figcaption>Health, grain, owner and input method for every dataset.</figcaption></figure>
-          <figure><span class="pill">Add</span><div class="ph r43" role="img" aria-label="Image placeholder: Add mapping"><span>Add mapping<br>1200 × 900</span></div><figcaption>Upload a file or enter rows by hand.</figcaption></figure>
+          <figure><span class="pill">List</span><img class="shot" src="img/ue/datasets-list.webp" alt="Datasets list with type, key, grain, input, records, owner and health" width="1600" height="900" loading="lazy" decoding="async"><figcaption>Health, grain, owner and input method for every dataset.</figcaption></figure>
+          <figure><span class="pill">Add</span><img class="shot" src="img/ue/add-mapping.webp" alt="Add Mapping panel: mapping name, cardinality, entities, owner, granularity and input method" width="1600" height="900" loading="lazy" decoding="async"><figcaption>Upload a file or enter rows by hand.</figcaption></figure>
         </div>
       </section>
 
@@ -122,17 +118,53 @@
           <li><b>Dry run</b><span>Preview the output before saving or publishing.</span></li>
         </ol>
         <div class="pair">
-          <figure><span class="pill">Version 1</span><div class="ph r43" role="img" aria-label="Image placeholder: Wizard, step 1"><span>Wizard, step 1<br>1200 × 900</span></div><figcaption>Targets and contributors.</figcaption></figure>
-          <figure><span class="pill">Version 1</span><div class="ph r43" role="img" aria-label="Image placeholder: Wizard, step 2"><span>Wizard, step 2<br>1200 × 900</span></div><figcaption>Report computation.</figcaption></figure>
+          <figure><span class="pill">Version 1</span><img class="shot" src="img/ue/wizard-1.webp" alt="Version 1 wizard, step 1: targets and contributors, with the live YAML panel" width="1600" height="900" loading="lazy" decoding="async"><figcaption>Targets and contributors.</figcaption></figure>
+          <figure><span class="pill">Version 1</span><img class="shot" src="img/ue/wizard-2.webp" alt="Version 1 wizard, step 2: report computation, with the YAML panel" width="1600" height="900" loading="lazy" decoding="async"><figcaption>Report computation.</figcaption></figure>
         </div>
         <div class="learned"><span class="pill">What I learned</span><h3>The wizard made the workflow linear. The problem wasn't.</h3><p>The wizard worked for straightforward rules, but real allocation logic often needed intermediate tables. A result from one calculation could become an input to another. Users needed to understand those relationships across the workflow, not just complete one step at a time. The YAML panel helped technical users inspect the rule, but it exposed implementation rather than explaining the logic to finance users.</p></div>
         <h3>Exploring the in-between</h3>
         <p>The missing piece was a working table: a place to combine inputs, transform them and pass the result into another stage. Once tables could feed other tables, a linear wizard no longer represented the system well.</p>
         <p>I explored a seven-stage flow for creating a working table: create it, define its purpose, build its structure, connect contributors, add safeguards, write or generate SQL, and test it against real data.</p>
-        <figure class="wide"><div class="ph r219" role="img" aria-label="Image placeholder: Exploration board: the seven stages of building a working table"><span class="ph-tag">Explorations</span><span>Exploration board: the seven stages of building a working table<br>1600 × 700</span></div><figcaption>What each stage resolved.</figcaption></figure>
+        <div class="stages" aria-roledescription="carousel" aria-label="The seven stages of building a working table">
+          <div class="stages-bar">
+            <span class="stages-count" aria-live="polite">Step <b id="stageNow">1</b> of 7</span>
+            <div class="stages-nav"><button type="button" class="sbtn" id="stagePlay" aria-pressed="true" aria-label="Pause auto-play">❚❚</button><button type="button" class="sbtn" id="stagePrev" aria-label="Previous step">←</button><button type="button" class="sbtn" id="stageNext" aria-label="Next step">→</button></div>
+          </div>
+          <ol class="stages-track" id="stageTrack">
+            <li class="sc" id="stage-1">
+              <img class="shot" src="img/ue/stage-1.webp" alt="Step 1, Create the table: the Add Intermediate Table panel" width="673" height="788" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 1 <i>of 7</i></span><h4>Create the table</h4><p>Name the working table, say what it's for, and pick the contributors whose columns it can use.</p></div>
+            </li>
+            <li class="sc" id="stage-2">
+              <img class="shot" src="img/ue/stage-2.webp" alt="Step 2, Define the logic: the Add Intermediate Table panel" width="673" height="788" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 2 <i>of 7</i></span><h4>Define the logic</h4><p>Describe in plain English what the table should calculate. No SQL needed: the description becomes the starting point for the logic.</p></div>
+            </li>
+            <li class="sc" id="stage-3">
+              <img class="shot" src="img/ue/stage-3.webp" alt="Step 3, Build the structure: the Add Intermediate Table panel" width="673" height="788" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 3 <i>of 7</i></span><h4>Build the structure</h4><p>Choose what each row represents, the table's grain, then add the columns and calculations the output needs.</p></div>
+            </li>
+            <li class="sc" id="stage-4">
+              <img class="shot" src="img/ue/stage-4.webp" alt="Step 4, Connect contributors: the Add Intermediate Table panel" width="673" height="788" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 4 <i>of 7</i></span><h4>Connect contributors</h4><p>OneLens suggests how the sources relate, by matching columns or looking up a value. Users accept a suggestion or add their own.</p></div>
+            </li>
+            <li class="sc" id="stage-5">
+              <img class="shot" src="img/ue/stage-5.webp" alt="Step 5, Add safeguards: the Add Intermediate Table panel" width="673" height="788" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 5 <i>of 7</i></span><h4>Add safeguards</h4><p>Decide what happens when data is missing, late or doesn't match, and who gets notified.</p></div>
+            </li>
+            <li class="sc" id="stage-6">
+              <img class="shot" src="img/ue/stage-6.webp" alt="Step 6, Generate SQL: the Add Intermediate Table panel" width="673" height="788" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 6 <i>of 7</i></span><h4>Generate SQL</h4><p>Everything so far becomes a guide to hand to an LLM. Users paste the SQL it returns and can review or edit it.</p></div>
+            </li>
+            <li class="sc" id="stage-7">
+              <img class="shot" src="img/ue/stage-7.webp" alt="Step 7, Test and publish: the Add Intermediate Table panel" width="673" height="788" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 7 <i>of 7</i></span><h4>Test and publish</h4><p>Run the SQL against source data, check warnings and blockers, then publish the table.</p></div>
+            </li>
+          </ol>
+          <div class="stages-dots" role="tablist" aria-label="Choose a step"><button type="button" role="tab" aria-label="Step 1" data-i="0"></button><button type="button" role="tab" aria-label="Step 2" data-i="1"></button><button type="button" role="tab" aria-label="Step 3" data-i="2"></button><button type="button" role="tab" aria-label="Step 4" data-i="3"></button><button type="button" role="tab" aria-label="Step 5" data-i="4"></button><button type="button" role="tab" aria-label="Step 6" data-i="5"></button><button type="button" role="tab" aria-label="Step 7" data-i="6"></button></div>
+        </div>
         <h3>Choosing the right entry point</h3>
         <p>I also explored ways to add a working table: from the toolbar, from an empty column, from an existing node, and through a question-led prompt.</p>
-        <figure class="wide"><div class="ph r219" role="img" aria-label="Image placeholder: Entry point explorations"><span class="ph-tag">Explorations</span><span>Entry point explorations<br>1600 × 700</span></div><figcaption>The selected entry point, marked.</figcaption></figure>
+        <figure><img class="shot" src="img/ue/entry-points.webp" alt="Four ways to add a working table on the canvas" width="1764" height="1120" loading="lazy" decoding="async"><figcaption>The selected entry point, marked.</figcaption></figure>
       </section>
 
       <!-- 06 SOLUTION -->
@@ -140,7 +172,7 @@
         <span class="sec-k">06 · The solution</span>
         <h2>The logic, on one canvas.</h2>
         <p class="lead">The canvas lays allocation out from left to right in three stages: contributors, working tables and the final report. Every input, table and output is represented as a node; connecting lines show what feeds what.</p>
-        <figure class="wide"><div class="ph " role="img" aria-label="Image placeholder: Final canvas in build mode"><span class="ph-tag">Final</span><span>Final canvas in build mode<br>2400 × 1350</span></div><figcaption>Contributors, working tables and the final report on one canvas.</figcaption></figure>
+        <figure><img class="shot" src="img/ue/canvas-build.webp" alt="The canvas in build mode, with the three stages across the top" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>Contributors, working tables and the final report on one canvas.</figcaption></figure>
         <div class="numcards">
           <div><i>01</i><h4>Prepare the data</h4><p>Bring entities, mappings, metrics and cost inputs into one managed dataset layer. Surface data health and metadata before a rule uses the input.</p></div>
           <div><i>02</i><h4>Build allocation logic</h4><p>Connect contributors, create intermediate working tables and define how costs flow into the final unit economics report.</p></div>
@@ -149,19 +181,19 @@
         </div>
         <div class="feature">
           <div class="txt"><h3>Keeping the canvas readable, with depth one click away</h3><p>Nodes communicate contributor type and relevant cost context at a glance. Selecting a node opens a side panel for its definition, structure, connections, safeguards, SQL and test results. The canvas stays focused on the overall flow while detailed configuration remains accessible when needed.</p></div>
-          <div class="ph r43" role="img" aria-label="Image placeholder: Node side panel"><span>Node side panel<br>1200 × 900</span></div>
+          <img class="shot" src="img/ue/node-panel.webp" alt="A working table selected, with its run details, SQL, warnings and output preview in the side panel" width="1600" height="900" loading="lazy" decoding="async">
         </div>
         <div class="feature flip">
           <div class="txt"><h3>Making data transformation accessible</h3><p>Derived datasets let users standardise inconsistent source data before it enters an allocation rule. Users can define transformations, map values to standard entities, normalise metrics and preview the result.</p></div>
-          <div class="ph r43" role="img" aria-label="Image placeholder: Derived dataset editor"><span>Derived dataset editor<br>1200 × 900</span></div>
+          <img class="shot tall" src="img/ue/derived-sql.webp" alt="Derived dataset step 4: paste SQL, dry-run, map metadata fields and preview the data" width="667" height="1080" loading="lazy" decoding="async">
         </div>
         <div class="feature">
           <div class="txt"><h3>Lowering the SQL barrier</h3><p>For users who don't write SQL, the AI-assisted query flow turns a plain-language description into a starting query. Technical users can inspect, edit and test the generated SQL before it runs.</p></div>
-          <div class="ph r43" role="img" aria-label="Image placeholder: AI-assisted query flow"><span>AI-assisted query flow<br>1200 × 900</span></div>
+          <img class="shot tall" src="img/ue/ai-guide.webp" alt="Derived dataset step 3: a generated guide to hand to an LLM, which returns the SQL" width="864" height="1080" loading="lazy" decoding="async">
         </div>
         <div class="feature flip">
           <div class="txt"><h3>From allocation to analysis</h3><p>The analytics view turns allocation outputs into charts and tables. Users can compare columns, group and filter by dimensions, switch report versions, save views and add report widgets to dashboards. Hierarchy management shows how costs roll up across the business.</p></div>
-          <div class="ph r43" role="img" aria-label="Image placeholder: Analytics page"><span>Analytics page<br>1200 × 900</span></div>
+          <img class="shot" src="img/ue/analytics.webp" alt="Analytics: cost per customer by month, grouped by customer, with the data table below" width="1600" height="977" loading="lazy" decoding="async">
         </div>
       </section>
 
@@ -172,8 +204,8 @@
         <p class="lead">Allocation frameworks change as businesses change. When a finance lead asks why cost per customer increased, they need to trace the report back to the rule and configuration that produced it.</p>
         <div class="cards"><div class="card"><span class="k">State</span><h4>Draft and published</h4><p>Distinguish working configurations from rules that are live.</p></div><div class="card"><span class="k">Mode</span><h4>View and edit</h4><p>Inspect a rule without risking an accidental change.</p></div><div class="card"><span class="k">History</span><h4>Change log and revert</h4><p>See who changed what and when, with a controlled way to return to a previous version.</p></div><div class="card"><span class="k">Reports</span><h4>Report versions</h4><p>Connect a report output to the version of the rule that generated it.</p></div><div class="card"><span class="k">Runs</span><h4>Execution logs</h4><p>Inspect run status and timing to understand whether an allocation completed.</p></div><div class="card"><span class="k">Findability</span><h4>Meaningful names</h4><p>Name rules and reports so they're easier to find in logs and history.</p></div></div>
         <div class="pair">
-          <figure><span class="pill">History</span><div class="ph r43" role="img" aria-label="Image placeholder: Change log and revert"><span>Change log and revert<br>1200 × 900</span></div><figcaption>Version details and the revert confirmation.</figcaption></figure>
-          <figure><span class="pill">Runs</span><div class="ph r43" role="img" aria-label="Image placeholder: Execution logs"><span>Execution logs<br>1200 × 900</span></div><figcaption>Run status and timing.</figcaption></figure>
+          <figure><span class="pill">History</span><img class="shot" src="img/ue/changelog.webp" alt="Change log with dated events, including View Details and Revert to this version" width="1600" height="900" loading="lazy" decoding="async"><figcaption>Version details and the revert confirmation.</figcaption></figure>
+          <figure><span class="pill">Runs</span><img class="shot" src="img/ue/exec-logs.webp" alt="Execution logs with successful and failed runs" width="1600" height="900" loading="lazy" decoding="async"><figcaption>Run status and timing.</figcaption></figure>
         </div>
       </section>
 
@@ -212,7 +244,6 @@
           <div class="card"><span class="k">Connected cost structures</span><h4>Advanced allocation meets business hierarchy</h4><p>The next version will bring the advanced allocation workflow together with the hierarchy and cost-centre capabilities already available in OneLens. This should make it easier to align allocation logic with how an organisation is structured, and understand how costs flow across its levels.</p></div>
           <div class="card"><span class="k">A more integrated assistant</span><h4>From external LLM dependency to an in-product experience</h4><p>The experience is also moving towards a more capable, chatbot-forward interface built into OneLens. Rather than sending users to a separate external LLM experience, conversational assistance will sit closer to the data and allocation workflow, helping users work through tasks in context.</p></div>
         </div>
-        <figure class="wide"><div class="ph r219" role="img" aria-label="Image placeholder: Version 3: hierarchy-to-allocation flow and the integrated assistant"><span class="ph-tag">Version 3</span><span>Version 3: hierarchy-to-allocation flow and the integrated assistant<br>1600 × 700</span></div><figcaption>Coming when Version 3 is ready.</figcaption></figure>
         <h3>What this could unlock</h3>
         <ul class="kv">
           <li><b>More consistent allocation</b><span>Connect allocation rules to the hierarchy and cost-centre structure teams already maintain.</span></li>

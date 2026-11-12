@@ -139,6 +139,20 @@ section{padding-block:clamp(64px,10vw,120px)}
 .layer svg{width:12px;height:12px;flex:none;opacity:.75}
 .layer .lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
+.canvas-glow{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;
+  background-image:radial-gradient(circle 150px at var(--gx,-500px) var(--gy,-500px),color-mix(in srgb,var(--select) 10%,transparent),transparent 70%),radial-gradient(var(--select) 1.3px,transparent 1.3px);
+  background-size:100% 100%,20px 20px;
+  -webkit-mask-image:radial-gradient(circle 170px at var(--gx,-500px) var(--gy,-500px),#000 0%,rgba(0,0,0,.55) 45%,transparent 100%);
+  mask-image:radial-gradient(circle 170px at var(--gx,-500px) var(--gy,-500px),#000 0%,rgba(0,0,0,.55) 45%,transparent 100%)}
+.fig-canvas.glow .canvas-glow{opacity:1}
+.glance-wrap{padding-block:28px 0}
+.glance{margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-block:1px solid var(--line)}
+.glance>div{display:grid;gap:6px;align-content:start;padding:20px 20px 20px 0;min-width:0}
+.glance>div+div{padding-left:20px;border-left:1px solid var(--line)}
+.glance dt{font:500 .68rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.glance dd{margin:0;font-weight:600;font-size:.98rem}
+.glance .st{display:flex;gap:8px;align-items:baseline}
+@media (max-width:760px){.glance{grid-template-columns:1fr 1fr}.glance>div:nth-child(3){padding-left:0;border-left:0}.glance>div:nth-child(n+3){border-top:1px solid var(--line)}}
 .fig-canvas{position:relative;overflow:hidden;background-color:var(--canvas);
   background-image:radial-gradient(var(--grid) 1px,transparent 1px);background-size:20px 20px;touch-action:pan-y}
 .board-label{position:absolute;left:5%;top:24px;font:500 11px var(--f-body);color:var(--muted)}
@@ -146,7 +160,8 @@ section{padding-block:clamp(64px,10vw,120px)}
 .board::before{content:"";position:absolute;inset:0 6%;pointer-events:none;opacity:0;transition:opacity .3s;
   --c:calc((100% - 11 * 16px) / 12);
   background:repeating-linear-gradient(90deg,color-mix(in srgb,var(--select) 7%,transparent) 0 var(--c),transparent var(--c) calc(var(--c) + 16px))}
-.hello{position:absolute;left:6%;top:9%;width:min(560px,56%);display:grid;gap:18px;z-index:1}
+.board{container-type:inline-size}
+.hello{position:absolute;left:6%;top:10%;width:min(560px,50%);display:grid;gap:16px;z-index:1}
 .who{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;font-size:.9rem}
 .who b{font:600 .95rem var(--f-display);letter-spacing:-.01em}
 .who span{color:var(--muted)}
@@ -157,9 +172,9 @@ section{padding-block:clamp(64px,10vw,120px)}
 .hsum dd{margin:0;font-size:.82rem;line-height:1.35;font-weight:500}
 .hsum .st{display:flex;gap:8px;align-items:baseline}
 .hsum .st .dot{transform:translateY(-1px)}
-.hero h1{font-size:clamp(1.9rem,2.7vw,2.9rem);line-height:1.04;font-weight:700}
+.hero h1{font-size:clamp(1.6rem,4.6cqi,2.9rem);line-height:1.04;font-weight:700}
 .hero h1 em{font-style:normal;white-space:nowrap;background:linear-gradient(90deg,color-mix(in srgb,#7FE7FF 60%,transparent),color-mix(in srgb,#C98BFF 60%,transparent)) no-repeat 0 88%/100% .36em;padding:0 .08em}
-.hero-sub{color:var(--muted);font-size:1rem;max-width:440px}
+.hero-sub{color:var(--muted);font-size:clamp(.88rem,1.75cqi,1rem);max-width:440px}
 .hero-cta{display:flex;gap:10px;flex-wrap:wrap}
 .status{font:500 .74rem var(--f-mono);color:var(--muted);display:flex;gap:8px;align-items:center}
 
@@ -271,10 +286,21 @@ section{padding-block:clamp(64px,10vw,120px)}
 .comp{display:flex;gap:6px;margin-top:10px}
 .comp span{padding:6px 10px;border-radius:7px;font-weight:600;font-size:.66rem}
 
+.aibars{display:grid;gap:7px}
+.aibars div{display:grid;grid-template-columns:56px 1fr;gap:8px;align-items:center;font:500 .62rem var(--f-mono);color:var(--muted)}
+.aibars i{display:block;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--select),#C98BFF)}
 .trow{display:grid;grid-template-columns:1.6fr repeat(3,.8fr);gap:6px;padding:6px 0;border-top:1px solid var(--line);font-size:.68rem;align-items:center}
 .trow span:first-child{font-family:var(--f-mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .trow.th{border-top:0;font:500 .58rem var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
 .trow .ok{color:#9B6BFF;font-weight:700}.trow .bad{color:var(--select);font-weight:700}.trow .warn{font:500 .6rem var(--f-mono);color:var(--select)}
+.cover.has-shot{padding:28px;align-content:center}
+.cover-shot{display:block;width:100%;height:auto;border-radius:10px;border:1px solid var(--line);background:#fff;box-shadow:0 24px 48px -28px rgba(20,23,31,.45);transition:transform .35s ease}
+.case:hover .cover-shot{transform:scale(1.02)}
+.cover-shot.is-cut{border:0;border-radius:0;background:none;box-shadow:none}
+.cover.has-shot:has(.is-cut){padding:0;place-items:center start}
+.cover-shot.is-cut{width:100%;height:100%;object-fit:cover;object-position:left center;transform-origin:left center}
+.cover.has-shot:has(.is-cut){padding:0;place-items:stretch;align-content:stretch}
+@media (max-width:820px){.cover:has(.is-cut){aspect-ratio:1460/1255;min-height:0}}
 .case-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
 .case-actions .btn{padding:9px 16px;font-size:.88rem}
 .case.tbd{cursor:default;border-style:dashed}
@@ -295,6 +321,9 @@ section{padding-block:clamp(64px,10vw,120px)}
 .ew-cover{height:150px;display:grid;place-items:center;padding:18px;overflow:hidden}
 .ew-ui{width:100%;max-width:220px;display:grid;gap:7px;padding:12px;transition:transform .35s ease}
 .ew:hover .ew-ui{transform:scale(1.04)}
+.ew-cover.has-img{height:auto;aspect-ratio:1228/959;padding:0;background:#1d1d1f}
+.ew-cover.has-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease}
+.ew:hover .ew-cover.has-img img{transform:scale(1.04)}
 .ew-alloc{display:flex;gap:2px;height:6px;border-radius:3px;overflow:hidden}
 .ew-field{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line);border-radius:6px;padding:4px 8px;font-size:.62rem;color:var(--muted)}
 .ew-field b{color:var(--ink);font-weight:600}
@@ -309,6 +338,7 @@ section{padding-block:clamp(64px,10vw,120px)}
 .ew-all-in{position:relative;flex:1;padding:22px;display:flex;flex-direction:column;gap:8px;justify-content:flex-end;min-height:220px}
 .ew-all .ew-meta{color:color-mix(in srgb,var(--bg) 60%,transparent)}
 .ew-all h4{font-size:1.4rem}
+.ew-be{position:absolute;top:18px;left:22px;height:44px;padding:0 12px;border-radius:12px;background:#1769FF;color:#fff;display:grid;place-items:center;font:800 1.45rem/1 var(--f-display);letter-spacing:-.04em}
 .ew-all p{color:color-mix(in srgb,var(--bg) 70%,transparent);font-size:.9rem}
 .ew-arrow{position:absolute;top:18px;right:18px;width:44px;height:44px;border-radius:50%;background:var(--select);color:#fff;display:grid;place-items:center;font-size:1.2rem;transition:transform .25s}
 .ew-all:hover .ew-arrow{transform:rotate(45deg)}
@@ -406,6 +436,31 @@ section{padding-block:clamp(64px,10vw,120px)}
 }
 
 /* Toolkit */
+.caps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--line)}
+.caps>div{padding:22px 24px 22px 0;border-bottom:1px solid var(--line);display:grid;gap:8px;align-content:start}
+.caps h3{font-size:1.05rem}
+.caps p{color:var(--muted);font-size:.95rem}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:22px}
+.tools span{font:500 .78rem var(--f-mono);padding:5px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.tools .tools-k{border:0;padding-left:0;color:var(--ink);text-transform:uppercase;letter-spacing:.08em;font-size:.7rem}
+@media (max-width:900px){.caps{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.caps{grid-template-columns:1fr}}
+.phil{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:start}
+.phil-main{display:grid;gap:18px}
+.phil h2{font-size:clamp(1.6rem,3.2vw,2.4rem);line-height:1.18}
+.phil-main p{color:var(--muted);font-size:1.05rem;max-width:60ch}
+.diffs{list-style:none;margin:0;padding:0;display:grid;border-top:1px solid var(--line)}
+.diffs li{display:grid;gap:4px;padding:16px 0;border-bottom:1px solid var(--line)}
+.diffs b{font:600 1rem var(--f-display)}
+.diffs span{color:var(--muted);font-size:.93rem}
+@media (max-width:820px){.phil{grid-template-columns:1fr}}
+.brief{margin:0;display:grid;gap:8px;padding-top:14px;border-top:1px dashed var(--line)}
+.brief div{display:grid;grid-template-columns:88px 1fr;gap:12px}
+.brief dt{font:500 .68rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+.brief dd{margin:0;font-size:.92rem}
+.soon-chip{align-self:flex-start;font:500 .78rem var(--f-mono);padding:7px 12px;border-radius:999px;border:1px dashed var(--muted);color:var(--muted)}
+.case.is-soon{cursor:default}
+.case.is-soon:hover{transform:none}
 .toolkit{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
 .toolkit h3{font-size:1.02rem;margin-bottom:12px}
 .toolkit ul{list-style:none;margin:0;padding:0;display:grid;gap:7px;color:var(--muted);font-size:.94rem}
@@ -471,7 +526,7 @@ html.cc.cc-in .ccur{opacity:1}
       <div class="fig-slot" id="figSlot">
       <header class="fig-top" id="figTop">
         <nav class="fig-tools" aria-label="Main">
-          <a class="tool brand" href="#hello" aria-label="Hrishikesh Kakade, back to top"><i class="mark" aria-hidden="true"></i><span class="tl brand-name">hrishikesh</span></a>
+          <a class="tool brand" href="#hello" aria-label="Hrishikesh Kakade, back to top"><i class="mark" aria-hidden="true"></i><span class="tl brand-name">Hrishikesh</span></a>
           <span class="tool-sep" aria-hidden="true"></span>
           <a class="tool on" href="#hello" data-key="F" data-sec="hello"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 1.5v13M11 1.5v13M1.5 5h13M1.5 11h13"/></svg><span class="tl">Hello</span><span class="tip">Hello <kbd>F</kbd></span></a>
           <a class="tool" href="#work" data-key="W" data-sec="work"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.5l4.5 6-2 6.5h-5l-2-6.5z"/><circle cx="8" cy="8.5" r="1.2"/></svg><span class="tl">Work</span><span class="tip">Work <kbd>W</kbd></span></a>
@@ -503,23 +558,18 @@ html.cc.cc-in .ccur{opacity:1}
         </aside>
 
         <div class="fig-canvas" id="canvas">
+          <div class="canvas-glow" id="canvasGlow" aria-hidden="true"></div>
           <div class="board-label">Hello</div>
           <div class="board" id="board" data-layer="Hello" data-kind="Frame">
             <div class="hello">
               <div class="who" data-layer="Name" data-kind="Auto layout"><b>Hrishikesh Kakade</b><span>Senior Product Designer</span></div>
-              <h1 data-layer="Headline" data-kind="Text">I take products from <em>0 to 1</em>, then scale them on solid UX foundations.</h1>
-              <p class="hero-sub" data-layer="Intro" data-kind="Text">At Astuto.ai I design cloud cost tools that engineers and finance teams both rely on. Before that, fintech at Kristal.AI.</p>
+              <h1 data-layer="Headline" data-kind="Text">I turn <em>complex</em> problems into products people can actually use.</h1>
+              <p class="hero-sub" data-layer="Intro" data-kind="Text">I'm a Senior Product Designer working across B2B SaaS, AI, FinOps, DevOps and Fintech. I build products from the ground up, bringing clarity to complex workflows through thoughtful UX, scalable systems and close collaboration with engineering.</p>
               <div class="hero-cta" data-layer="Buttons" data-kind="Auto layout">
                 <a href="#work" class="btn primary">View selected work ↓</a>
                 <a href="#contact" class="btn">Get in touch</a>
               </div>
             </div>
-            <dl class="hsum" data-layer="Summary" data-kind="Auto layout">
-              <div><dt>Now</dt><dd>Senior Product Designer, Astuto.ai</dd></div>
-              <div><dt>Before</dt><dd>UI/UX Designer, Kristal.AI</dd></div>
-              <div><dt>Focus</dt><dd>0 → 1 products, design systems</dd></div>
-              <div><dt>Status</dt><dd class="st"><span class="dot" aria-hidden="true"></span><span>Open to conversations · <span id="clock">India · --:-- IST</span></span></dd></div>
-            </dl>
             <div class="cards" id="cards"></div>
           </div>
           <div class="sel" id="sel" hidden><i class="h tl"></i><i class="h tr"></i><i class="h bl"></i><i class="h br"></i><span class="size-tag" id="selTag"></span></div>
@@ -563,10 +613,19 @@ html.cc.cc-in .ccur{opacity:1}
 
   </header>
 
+  <section class="wrap glance-wrap" aria-label="At a glance">
+    <dl class="glance">
+      <div><dt>Now</dt><dd>Senior Product Designer, Astuto.ai</dd></div>
+      <div><dt>Before</dt><dd>UI/UX Designer, Kristal.AI</dd></div>
+      <div><dt>Focus</dt><dd>0 → 1 products, design systems</dd></div>
+      <div><dt>Status</dt><dd class="st"><span class="dot" aria-hidden="true"></span><span>Open to conversations · <span id="clock">India (IST)</span></span></dd></div>
+    </dl>
+  </section>
+
   <section class="wrap" aria-label="Introduction">
     <div class="intro">
       <span class="eyebrow">In one breath</span>
-      <p>I'm comfortable in ambiguity and pick up new domains fast. <span>I work where product strategy meets design: design systems, scalable architecture, and turning complex problems into structured, execution-ready solutions.</span></p>
+      <p>I enjoy working on problems that don't come with obvious answers. <span>From understanding unfamiliar domains to structuring complex workflows, I bring clarity to early-stage ideas and turn them into scalable product experiences. I work closely with engineering and product teams to make sure good design translates into products that actually work.</span></p>
     </div>
   </section>
 
@@ -585,14 +644,7 @@ html.cc.cc-in .ccur{opacity:1}
       </div>
       <div class="earlier-grid">
         <a class="ew" href="https://www.behance.net/gallery/177973467/Portfolio-Details-Page-KristalAI" target="_blank" rel="noopener">
-          <div class="ew-cover c-blue" aria-hidden="true">
-            <div class="ui ew-ui">
-              <div class="ui-row" style="justify-content:space-between"><b style="font:700 .72rem var(--f-display)">My portfolio</b><span style="font:500 .58rem var(--f-mono);color:#9B6BFF">▲ 6.4%</span></div>
-              <b style="font:700 1rem var(--f-display)">$128,450</b>
-              <svg viewBox="0 0 200 40" style="width:100%;height:auto;display:block"><path d="M0 32 L30 28 L60 30 L90 20 L120 22 L150 12 L200 8" fill="none" stroke="var(--select)" stroke-width="2" stroke-linecap="round"/></svg>
-              <div class="ew-alloc"><i style="flex:5;background:var(--select)"></i><i style="flex:3;background:#9B6BFF"></i><i style="flex:2;background:#7FE7FF"></i></div>
-            </div>
-          </div>
+          <div class="ew-cover has-img"><img src="img/be/portfolio-details.webp" alt="Portfolio Details Page cover from Behance: the Kristal.AI portfolio screen on a phone" width="1228" height="959" loading="lazy" decoding="async"></div>
           <div class="ew-body">
             <span class="ew-meta">Kristal.AI · Fintech</span>
             <h4>Portfolio Details Page Redesign</h4>
@@ -600,23 +652,16 @@ html.cc.cc-in .ccur{opacity:1}
           </div>
         </a>
         <a class="ew" href="https://www.behance.net/gallery/178080745/Target-Returns-Calculator-(WIP)" target="_blank" rel="noopener">
-          <div class="ew-cover c-lilac" aria-hidden="true">
-            <div class="ui ew-ui">
-              <b style="font:700 .72rem var(--f-display)">Target returns</b>
-              <div class="ew-field"><span>Invest</span><b>$10,000</b></div>
-              <div class="ew-field"><span>Target</span><b>12% / yr</b></div>
-              <div class="ew-slider"><i></i></div>
-              <div class="ui-row" style="justify-content:space-between;font:500 .58rem var(--f-mono);color:var(--muted)"><span>In 5 years</span><b style="color:var(--ink);font:700 .8rem var(--f-display)">$17,623</b></div>
-            </div>
-          </div>
+          <div class="ew-cover has-img"><img src="img/be/target-returns.webp" alt="Target Returns Calculator cover from Behance: the returns calculator screen on a phone" width="1228" height="959" loading="lazy" decoding="async"></div>
           <div class="ew-body">
-            <span class="ew-meta">Kristal.AI · Work in progress</span>
+            <span class="ew-meta">Kristal.AI · Fintech B2C</span>
             <h4>Target Returns Calculator</h4>
             <span class="ew-link">View on Behance ↗</span>
           </div>
         </a>
         <a class="ew ew-all" href="https://www.behance.net/hrishikkakade" target="_blank" rel="noopener">
           <div class="ew-all-in">
+            <span class="ew-be" aria-hidden="true">Bē</span>
             <span class="ew-meta">behance.net/hrishikkakade</span>
             <h4>See everything on Behance</h4>
             <p>UI explorations, visual design and older client work.</p>
@@ -627,11 +672,27 @@ html.cc.cc-in .ccur{opacity:1}
     </div>
   </section>
 
+  <section id="philosophy" class="wrap" aria-labelledby="philH">
+    <div class="phil">
+      <div class="phil-main">
+        <span class="eyebrow">Design philosophy</span>
+        <h2 id="philH">Good product design is as much about making the right decisions as it is about creating the right interfaces.</h2>
+        <p>It's about understanding the problem deeply, navigating constraints, questioning assumptions and finding solutions that work for both the people using a product and the teams building it.</p>
+      </div>
+      <ul class="diffs">
+        <li><b>0 to 1 ownership</b><span>Helped build OneLens from its early stages as Astuto's first product designer.</span></li>
+        <li><b>Complex products</b><span>Cloud cost management, AI observability, cost allocation and fintech.</span></li>
+        <li><b>Systems thinking</b><span>How workflows, data models, design systems and engineering fit together.</span></li>
+        <li><b>Cross-functional work</b><span>Close partnership with founders and engineers, from idea to execution.</span></li>
+      </ul>
+    </div>
+  </section>
+
   <section id="approach" class="wrap">
     <div class="sec-head">
       <span class="eyebrow">How I work</span>
       <h2>How I work at 0 to 1</h2>
-      <p>Habits from being the first designer in the room.</p>
+      <p>Habits from being the first designer in the room. Good product design starts well before the first screen. Working early-stage taught me to navigate ambiguity, learn unfamiliar domains, challenge assumptions and work closely with engineering to turn ideas into practical, scalable solutions.</p>
     </div>
     <div class="principles">
       <article class="principle">
@@ -643,8 +704,8 @@ html.cc.cc-in .ccur{opacity:1}
           </div>
           <div class="v-hint"><span>Click a note to validate it</span><button type="button" id="unkReset">Reset</button></div>
         </div>
-        <h3>Map the unknowns before the screens</h3>
-        <p>Early products are mostly open questions. I sort what we know, what we're assuming and what we need to test, so the team argues about evidence instead of opinions.</p>
+        <h3>Start with the problem, not the interface</h3>
+        <p>Understand the context, map the unknowns and identify the real problem before moving into screens and solutions. Sorting what we know from what we assume keeps the team arguing about evidence, not opinions.</p>
       </article>
 
       <article class="principle">
@@ -657,8 +718,8 @@ html.cc.cc-in .ccur{opacity:1}
           <span class="demo-btn" aria-hidden="true">Save changes</span>
           <pre class="spec" id="spec" aria-live="polite"></pre>
         </div>
-        <h3>Speak the engineers' language</h3>
-        <p>I design components the way they get built. One button in Figma maps directly to a Tailwind class and a Material UI prop, so handoff is a lookup, not a translation.</p>
+        <h3>Design with implementation in mind</h3>
+        <p>Work closely with engineers, understand technical constraints and make decisions that hold up in the build. At Astuto, components map directly from Figma to Tailwind and Material UI.</p>
       </article>
 
       <article class="principle">
@@ -673,8 +734,8 @@ html.cc.cc-in .ccur{opacity:1}
           <div class="slice-ctl"><label for="sliceRange">v1</label><input type="range" id="sliceRange" min="1" max="3" step="1" value="1"><span>v3</span></div>
           <div class="v-hint"><span id="sliceNote"><b>v1</b> The smallest version worth using</span></div>
         </div>
-        <h3>Ship in slices</h3>
-        <p>I plan v1 as the smallest version worth using, then show what v2 and v3 add. Engineers get something buildable now, and founders still see where it's going.</p>
+        <h3>Build for today, design for tomorrow</h3>
+        <p>Ship iteratively while laying patterns and foundations that can scale as the product evolves. v1 is the smallest version worth using; v2 and v3 are already sketched.</p>
       </article>
 
       <article class="principle">
@@ -687,8 +748,8 @@ html.cc.cc-in .ccur{opacity:1}
           </div>
           <div class="v-hint"><span>Hover or tap to translate</span></div>
         </div>
-        <h3>Learn the domain fast</h3>
-        <p>At Astuto.ai I design for cloud cost management, where engineers and finance teams read the same numbers very differently. I start by turning the jargon into plain language, because if I can't explain it, users can't use it.</p>
+        <h3>Make complex domains understandable</h3>
+        <p>Get up to speed in unfamiliar domains, understand the systems underneath and translate complexity into clear, usable experiences. In cloud cost management, that starts with turning jargon into plain language.</p>
       </article>
     </div>
   </section>
@@ -708,8 +769,8 @@ html.cc.cc-in .ccur{opacity:1}
           <div class="card">
             <span class="dates">Oct 2021 — May 2023 · Where it started</span>
             <h3>Associate UI/UX Designer <em>@ Kristal.AI</em></h3>
-            <p>End-to-end experiences for B2B, B2C and B2B2C financial products.</p>
-            <ul><li>Found friction points through research and usability testing</li><li>Built high-fidelity interactive prototypes for faster validation</li></ul>
+            <p>Worked across multiple financial products, contributing to user research, interaction design and high-fidelity prototyping for B2B and B2C experiences.</p>
+            <ul><li>Found friction points through research and usability testing</li><li>Built interactive prototypes that sped up stakeholder and user validation</li></ul>
             <div class="tags"><span class="tag">Fintech</span><span class="tag">Research</span><span class="tag">Prototyping</span></div>
           </div>
         </li>
@@ -719,8 +780,8 @@ html.cc.cc-in .ccur{opacity:1}
           <div class="card">
             <span class="dates">May 2023 — Sep 2023</span>
             <h3>UI/UX Designer <em>@ Kristal.AI</em></h3>
-            <p>Overhauled the client app and web portal, and redesigned onboarding.</p>
-            <ul><li>Onboarding drop-offs down 40%, with better data collection</li><li>Responsive, dev-ready component library</li><li>App demos that helped secure UAE trade licensing approval</li></ul>
+            <p>Redesigned key investment platform experiences across mobile and web, with a focus on onboarding, usability and consistency.</p>
+            <ul><li>Reduced onboarding drop-offs by 40% through improved user flows and data collection</li><li>Built a responsive component library for consistent design and cleaner handoff</li><li>Created product demos that supported the company's UAE trade licensing approval</li></ul>
             <div class="tags"><span class="tag">Onboarding</span><span class="tag">Component library</span><span class="tag">Mobile + web</span></div>
           </div>
         </li>
@@ -730,8 +791,8 @@ html.cc.cc-in .ccur{opacity:1}
           <div class="card">
             <span class="dates">Sep 2023 — 2024</span>
             <h3>Founding Product Designer <em>@ Astuto.ai</em></h3>
-            <p>First designer on the team, setting up the product's UX foundations and visual identity from scratch.</p>
-            <ul><li>Design system for Tailwind CSS and Material UI, used across the product</li><li>Established Astuto's early brand identity across product and marketing</li><li>Ran user research and validation cycles to shape the roadmap</li></ul>
+            <p>Joined Astuto.ai as its first product designer, taking ownership of the product's UX foundations, design system and visual identity.</p>
+            <ul><li>Established the product design system using Tailwind CSS and Material UI</li><li>Defined core interaction patterns and information architecture across OneLens</li><li>Built the company's visual identity across product and marketing</li><li>Shaped early product direction with the founders and engineering through research and iterative validation</li></ul>
             <div class="tags"><span class="tag">0 → 1</span><span class="tag">Design system</span><span class="tag">Brand</span></div>
           </div>
         </li>
@@ -741,9 +802,9 @@ html.cc.cc-in .ccur{opacity:1}
           <div class="card">
             <span class="dates">2024 — Present</span>
             <h3>Senior Product Designer <em>@ Astuto.ai</em></h3>
-            <p>Leading design for high-stakes product initiatives with the founders, PMs and engineering, from discovery to execution.</p>
-            <ul><li>Managed and mentored a team of 3 designers</li><li>Raised design quality and execution speed across the team</li><li>Own design direction across the product</li></ul>
-            <div class="tags"><span class="tag">Leadership</span><span class="tag">Mentoring</span><span class="tag">Strategy</span></div>
+            <p>Leading product design across OneLens with the founders, product and engineering, shaping complex initiatives from discovery through execution.</p>
+            <ul><li>Own end-to-end design direction across cloud cost observability, optimisation and allocation</li><li>Translate complex technical and financial workflows into intuitive, scalable experiences</li><li>Evolve the design system and interaction patterns as the platform scales</li><li>Manage and mentor a team of 3 designers</li></ul>
+            <div class="tags"><span class="tag">Design direction</span><span class="tag">Systems</span><span class="tag">Mentoring</span></div>
           </div>
         </li>
         <li class="stop next">
@@ -762,27 +823,31 @@ html.cc.cc-in .ccur{opacity:1}
 
   <section class="wrap" aria-labelledby="toolkitH">
     <div class="sec-head">
-      <span class="eyebrow">Toolkit</span>
+      <span class="eyebrow">Capabilities</span>
       <h2 id="toolkitH">What I bring to a team</h2>
     </div>
-    <div class="toolkit">
-      <div><h3>Product strategy</h3><ul><li>UX strategy & systems thinking</li><li>0 to 1 product design</li><li>Interaction design</li><li>Information architecture</li><li>User research & usability testing</li></ul></div>
-      <div><h3>Execution</h3><ul><li>Design systems & component libraries</li><li>Wireframing & prototyping</li><li>Responsive web & mobile</li><li>Developer handoff & documentation</li><li>HTML, CSS & front-end constraints</li></ul></div>
-      <div><h3>Collaboration</h3><ul><li>Cross-functional leadership</li><li>Stakeholder communication</li><li>Design mentorship</li><li>AI-assisted design</li></ul></div>
-      <div><h3>Tools</h3><ul><li>Figma (advanced, design systems)</li><li>Photoshop & Illustrator</li><li>AI tools for research & prototyping</li><li>Rhino 3D, Blender, KeyShot</li><li>AutoCAD</li></ul></div>
+    <div class="caps">
+      <div><h3>Product thinking</h3><p>Product discovery, UX strategy, systems thinking, information architecture</p></div>
+      <div><h3>Experience design</h3><p>Interaction design, complex workflows, data visualisation, responsive design</p></div>
+      <div><h3>AI product design</h3><p>AI-assisted workflows, LLM-guided data setup, human review of generated output</p></div>
+      <div><h3>Design systems</h3><p>Component architecture, design tokens, scalable UI patterns, documentation</p></div>
+      <div><h3>Collaboration</h3><p>Engineering partnership, stakeholder alignment, design critique, mentorship</p></div>
+      <div><h3>Prototyping</h3><p>Interactive prototyping, HTML and CSS, AI-assisted workflows</p></div>
     </div>
+    <div class="tools"><span class="tools-k">Tools</span><span>Figma</span><span>FigJam</span><span>Photoshop</span><span>Illustrator</span><span>AI tools for research and prototyping</span><span>Rhino 3D</span><span>Blender</span><span>KeyShot</span><span>AutoCAD</span></div>
   </section>
 
   <section id="contact" class="wrap">
     <div class="contact">
-      <div class="status"><span class="dot" aria-hidden="true"></span>Open to product design roles and conversations</div>
-      <h2>Let's build something people trust.</h2>
+      <div class="status"><span class="dot" aria-hidden="true"></span>Open to Senior Product Designer opportunities and conversations</div>
+      <h2>Let's build something meaningful.</h2>
       <div class="email">
         <code id="email">hrishikakade1@gmail.com</code>
         <button class="btn primary" id="copyBtn">Copy email</button>
       </div>
       <div class="links">
         <a class="btn" href="https://www.linkedin.com/in/hrishikesh-kakade-a2955b1a1/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn" href="Hrishikesh_Kakade_Resume_2026.pdf" target="_blank" rel="noopener" id="resumeLink">Download resume ↓</a>
         <a class="btn" href="https://www.behance.net/hrishikkakade" target="_blank" rel="noopener">Behance ↗</a>
       </div>
     </div>
@@ -803,28 +868,32 @@ html.cc.cc-in .ccur{opacity:1}
 /* ---- Replace this sample content with your own projects ---- */
 const CASES = [
   {
-    id:"unit-economics", pdf:"", title:"Unit Economics Cost Engine", product:"OneLens", year:"Astuto.ai", role:"Senior Product Designer", team:"Product Manager, Engineering", duration:"1 sprint",
-    tags:["FinOps","Workflow design","B2B SaaS"], cover:"c-blue", ui:"unit",
-    blurb:"Designing a flexible cost allocation engine, so FinOps teams can understand the true cost of serving customers or running products without relying on engineering teams.",
-    metrics:[["6","separate parts of OneLens brought into one framework"],["5","data building blocks feeding one canvas"]],
-    problem:"A bill from a cloud provider, an AI service or a SaaS vendor says what you spent, not what one customer or product costs. The logic to split shared costs lived in spreadsheets and SQL a data engineer wrote, so nobody else could see it or trace a number back to its rule.",
-    process:["Defined the data model: entities, mappings, metrics and derived datasets that bring in data the bill doesn't have","Started with a guided wizard, then moved to a node-based canvas when multi-step rules had nowhere to live","Made data prep approachable with SQL-based derived datasets and an AI-assisted query flow","Added drafts, versions, change logs and execution logs so every number traces back to a rule"],
-    outcome:"Six separate parts of OneLens became one framework for building, managing and analysing allocation logic."
+    id:"unit-economics", pdf:"", title:"Advanced Cost Allocation", product:"OneLens", year:"Astuto.ai",
+    tags:["FinOps","B2B SaaS","Workflow design"], cover:"c-blue", ui:"unit", img:"img/ue/cover-card.webp", imgCut:true,
+    imgAlt:"The allocation canvas in OneLens: contributors, intermediate tables and the final report",
+    blurb:"Designing a flexible cost allocation engine, so FinOps teams can understand the true cost of serving a customer or running a product without relying on engineering.",
+    brief:[["Problem","A bill says what you spent, not what one customer costs. The logic to split shared costs lived in spreadsheets and custom SQL."],["My role","Senior Product Designer, end to end, with a Product Manager and Engineering over 1 sprint."],["Outcome","One framework instead of six disconnected parts: data, a visual rule builder, transformations, versioning and analytics."]]
   },
   {
-    id:"tag-governance", pdf:"", title:"Tag Governance Module", product:"OneLens", year:"Astuto.ai", role:"Senior Product Designer", team:"PM, engineering", duration:"Add timeline",
-    tags:["Cloud governance","Workflows","Policy"], cover:"c-lilac", ui:"tags",
-    blurb:"Helping teams find untagged and mis-tagged cloud resources, set tagging rules, and fix gaps at scale, so every dollar of spend can be traced to an owner.",
-    metrics:[["Add metric","e.g. tag coverage improvement"],["Add metric","e.g. resources fixed"]],
-    problem:"Cost allocation only works if resources are tagged with an owner, team and environment. In practice tags were missing, inconsistent or misspelled, and fixing them meant hunting through thousands of resources by hand.",
-    process:["Mapped how platform teams define and enforce tagging today","Designed policies that state which tags are required and which values are allowed","Created a compliance view that groups violations by account, team and tag","Designed bulk fixes so users can correct many resources in one step"],
-    outcome:"Add the outcome here: coverage before and after, time saved, or customer feedback."
+    id:"ai-costs", soon:true, title:"AI Costs & Usage", product:"OneLens", year:"Astuto.ai",
+    tags:["Product strategy","AI","Data UX"], cover:"c-lilac", ui:"ai",
+    blurb:"Bringing AI provider costs, usage, unit economics and anomalies into a unified observability experience.",
+    brief:[["My role","Senior Product Designer"]]
   },
-  { id:"tbd", tbd:true, title:"Next case study", product:"Coming soon", cover:"c-peach",
-    blurb:"A new project write-up is on its way." }
+  {
+    id:"kristal", soon:true, title:"Kristal.AI Platform & Onboarding", product:"Kristal.AI", year:"2021 – 2023",
+    tags:["Fintech","UX redesign"], cover:"c-peach", ui:"onboard",
+    blurb:"Improving investment platform experiences through better information architecture, onboarding and responsive design systems.",
+    brief:[["Problem","Too many new investors dropped off during onboarding."],["My role","UI/UX Designer across the client app and web portal."],["Outcome","40% fewer onboarding drop-offs, with better data collection."]]
+  }
 ];
 
 const UI = {
+  ai:`<div class="ui"><div class="ui-top"><i></i><i></i><i></i></div>
+    <div class="ui-row" style="justify-content:space-between;margin-bottom:10px"><b style="font:700 .8rem var(--f-display)">AI spend by model</b><span class="tag" style="padding:2px 7px">Last 30 days</span></div>
+    <div class="kpis"><div class="kpi"><b>$18.4k</b><em>total spend</em></div><div class="kpi"><b>412M</b><em>tokens</em></div><div class="kpi"><b>$0.045</b><em>per 1k tokens</em></div></div>
+    <div class="aibars"><div><span>Model A</span><i style="width:82%"></i></div><div><span>Model B</span><i style="width:54%"></i></div><div><span>Model C</span><i style="width:31%"></i></div></div>
+    <div class="ui-row" style="margin-top:10px"><span class="why"><span>Anomaly: spend up 3× on Tue</span></span></div></div>`,
   unit:`<div class="ui"><div class="ui-top"><i></i><i></i><i></i></div>
     <div class="ui-row" style="justify-content:space-between;margin-bottom:10px"><b style="font:700 .8rem var(--f-display)">Cost per customer</b><span class="tag" style="padding:2px 7px">Last 6 months</span></div>
     <div class="kpis"><div class="kpi"><b>$0.42</b><em>per customer</em></div><div class="kpi"><b>$1.18</b><em>per 1k API calls</em></div><div class="kpi"><b>68%</b><em>spend mapped</em></div></div>
@@ -854,27 +923,20 @@ const UI = {
 };
 
 const list = document.getElementById('workList');
-list.innerHTML = CASES.map((c,i)=>c.tbd?`
-  <div class="case tbd" aria-label="Case study coming soon">
-    <div class="cover ${c.cover}"><div class="soon"><span class="soon-badge">TBD</span><span>In the works</span></div></div>
-    <div class="case-body">
-      <div class="meta"><span>Case study ${String(i+1).padStart(2,'0')}</span><span>·</span><span>${c.product}</span></div>
-      <h3>${c.title}</h3>
-      <p>${c.blurb}</p>
-    </div>
-  </div>`:`
-  <article class="case" data-href="case-${c.id}.html">
-    <div class="cover ${c.cover}"><div class="cover-ui">${UI[c.ui]}</div></div>
+const brief=c=>c.brief?`<dl class="brief">${c.brief.map(b=>`<div><dt>${b[0]}</dt><dd>${b[1]}</dd></div>`).join('')}</dl>`:'';
+list.innerHTML = CASES.map((c,i)=>`
+  <article class="case${c.soon?' is-soon':''}"${c.soon?'':` data-href="case-${c.id}.html"`}>
+    <div class="cover ${c.cover}${c.img?' has-shot':''}">${c.img?`<img class="cover-shot${c.imgCut?' is-cut':''}" src="${c.img}" alt="${c.imgAlt||''}" width="${c.imgCut?1460:1920}" height="${c.imgCut?1255:1080}" loading="lazy" decoding="async">`:`<div class="cover-ui">${UI[c.ui]}</div>`}</div>
     <div class="case-body">
       <div class="meta"><span>Case study ${String(i+1).padStart(2,'0')}</span><span>·</span><span>${c.product}</span><span>·</span><span>${c.year}</span></div>
       <h3>${c.title}</h3>
       <p>${c.blurb}</p>
       <div class="tags">${c.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
-      <div class="metrics">${c.metrics.map(m=>`<div class="metric"><b${m[0]==='Add metric'?' class="todo"':''}>${m[0]}</b><span>${m[1]}</span></div>`).join('')}</div>
-      <div class="case-actions">
+      ${brief(c)}
+      ${c.soon?'<span class="soon-chip">Case study coming soon</span>':`<div class="case-actions">
         <a class="btn primary read-btn" href="case-${c.id}.html">Read case study →</a>
         <a class="btn pdf-btn" href="${c.pdf||'#'}"${c.pdf?' target="_blank" rel="noopener"':' data-nopdf'}>View PDF ↗</a>
-      </div>
+      </div>`}
     </div>
   </article>`).join('');
 
@@ -882,7 +944,7 @@ list.innerHTML = CASES.map((c,i)=>c.tbd?`
 const modal=document.getElementById('modal'), mBody=document.getElementById('mBody');
 let lastFocus=null;
 function openCase(id){
-  const c=CASES.find(x=>x.id===id&&!x.tbd); if(!c) return;
+  const c=CASES.find(x=>x.id===id&&!x.soon); if(!c||!c.problem) return;
   lastFocus=document.activeElement;
   document.getElementById('mKicker').textContent=`Case study · ${c.year}`;
   mBody.innerHTML=`
@@ -899,7 +961,7 @@ function openCase(id){
 }
 function closeCase(){
   modal.hidden=true; document.body.style.overflow='';
-  if(CASES.some(c=>!c.tbd&&'#'+c.id===location.hash)) history.replaceState(null,'','#work');
+  if(CASES.some(c=>!c.soon&&'#'+c.id===location.hash)) history.replaceState(null,'','#work');
   lastFocus&&lastFocus.focus();
 }
 list.addEventListener('click',e=>{
@@ -910,7 +972,7 @@ list.addEventListener('click',e=>{
 document.getElementById('mClose').onclick=closeCase;
 modal.addEventListener('click',e=>{if(e.target===modal) closeCase()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden) closeCase()});
-function routeHash(){const id=location.hash.slice(1); if(CASES.some(c=>c.id===id&&!c.tbd)) location.replace('case-'+id+'.html')}
+function routeHash(){const id=location.hash.slice(1); if(CASES.some(c=>c.id===id&&!c.soon)) location.replace('case-'+id+'.html')}
 window.addEventListener('hashchange',routeHash); routeHash();
 
 /* Theme toggle */
@@ -924,8 +986,9 @@ document.getElementById('themeBtn').onclick=()=>{
 
 /* Clock */
 function tick(){
-  try{const t=new Intl.DateTimeFormat('en-IN',{hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'Asia/Kolkata'}).format(new Date());
-  document.getElementById('clock').textContent=`India · ${t} IST`}catch(e){}
+  /* IST is UTC+5:30 all year, so work it out directly instead of relying on time zone data */
+  const d=new Date(Date.now()+5.5*3600e3), p=n=>String(n).padStart(2,'0');
+  const el=document.getElementById('clock'); if(el) el.textContent=`India · ${p(d.getUTCHours())}:${p(d.getUTCMinutes())} IST`;
 }
 tick(); setInterval(tick,30000);
 
@@ -1039,6 +1102,14 @@ addEventListener('resize',refresh);
 if(document.fonts&&document.fonts.ready) document.fonts.ready.then(refresh);
 new MutationObserver(()=>requestAnimationFrame(props)).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>requestAnimationFrame(props));
+
+/* Orange dot glow on the canvas grid, following the pointer */
+(function(){
+  const cv=document.getElementById('canvas'), g=document.getElementById('canvasGlow'); if(!cv||!g) return;
+  if(!matchMedia('(hover: hover)').matches) return;
+  cv.addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect(); g.style.setProperty('--gx',(e.clientX-r.left)+'px'); g.style.setProperty('--gy',(e.clientY-r.top)+'px'); cv.classList.add('glow')},{passive:true});
+  cv.addEventListener('pointerleave',()=>cv.classList.remove('glow'));
+})();
 
 /* Wandering collaborator cursor */
 const cur=document.getElementById('cursor');
@@ -1289,7 +1360,8 @@ document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>c.c
   let x=-100,y=-100,cx=-100,cy=-100,raf=0;
   const RULES=[
     ['.sticky',()=>matchMedia('(min-width: 1000px)').matches?'Drag':''],
-    ['.case.tbd',()=>'Coming soon'],
+    ['.case.is-soon',()=>'Case study coming soon'],
+    ['#resumeLink',()=>'Open resume PDF'],
     ['[data-nopdf]',()=>'PDF coming soon'],
     ['.pdf-btn',()=>'Open PDF ↗'],
     ['.read-btn',()=>'Read case study'],

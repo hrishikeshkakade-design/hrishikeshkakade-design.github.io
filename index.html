@@ -804,13 +804,13 @@ html.cc.cc-in .ccur{opacity:1}
 /* ---- Replace this sample content with your own projects ---- */
 const CASES = [
   {
-    id:"unit-economics", pdf:"", title:"Unit Economics Cost Engine", product:"OneLens", year:"Astuto.ai", role:"Senior Product Designer", team:"PM, engineering, founders", duration:"Add timeline",
-    tags:["FinOps","Data visualisation","B2B SaaS"], cover:"c-blue", ui:"unit",
-    blurb:"Turning a raw cloud bill into cost per customer, per feature and per transaction, so engineering and finance can see what each unit of the business actually costs to run.",
-    metrics:[["Add metric","e.g. adoption or time to answer"],["Add metric","e.g. customers using it"]],
-    problem:"A total cloud bill tells you what you spent, not whether it was worth it. Teams needed to tie spend to business units like customers, features or API calls, but the data lived in billing exports and spreadsheets that only a few people could read.",
-    process:["Interviewed engineering and finance users to learn how each group defines a 'unit'","Designed a setup flow for choosing a business metric and mapping cloud costs to it","Built views that show cost per unit over time, with drill-downs by service and team","Tested early prototypes with real customer data to check the numbers made sense to both audiences"],
-    outcome:"Add the outcome here: what shipped, who uses it, and what changed for customers."
+    id:"unit-economics", pdf:"", title:"Unit Economics Cost Engine", product:"OneLens", year:"Astuto.ai", role:"Senior Product Designer", team:"PM, Engineering", duration:"1.5 sprints",
+    tags:["FinOps","Workflow design","B2B SaaS"], cover:"c-blue", ui:"unit",
+    blurb:"A flexible allocation engine that turns multicloud, AI and SaaS spend into unit economics like cost per customer or cost per product, built so FinOps teams can set it up without a data engineer.",
+    metrics:[["6","separate parts of OneLens brought into one framework"],["5","data building blocks feeding one canvas"]],
+    problem:"A bill from a cloud provider, an AI service or a SaaS vendor says what you spent, not what one customer or product costs. The logic to split shared costs lived in spreadsheets and SQL a data engineer wrote, so nobody else could see it or trace a number back to its rule.",
+    process:["Defined the data model: entities, mappings, metrics and derived datasets that bring in data the bill doesn't have","Started with a guided wizard, then moved to a node-based canvas when multi-step rules had nowhere to live","Made data prep approachable with SQL-based derived datasets and an AI-assisted query flow","Added drafts, versions, change logs and execution logs so every number traces back to a rule"],
+    outcome:"Six separate parts of OneLens became one framework for building, managing and analysing allocation logic."
   },
   {
     id:"tag-governance", pdf:"", title:"Tag Governance Module", product:"OneLens", year:"Astuto.ai", role:"Senior Product Designer", team:"PM, engineering", duration:"Add timeline",

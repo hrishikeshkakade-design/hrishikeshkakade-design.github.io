@@ -28,20 +28,20 @@
 <main>
   <!-- HERO: title, one-line summary, project facts, cover image -->
   <header class="hero wrap">
-    <div class="crumb"><b>Case study</b><span>·</span><span>OneLens by Astuto.ai</span><span>·</span><span>FinOps · Data visualisation · B2B SaaS</span></div>
+    <div class="crumb"><b>Case study</b><span>·</span><span>OneLens by Astuto.ai</span><span>·</span><span>FinOps · Workflow design · B2B SaaS</span></div>
     <h1>Unit Economics Cost Engine</h1>
-    <p class="sum">Turning a raw cloud bill into cost per customer, per feature and per transaction, so engineering and finance can see what each unit of the business costs to run.</p>
+    <p class="sum">A flexible allocation engine that turns multicloud, AI and SaaS spend into unit economics like cost per customer or cost per product, built so FinOps teams can set it up without a data engineer.</p>
     <dl class="meta">
-      <div><dt>Role</dt><dd>Senior Product Designer</dd></div>
-      <div><dt>Team</dt><dd><span class="todo">PM, engineers…</span></dd></div>
-      <div><dt>Timeline</dt><dd><span class="todo">Month YYYY – Month YYYY</span></dd></div>
-      <div><dt>Platform</dt><dd><span class="todo">Web app</span></dd></div>
+      <div><dt>Role</dt><dd>Senior Product Designer, end to end</dd></div>
+      <div><dt>Team</dt><dd>PM, Engineering</dd></div>
+      <div><dt>Timeline</dt><dd>1.5 sprints</dd></div>
+      <div><dt>Platform</dt><dd>Web app (B2B SaaS), desktop first</dd></div>
     </dl>
     <div class="hero-actions">
       <a class="btn primary" href="#overview">Start reading ↓</a>
       <a class="btn" href="#" data-pdf="">View PDF ↗</a>
     </div>
-    <figure class="cover"><div class="ph " role="img" aria-label="Image placeholder: Cover image"><span class="ph-tag">Cover</span><span>Cover image<br>2400 × 1350</span></div></figure>
+    <figure class="cover"><div class="ph " role="img" aria-label="Image placeholder: The full canvas for Costs per Customer per Product"><span class="ph-tag">Cover</span><span>The full canvas: Costs per Customer per Product<br>2400 × 1350</span></div></figure>
   </header>
 
   <div class="wrap body">
@@ -49,11 +49,13 @@
       <span class="lbl">Contents</span>
       <a href="#overview"><i>01</i>Overview</a>
       <a href="#problem"><i>02</i>Problem</a>
-      <a href="#research"><i>03</i>Research</a>
-      <a href="#explorations"><i>04</i>Explorations</a>
-      <a href="#solution"><i>05</i>Solution</a>
-      <a href="#outcome"><i>06</i>Outcome</a>
-      <a href="#learnings"><i>07</i>Learnings</a>
+      <a href="#challenge"><i>03</i>Challenge</a>
+      <a href="#building-blocks"><i>04</i>Building blocks</a>
+      <a href="#explorations"><i>05</i>Explorations</a>
+      <a href="#solution"><i>06</i>Solution</a>
+      <a href="#trust"><i>07</i>Trust</a>
+      <a href="#outcome"><i>08</i>Outcome</a>
+      <a href="#learnings"><i>09</i>Learnings</a>
     </nav>
 
     <article>
@@ -61,80 +63,152 @@
       <section class="sec" id="overview">
         <span class="sec-k">01 · Overview</span>
         <h2>The short version</h2>
-        <p class="lead">Turning a raw cloud bill into cost per customer, per feature and per transaction, so engineering and finance can see what each unit of the business costs to run.</p>
+        <p class="lead">Spend now spreads across cloud providers, AI services and SaaS tools, and across teams, products, customers and business units. No single bill says who is responsible for what. I designed the engine in OneLens that turns that spend into cost per customer or cost per product.</p>
         <div class="tldr">
-          <div><b>Problem</b><p>A total cloud bill tells you what you spent, not whether it was worth it.</p></div>
-          <div><b>What I did</b><p>Designed the setup flow for defining business units, and the views that show cost per unit over time with drill-downs by service and team.</p></div>
-          <div><b>Impact</b><p><span class="todo">Add the headline result in one sentence.</span></p></div>
+          <div><b>Problem</b><p>A bill says what you spent, not what one customer or product costs. The logic to split it lived in spreadsheets and SQL nobody else could read.</p></div>
+          <div><b>What I did</b><p>Designed the data model, then took the rule builder from a YAML-writing wizard to a visual canvas, with data prep, versioning and analytics around it.</p></div>
+          <div><b>Impact</b><p>Six separate parts of OneLens became one framework for building, managing and analysing allocation logic. <span class="todo">Add a number if you can share one.</span></p></div>
         </div>
       </section>
 
       <!-- 02 PROBLEM: context, who it is for, why it matters -->
       <section class="sec" id="problem">
         <span class="sec-k">02 · Problem</span>
-        <h2><span class="todo">Name the problem in one line</span></h2>
-        <p>A total cloud bill tells you what you spent, not whether it was worth it. Teams needed to tie spend to business units like customers, features or API calls, but the data lived in billing exports and spreadsheets that only a few people could read.</p>
-        <p><span class="todo">Who were the users? What did they do before this existed, and what did it cost them?</span></p>
+        <h2>A bill says what you spent. Not what one customer costs.</h2>
+        <p>A bill from a cloud provider, an AI model provider or a SaaS vendor tells you what you spent. It doesn't tell you what it costs to serve one customer. Some costs map directly to a product or team. Others are shared and have to be split using business metrics, resource consumption or custom logic.</p>
+        <p>To get there, users need to:</p>
+        <ul>
+          <li>Combine data from several sources, much of it outside the bill</li>
+          <li>Map cloud, AI and SaaS costs to business entities like customers and products</li>
+          <li>Apply custom calculations and distribution rules</li>
+          <li>Turn raw data into clean inputs the allocation can use</li>
+          <li>See how costs flow through each stage</li>
+          <li>Track and audit changes to the framework over time</li>
+        </ul>
+        <p>Before this work, that logic lived in spreadsheets or in SQL written by a data engineer. Nobody else could see it, and when a number looked wrong, nobody could trace it back to the rule that produced it.</p>
         <blockquote class="quote"><p><span class="todo">“A quote from a user or stakeholder that captures the pain.”</span></p><cite><span class="todo">— Role, company type</span></cite></blockquote>
       </section>
 
-      <!-- 03 RESEARCH: what you did to understand it, and what you learned -->
-      <section class="sec" id="research">
-        <span class="sec-k">03 · Research</span>
-        <h2>What we learned</h2>
-        <p><span class="todo">How did you research this? Interviews, data, competitor review, support tickets…</span></p>
-        <div class="cards"><div class="card"><span class="k">Insight</span><h4>Engineers and finance mean different things by "unit"</h4><p>Engineers thought in requests and resources; finance thought in customers and revenue. The product had to support both.</p></div><div class="card"><span class="k">Insight</span><h4>Totals hide the story</h4><p>A rising bill can be healthy if cost per customer is falling. People needed the ratio, not the sum.</p></div><div class="card"><span class="k">Insight</span><h4>Trust comes from traceability</h4><p>Users only believed a number if they could click through to the costs behind it.</p></div></div>
-        <figure class="wide"><div class="ph " role="img" aria-label="Image placeholder: Research artefact: affinity map, journey or user flow"><span class="ph-tag">Research</span><span>Research artefact: affinity map, journey or user flow<br>1600 × 900</span></div><figcaption><span class="todo">Caption: what this shows.</span></figcaption></figure>
+      <!-- 03 CHALLENGE: the design question and the tensions behind it -->
+      <section class="sec" id="challenge">
+        <span class="sec-k">03 · Challenge</span>
+        <h2>Complex logic, without a data engineer</h2>
+        <p class="lead">How might we let a FinOps analyst build multi-step allocation logic, check it and trust the output, without spreadsheets, disconnected configuration screens or a data engineer?</p>
+        <div class="cards"><div class="card"><span class="k">Tension</span><h4>Complexity vs. usability</h4><p>Users needed control over datasets, calculations, relationships and stages. The interface had to expose that without overwhelming them.</p></div><div class="card"><span class="k">Tension</span><h4>Flexibility vs. structure</h4><p>Every organisation allocates differently. The system had to support custom logic while keeping a structure the engine could process.</p></div><div class="card"><span class="k">Tension</span><h4>Transparency vs. trust</h4><p>Allocation feeds financial reporting and pricing. Users needed to see how costs were calculated, what changed, and whether a rule did what they expected.</p></div></div>
       </section>
 
-      <!-- 04 EXPLORATIONS: options considered, before / after, trade-offs -->
-      <section class="sec" id="explorations">
-        <span class="sec-k">04 · Explorations</span>
-        <h2>Options we tried</h2>
-        <p><span class="todo">Which directions did you explore? Why did you drop some? What trade-offs did you weigh?</span></p>
+      <!-- 04 BUILDING BLOCKS: the data model underneath the builder -->
+      <section class="sec" id="building-blocks">
+        <span class="sec-k">04 · Building blocks</span>
+        <h2>The data the bill doesn't have</h2>
+        <p>Before designing the builder, I worked on the data model underneath it. Most allocation inputs aren't in any billing export, whether from a cloud provider, an AI service or a SaaS tool, so users needed a way to bring them into OneLens. Datasets do that in four types, plus derived datasets for data that needs cleaning first.</p>
+        <div class="cards"><div class="card"><span class="k">Entity (Target)</span><h4>Things that receive cost</h4><p>Product, LoB. Becomes the rows of the output report.</p></div><div class="card"><span class="k">Entity (Source)</span><h4>A dimension inside rules</h4><p>Customer. Lets rules split or filter by it.</p></div><div class="card"><span class="k">Mapping</span><h4>From → to ID pairs</h4><p>Customer → Product, with optional start and end dates. Links two entities so cost can move between them.</p></div><div class="card"><span class="k">Metric</span><h4>Usage or business numbers</h4><p>DB Size, Revenue, Cost Drivers. Sets the weights for splitting cost.</p></div><div class="card"><span class="k">Derived dataset</span><h4>Transformed raw data</h4><p>Normalised usage by customer. Turns inconsistent data into a standard input.</p></div></div>
+        <p>Every contributor in an allocation rule starts as one of these, so this layer had to work before the builder could.</p>
+        <h3>Decisions that shaped datasets</h3>
+        <ul>
+          <li><b>One list with health.</b> Every dataset shows its key, grain, input method (API or manual), record count, owner and health. Stale or Missing warns you before a report runs on bad data.</li>
+          <li><b>Two ways in.</b> Upload a CSV or XLSX from a template, or add rows by hand. The review step shows the API reference so engineering can automate it later.</li>
+          <li><b>Upload first, fields second.</b> Start with a file and OneLens suggests the metadata fields.</li>
+          <li><b>Reuse what's already there.</b> Entities can come from OneLens dimensions, Cost360 dimensions or cost centres, so teams don't re-upload lists the product already knows.</li>
+          <li><b>Relationships that change.</b> Mapping rows take effective dates, so a customer can move between products without breaking past months.</li>
+          <li><b>Manual data that stays current.</b> Manual metrics are editable and tracked per entry, with a reminder email on the 5th if nothing has arrived.</li>
+        </ul>
         <div class="pair">
-          <figure><span class="pill">Before</span><div class="ph r43" role="img" aria-label="Image placeholder: Before"><span>Before<br>1200 × 900</span></div><figcaption><span class="todo">What was wrong here.</span></figcaption></figure>
-          <figure><span class="pill">After</span><div class="ph r43" role="img" aria-label="Image placeholder: After"><span>After<br>1200 × 900</span></div><figcaption><span class="todo">What changed and why.</span></figcaption></figure>
+          <figure><span class="pill">List</span><div class="ph r43" role="img" aria-label="Image placeholder: Datasets list"><span>Datasets list<br>1200 × 900</span></div><figcaption>Every dataset with its type, key, grain, input, owner and health.</figcaption></figure>
+          <figure><span class="pill">Add</span><div class="ph r43" role="img" aria-label="Image placeholder: Add Mapping, step 2"><span>Add Mapping, step 2<br>1200 × 900</span></div><figcaption>CSV upload or manual rows, with effective dates.</figcaption></figure>
         </div>
-        <figure class="wide"><div class="ph r219" role="img" aria-label="Image placeholder: Wireframes or explorations"><span class="ph-tag">Explorations</span><span>Wireframes or explorations<br>1600 × 700</span></div><figcaption><span class="todo">Caption.</span></figcaption></figure>
       </section>
 
-      <!-- 05 SOLUTION: the final design, feature by feature -->
+      <!-- 05 EXPLORATIONS: options considered, before / after, trade-offs -->
+      <section class="sec" id="explorations">
+        <span class="sec-k">05 · Explorations</span>
+        <h2>From a guided wizard to a canvas</h2>
+        <p>An allocation rule has several stages: which costs are being allocated, which inputs contribute, and how the results flow into the final report. My first approach was a four-step wizard.</p>
+        <ol>
+          <li><b>Targets and contributors.</b> Pick a primary target (Customer) and an optional secondary one (Product), then add datasets, cost centres, virtual tags and Cost360 costs.</li>
+          <li><b>Report computation.</b> Add calculation rules. Each rule produces one column in the output.</li>
+          <li><b>Fallback policies.</b> Decide what happens to cost no rule catches.</li>
+          <li><b>Dry run.</b> Preview the output before saving.</li>
+        </ol>
+        <p>A live YAML panel on the right wrote the rule line by line as the user filled the form, so technical users could check exactly what would run.</p>
+        <div class="pair">
+          <figure><span class="pill">Version 1</span><div class="ph r43" role="img" aria-label="Image placeholder: Wizard step 1 with YAML panel"><span>Wizard, step 1<br>1200 × 900</span></div><figcaption>Targets and contributors, with the empty YAML panel.</figcaption></figure>
+          <figure><span class="pill">Version 1</span><div class="ph r43" role="img" aria-label="Image placeholder: Wizard step 2 with YAML panel"><span>Wizard, step 2<br>1200 × 900</span></div><figcaption>Report computation, with the YAML panel filled in.</figcaption></figure>
+        </div>
+        <h3>Structure became a constraint</h3>
+        <p>The wizard handled one-step rules well and hid the shape of multi-step ones. A rule that needed an intermediate table, like product cost per customer feeding OCI cost per customer, had no place to live. The YAML panel helped engineers but meant little to the finance users the feature was for. People needed to see relationships across stages, not finish one step at a time.</p>
+        <p><span class="todo">What confirmed this: a usability session, customer call or PM conversation.</span></p>
+        <h3>Exploring the in-between</h3>
+        <p>The missing piece was the working table: one that combines a few inputs before the final report uses it. Once tables could feed tables, a linear wizard no longer fit, so I moved to a canvas and explored building one working table in seven stages: create it, define its name and purpose, build its structure, connect it to contributors, add safeguards, write or generate the SQL, and test it against real data.</p>
+        <figure class="wide"><div class="ph r219" role="img" aria-label="Image placeholder: The seven stages of building a working table"><span class="ph-tag">Explorations</span><span>The seven stages, from create to SQL test<br>1600 × 700</span></div><figcaption>One frame per stage of building a working table.</figcaption></figure>
+        <p>I also tried several entry points for adding a table: from the toolbar, from an empty column and from a node, plus a question-led form that asks what the table should do.</p>
+        <figure class="wide"><div class="ph r219" role="img" aria-label="Image placeholder: Entry point options"><span class="ph-tag">Explorations</span><span>Entry point options<br>1600 × 700</span></div><figcaption><span class="todo">Which entry point won, and why.</span></figcaption></figure>
+      </section>
+
+      <!-- 06 SOLUTION: the final design, feature by feature -->
       <section class="sec" id="solution">
-        <span class="sec-k">05 · Solution</span>
-        <h2>The final design</h2>
-        <p><span class="todo">One paragraph on the overall solution and the main idea behind it.</span></p>
+        <span class="sec-k">06 · Solution</span>
+        <h2>The logic on one canvas</h2>
+        <p>The canvas lays allocation out left to right in three stages: contributors, working tables and the final report. Every input, table and output is a node, and lines show what feeds what. Users see the whole rule instead of clicking through it blind.</p>
+        <figure class="wide"><div class="ph " role="img" aria-label="Image placeholder: The canvas in build mode"><span class="ph-tag">Final</span><span>The canvas in build mode<br>2400 × 1350</span></div><figcaption>Six contributors feed two layers of working tables and one unit economics report.</figcaption></figure>
+        <ul>
+          <li><b>Colour by contributor type.</b> Entities, mappings, metrics, Cost360 costs and cost centres each get a colour and tag, so you know a node without opening it.</li>
+          <li><b>Cost on the node.</b> Cost-bearing contributors show last month's amount, so users see how much money moves through the pipeline.</li>
+          <li><b>Columns, not free placement.</b> Nodes sit in stage columns, which keeps the flow readable as rules grow and gives "Add working table" a fixed home.</li>
+          <li><b>Test before publish.</b> Test Run, Save as Draft and Publish sit in the header. Nothing reaches a report until it has run once.</li>
+        </ul>
         <div class="feature">
-          <div class="txt"><h3>Define a unit</h3><p>Pick a business metric, connect its data source, and choose which cloud costs count towards it.</p></div>
-          <div class="ph r43" role="img" aria-label="Image placeholder: Define a unit screen"><span>Define a unit screen<br>1200 × 900</span></div>
+          <div class="txt"><h3>Every detail, one click away</h3><p>Clicking a node opens a side pane with its definition, structure, connections, safeguards, SQL and a test against real data. Power users get depth; the canvas stays readable for everyone else.</p></div>
+          <div class="ph r43" role="img" aria-label="Image placeholder: Node side pane"><span>Node side pane<br>1200 × 900</span></div>
         </div>
         <div class="feature flip">
-          <div class="txt"><h3>Cost per unit over time</h3><p>A trend view comparing cost per unit with revenue per unit, with drill-downs by service, team and environment.</p></div>
-          <div class="ph r43" role="img" aria-label="Image placeholder: Cost per unit over time screen"><span>Cost per unit over time screen<br>1200 × 900</span></div>
+          <div class="txt"><h3>Making data transformation accessible</h3><p>Naming, units and identifiers differ from source to source. Derived datasets let users create a dataset from raw data, define the transformation in SQL, map values to standard entities, normalise metrics and preview the result before a rule uses it.</p></div>
+          <div class="ph r43" role="img" aria-label="Image placeholder: Derived dataset SQL editor"><span>Derived dataset editor<br>1200 × 900</span></div>
         </div>
-        <figure class="wide"><div class="ph " role="img" aria-label="Image placeholder: Full-width hero screen of the final product"><span class="ph-tag">Final</span><span>Full-width hero screen of the final product<br>2400 × 1350</span></div><figcaption><span class="todo">Caption.</span></figcaption></figure>
+        <div class="feature">
+          <div class="txt"><h3>Lowering the SQL barrier</h3><p>SQL is a real barrier for many FinOps users, so I explored an AI-assisted query flow. Users describe the transformation in plain language and get generated SQL as a starting point. Technical users can still read, edit and test it before it runs.</p></div>
+          <div class="ph r43" role="img" aria-label="Image placeholder: AI-assisted query"><span>AI-assisted query<br>1200 × 900</span></div>
+        </div>
+        <div class="feature flip">
+          <div class="txt"><h3>From allocation to analysis</h3><p>A report only matters if people look at it. The analytics view shows any report as a chart and a table: compare two data columns, group and filter by any dimension, switch report versions, save views and turn a report into a dashboard widget. Hierarchy management shows how costs roll up across the business.</p></div>
+          <div class="ph r43" role="img" aria-label="Image placeholder: Analytics page"><span>Analytics page<br>1200 × 900</span></div>
+        </div>
       </section>
 
-      <!-- 06 OUTCOME: results, with numbers where you can share them -->
+      <!-- 07 TRUST: versioning, change tracking and logs -->
+      <section class="sec" id="trust">
+        <span class="sec-k">07 · Trust</span>
+        <h2>Knowing which rule made which number</h2>
+        <p>An allocation framework changes as the business changes. When a finance lead asks why cost per customer jumped in March, the answer has to be one click away. So I designed a layer around the builder for tracking and undoing changes.</p>
+        <div class="cards"><div class="card"><span class="k">State</span><h4>Draft and published</h4><p>Is this rule live, or still being edited?</p></div><div class="card"><span class="k">Mode</span><h4>View and edit</h4><p>Inspect a rule without risking a change.</p></div><div class="card"><span class="k">History</span><h4>Change log and revert</h4><p>Who changed what and when, and a confirmed way back.</p></div><div class="card"><span class="k">History</span><h4>Report versions</h4><p>Which version of the rule produced this report?</p></div><div class="card"><span class="k">Runs</span><h4>Execution logs</h4><p>Did the last run succeed, and when did it run?</p></div></div>
+        <p>I also built naming into the flow: users name the rule when they create it and name the report once the rule exists. Named things are much easier to find in a log.</p>
+        <div class="pair">
+          <figure><span class="pill">Change log</span><div class="ph r43" role="img" aria-label="Image placeholder: Change log and revert"><span>Change log and revert<br>1200 × 900</span></div><figcaption>A version's details open, with the revert confirmation.</figcaption></figure>
+          <figure><span class="pill">Runs</span><div class="ph r43" role="img" aria-label="Image placeholder: Execution logs"><span>Execution logs<br>1200 × 900</span></div><figcaption>Run history with status and timing.</figcaption></figure>
+        </div>
+      </section>
+
+      <!-- 08 OUTCOME: results, with numbers where you can share them -->
       <section class="sec" id="outcome">
-        <span class="sec-k">06 · Outcome</span>
-        <h2>What changed</h2>
+        <span class="sec-k">08 · Outcome</span>
+        <h2>One framework instead of six parts</h2>
         <div class="stats">
-          <div class="stat"><b class="todo">Add metric</b><span><span class="todo">What it measures</span></span></div>
-          <div class="stat"><b class="todo">Add metric</b><span><span class="todo">What it measures</span></span></div>
-          <div class="stat"><b class="todo">Add metric</b><span><span class="todo">What it measures</span></span></div>
+          <div class="stat"><b>6</b><span>separate parts of OneLens brought into one framework</span></div>
+          <div class="stat"><b>5</b><span>data building blocks feeding one canvas</span></div>
+          <div class="stat"><b class="todo">Add metric</b><span><span class="todo">e.g. customers using it, or time to a first report</span></span></div>
         </div>
-        <p><span class="todo">What shipped, who uses it, and any customer or team feedback.</span></p>
+        <p>The engine brought together a visual rule builder, dataset management, SQL-based transformations, AI-assisted queries, versioning and change tracking, and allocation analytics with hierarchy management.</p>
+        <p>The larger challenge was making all of this feel like one product around a demanding financial and technical workflow. It pushed me to design the relationships, states and interactions underneath the screens, and the screens themselves.</p>
       </section>
 
-      <!-- 07 LEARNINGS: what you would keep or change -->
+      <!-- 09 LEARNINGS: what you would keep or change -->
       <section class="sec" id="learnings">
-        <span class="sec-k">07 · Learnings</span>
-        <h2>What I'd take forward</h2>
+        <span class="sec-k">09 · Learnings</span>
+        <h2>Complexity can't always be removed. It can be organised.</h2>
         <ul>
-          <li><span class="todo">Learning one</span></li>
-          <li><span class="todo">Learning two</span></li>
-          <li><span class="todo">What you would do differently next time</span></li>
+          <li><b>Show the structure the user thinks in.</b> The wizard matched the system's steps. The canvas matched how people describe allocation: these inputs feed this table, which feeds that report.</li>
+          <li><b>Trust is part of the feature.</b> Versioning and logs took real design time. For numbers that drive money decisions, they are core to the product.</li>
+          <li><span class="todo">What you would do differently next time, e.g. test the canvas with finance users earlier.</span></li>
         </ul>
       </section>
     </article>

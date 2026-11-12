@@ -1,0 +1,43 @@
+/* Unit economics motion cover: real Figma layers, animated in sequence.
+   Story: canvas appears → a node is highlighted → cursor clicks expand → node opens → run details panel slides in. */
+.uem{position:relative;width:100%;overflow:hidden;isolation:isolate}
+.uem-bg{position:absolute;inset:0;z-index:-1;background:linear-gradient(115deg,#FFF4EC 0%,#F7F0F8 55%,#F1EFFF 100%)}
+.uem-bg::before,.uem-bg::after{content:"";position:absolute;width:42%;aspect-ratio:1;border-radius:50%;filter:blur(60px)}
+.uem-bg::before{left:-9%;top:-20%;background:rgba(242,86,11,.22)}
+.uem-bg::after{right:-8%;bottom:-38%;background:rgba(115,102,255,.22)}
+.uem-layer{position:absolute;display:block;height:auto;max-width:none;pointer-events:none;user-select:none}
+.uem-hl{position:absolute;border:2px solid #F2560B;border-radius:10px;box-shadow:0 0 0 6px rgba(242,86,11,.14);opacity:0}
+.uem-cur{position:absolute;opacity:0;z-index:5;filter:drop-shadow(0 2px 3px rgba(0,0,0,.3))}
+.uem-cur svg{display:block;width:100%;height:auto}
+.uem-cur::after{content:"";position:absolute;left:-60%;top:-60%;width:120%;aspect-ratio:1;border-radius:50%;background:rgba(242,86,11,.45);transform:scale(0);opacity:0}
+.uem{container-type:inline-size}
+.uem-main{z-index:1}.uem-hl{z-index:2}.uem-panel{z-index:3}.uem-node{z-index:4}
+
+/* Before play: hidden. Final state is the default so reduced motion / no JS shows the composition. */
+.uem.is-ready:not(.is-play) .uem-main,.uem.is-ready:not(.is-play) .uem-panel,.uem.is-ready:not(.is-play) .uem-node{opacity:0}
+.uem.is-play .uem-main{animation:uemRise .8s cubic-bezier(.2,.8,.2,1) both}
+.uem.is-play .uem-hl{animation:uemHl 2.6s ease .7s both}
+.uem.is-play .uem-cur{animation:uemCur 3.4s cubic-bezier(.45,0,.2,1) .8s both}
+.uem.is-play .uem-cur::after{animation:uemTap .6s ease-out 2.05s both}
+.uem.is-play .uem-node{transform-origin:85% 10%;animation:uemPop .7s cubic-bezier(.2,1.3,.4,1) 2.25s both,uemFloat 6s ease-in-out 3.4s infinite}
+.uem.is-play .uem-panel{animation:uemSlide .8s cubic-bezier(.2,.8,.2,1) 2.8s both,uemFloat 7s ease-in-out 3.8s infinite reverse}
+@keyframes uemRise{from{opacity:0;transform:translateY(4%) scale(.98)}to{opacity:1;transform:none}}
+@keyframes uemHl{0%{opacity:0;transform:scale(1.06)}20%{opacity:1;transform:none}70%{opacity:1}100%{opacity:0}}
+@keyframes uemCur{0%{opacity:0;transform:translate(1300%,1100%)}12%{opacity:1}38%{transform:translate(0,0)}46%{transform:translate(0,0) scale(.86)}52%{transform:translate(0,0) scale(1)}78%{opacity:1;transform:translate(0,0)}100%{opacity:0;transform:translate(600%,700%)}}
+@keyframes uemTap{0%{transform:scale(0);opacity:.9}100%{transform:scale(2.2);opacity:0}}
+@keyframes uemPop{from{opacity:0;transform:translate(60%,-50%) scale(.4)}to{opacity:1;transform:none}}
+@keyframes uemSlide{from{opacity:0;transform:translateX(18%)}to{opacity:1;transform:none}}
+@keyframes uemFloat{0%,100%{translate:0 0}50%{translate:0 -1.2%}}
+@media (prefers-reduced-motion:reduce){.uem *,.uem *::after{animation:none!important}.uem.is-ready .uem-main,.uem.is-ready .uem-panel,.uem.is-ready .uem-node{opacity:1!important}}
+.uem-hero{aspect-ratio:2400/1350}
+.uem-hero .uem-main{left:1.250%;top:7.407%;width:75.458%}
+.uem-hero .uem-panel{left:66.667%;top:18.519%;width:33.333%}
+.uem-hero .uem-node{left:1.600%;top:62.993%;width:20.500%}
+.uem-hero .uem-hl{left:29.083%;top:44.074%;width:17.542%;height:6.074%}
+.uem-hero .uem-cur{left:45.208%;top:47.407%;width:1.250%}
+.uem-card{aspect-ratio:1460/1255}
+.uem-card .uem-main{left:-0.685%;top:0.000%;width:124.041%}
+.uem-card .uem-panel{left:49.315%;top:27.888%;width:54.795%}
+.uem-card .uem-node{left:0.164%;top:67.761%;width:33.699%}
+.uem-card .uem-hl{left:45.068%;top:39.442%;width:28.836%;height:6.534%}
+.uem-card .uem-cur{left:71.575%;top:43.028%;width:2.740%}

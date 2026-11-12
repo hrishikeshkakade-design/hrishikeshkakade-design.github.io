@@ -3,10 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Case study by Hrishikesh Kakade on designing a flexible cost allocation engine for OneLens by Astuto.ai.">
+<meta name="description" content="Case study by Hrishikesh Kakade: turning an enterprise customer need into a scalable cost allocation framework for OneLens by Astuto.ai.">
 <title>Advanced Cost Allocation — Hrishikesh Kakade</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="case.css">
+<link rel="stylesheet" href="motion.css">
 </head>
 <body>
 <!-- Content source: the "Unit Economics Cost Engine" tab of the Portfolio Case Studies doc.
@@ -24,93 +28,159 @@
 <main>
   <header class="hero wrap">
     <div class="crumb"><b>Case study</b><span>·</span><span>OneLens by Astuto.ai</span><span>·</span><span>FinOps / B2B SaaS</span></div>
-    <h1>Designing a flexible cost allocation engine.</h1>
-    <p class="sum hmw">How might we enable FinOps teams to understand the true cost of serving customers or running products, without relying on engineering teams for building and maintaining allocation logic?</p>
+    <h1>From an enterprise customer need to a scalable allocation framework.</h1>
+    <p class="sum">This project was about more than a sophisticated cost allocation interface. It meant identifying and solving an enterprise-scale product gap through customer discovery, systems-level design and close alignment with business priorities.</p>
     <dl class="meta">
-      <div><dt>Role</dt><dd>Senior Product Designer, end to end</dd></div>
-      <div><dt>Team</dt><dd>Product Manager, Engineering</dd></div>
-      <div><dt>Timeline</dt><dd>1 sprint</dd></div>
-      <div><dt>Platform</dt><dd>Web app · Desktop first</dd></div>
+      <div><dt>Product</dt><dd>OneLens by Astuto</dd></div>
+      <div><dt>Area</dt><dd>Unit Economics / Cost Allocation</dd></div>
+      <div><dt>Role</dt><dd>Senior Product Designer</dd></div>
+      <div><dt>Collaboration</dt><dd>Product, Engineering, business stakeholders, enterprise customer SPOCs</dd></div>
     </dl>
     <div class="hero-actions">
       <a class="btn primary" href="#overview">Explore the case study ↓</a>
       <a class="btn" href="#" data-pdf="">View PDF ↗</a>
     </div>
-    <figure class="cover"><img class="shot" src="img/ue/cover-hero.webp" alt="Allocation canvas with an expanded intermediate-table node and the run details panel showing SQL, safeguards and output preview" width="2400" height="1350" fetchpriority="high" decoding="async"><figcaption class="cover-cap">From fragmented cost data to a connected allocation model.</figcaption></figure>
+    <figure class="cover"><div class="uem uem-hero" role="img" aria-label="Animated preview: the allocation canvas appears, a working table is selected and expands to show its columns, and the run details panel slides in with SQL, safeguards and output preview."><div class="uem-bg"></div><img class="uem-layer uem-main" src="img/ue/motion/main.webp" alt="" width="1652" height="994" decoding="async"><span class="uem-hl" aria-hidden="true"></span><img class="uem-layer uem-panel" src="img/ue/motion/panel.webp" alt="" width="800" height="820" decoding="async"><img class="uem-layer uem-node" src="img/ue/motion/node.webp" alt="" width="492" height="376" decoding="async"><span class="uem-cur" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 2.5l6.5 18 2.6-7.4 7.4-2.6z" fill="#fff" stroke="#14171F" stroke-width="1.6" stroke-linejoin="round"/></svg></span></div><figcaption class="cover-cap">From fragmented cost data to a connected allocation model.</figcaption></figure>
   </header>
 
   <div class="wrap body">
     <nav class="toc" aria-label="Contents">
       <span class="lbl">On this page</span>
-      <a href="#overview"><i>01</i>Overview</a><a href="#problem"><i>02</i>Problem</a><a href="#challenge"><i>03</i>Challenge</a><a href="#foundation"><i>04</i>Foundation</a><a href="#exploration"><i>05</i>Exploration</a><a href="#solution"><i>06</i>Solution</a><a href="#trust"><i>07</i>Trust &amp; governance</a><a href="#outcome"><i>08</i>Outcome</a><a href="#learnings"><i>09</i>Learnings</a><a href="#whats-next"><i>10</i>What's next</a>
+      <a href="#overview"><i>01</i>Overview</a><a href="#context"><i>02</i>Business context</a><a href="#discovery"><i>03</i>Customer discovery</a><a href="#problem"><i>04</i>Problem</a><a href="#challenge"><i>05</i>Design challenge</a><a href="#principles"><i>06</i>Design principles</a><a href="#foundation"><i>07</i>Building blocks</a><a href="#exploration"><i>08</i>Explorations</a><a href="#solution"><i>09</i>Solution</a><a href="#trust"><i>10</i>Building trust</a><a href="#outcome"><i>11</i>Outcomes</a><a href="#learnings"><i>12</i>Learnings</a><a href="#whats-next"><i>13</i>What's next</a>
     </nav>
     <article>
 
       <!-- 01 OVERVIEW -->
       <section class="sec" id="overview">
         <span class="sec-k">01 · Overview</span>
-        <h2>Making unit economics accessible to the people who need it.</h2>
-        <p class="lead">As businesses scale across cloud infrastructure, AI services and SaaS platforms, understanding what it costs to serve a customer or run a product becomes increasingly difficult.</p>
+        <h2>A business-critical capability, shaped by real enterprise needs.</h2>
+        <p class="lead">Some of Astuto's largest enterprise customers needed a more flexible way to understand the true cost of serving individual customers, products and business units. Their workflows were fragmented, hard to maintain and dependent on engineering support.</p>
+        <p>I spoke directly with the SPOCs of four of these customers, studied their distinct allocation workflows, and translated those varied, complex requirements into one unified Unit Economics Cost Engine for OneLens. The capability strengthened OneLens' enterprise proposition and contributed to securing two large enterprise deals.</p>
         <div class="duo">
-          <div class="card"><span class="k">The context</span><p>Provider bills show where money was spent, but not how that spend translates to products, customers or business units. Shared costs need business metrics and allocation logic to make them meaningful.</p></div>
-          <div class="card"><span class="k">The challenge</span><p>Allocation logic often lives in spreadsheets and custom SQL. It can be difficult to maintain, inspect and change without involving a data engineer.</p></div>
+          <div class="card"><span class="k">My role</span><p>Senior Product Designer. I led customer conversations, problem definition, UX strategy, interaction design and end-to-end product design.</p></div>
+          <div class="card"><span class="k">Team</span><p>Product, Engineering and business stakeholders, with the SPOCs of four enterprise customers.</p></div>
         </div>
-        <div class="callout"><b>My contribution</b><p>I led the end-to-end product design of the Unit Economics Cost Engine, covering the underlying data model, dataset management, allocation workflows, visual rule builder, analytics and governance.</p></div>
       </section>
 
-      <!-- 02 PROBLEM -->
-      <section class="sec" id="problem">
-        <span class="sec-k">02 · Problem</span>
-        <h2>A bill says what you spent. Not what one customer costs.</h2>
-        <p class="lead">Some costs map directly to a product or team. Others are shared and need to be distributed using business metrics, resource consumption or custom logic.</p>
-        <p>To get from raw spend to meaningful unit economics, users need to combine data from multiple sources, map costs to business entities, apply calculations and understand how the final number was produced.</p>
-        <figure><img class="shot" src="img/ue/workflow.webp" alt="The existing workflow: provider bills and business data go into spreadsheets and custom SQL, then manual allocation rules, then reports. When a number looks wrong, the FinOps analyst asks a data engineer, who writes and updates the spreadsheets, SQL and rules." width="1800" height="714" loading="lazy" decoding="async"><figcaption>Before: every change to the allocation logic went through a data engineer.</figcaption></figure>
-        <h3>Where the workflow broke down</h3>
+      <!-- 02 BUSINESS CONTEXT -->
+      <section class="sec" id="context">
+        <span class="sec-k">02 · The business context</span>
+        <h2>A problem surfaced by our largest enterprise customers.</h2>
+        <p class="lead">The need for a more sophisticated cost allocation engine came directly from conversations with some of Astuto's largest enterprise customers.</p>
+        <p>As organisations scaled across multiple cloud providers, products, business units and customer segments, understanding the true cost of serving each customer became increasingly difficult. Their existing allocation workflows relied heavily on spreadsheets, manually maintained SQL queries and engineering support. FinOps teams struggled to model, validate and maintain complex allocation logic on their own.</p>
+        <p>This wasn't an isolated request. It was a recurring challenge among larger enterprises, where shared infrastructure, complex organisational hierarchies and diverse cost drivers made traditional allocation approaches hard to scale.</p>
+        <p>Addressing this gap was strategically important for Astuto. This was a business-critical product initiative rather than another feature enhancement: it strengthened OneLens' enterprise proposition and contributed to securing two large enterprise deals.</p>
+        <h3>Why this mattered to the business</h3>
         <ul class="kv">
-          <li><b>Scattered inputs</b><span>Important business metrics often sit outside provider billing exports.</span></li>
-          <li><b>Engineering dependency</b><span>Even small changes to allocation logic can require SQL support.</span></li>
-          <li><b>Limited visibility</b><span>Users struggle to see how costs move through each calculation.</span></li>
-          <li><b>Hard to audit</b><span>When a number looks wrong, tracing it back to the rule that produced it is difficult.</span></li>
+          <li><b>A real capability gap</b><span>It addressed a need raised by some of our largest customers.</span></li>
+          <li><b>Enterprise fit</b><span>It strengthened the product's fit for complex enterprise environments.</span></li>
+          <li><b>Sales value</b><span>It became part of the value proposition in sales conversations that contributed to two large enterprise deals.</span></li>
         </ul>
-        <div class="persona"><span class="av" aria-hidden="true">FA</span><div><span class="k">Primary user</span><h4>FinOps analyst</h4><p>Responsible for understanding and explaining cost distribution across products, customers and business units, while keeping allocation models accurate and up to date.</p></div></div>
       </section>
 
-      <!-- 03 CHALLENGE -->
+      <!-- 03 DISCOVERY -->
+      <section class="sec" id="discovery">
+        <span class="sec-k">03 · Customer discovery</span>
+        <h2>Four customers. Four real-world allocation challenges.</h2>
+        <p class="lead">The feature was shaped by four real use cases from four different enterprise customers. I personally spoke with each customer's SPOC (single point of contact) to understand their existing allocation workflows, operational challenges and specific requirements.</p>
+        <p>The goal wasn't to build four disconnected solutions. It was to find the common needs underneath them, and design one flexible framework that could serve all four.</p>
+        <div class="usecases">
+          <div class="uc"><span class="uc-id">Customer 01</span><h4>Cost per customer per product</h4><p class="uc-goal"><b>Goal</b>Split cloud database and product costs across each customer.</p><span class="uc-k">The challenge</span><ul><li>Match customer names spelled differently across files, using a helper table.</li><li>Share database cost by each customer's database usage.</li><li>Decide what happens to customers with no usage data.</li></ul><div class="uc-ex"><span>Documented example</span><p>29 of 77 customers had no database usage, leaving <b>$967.75</b> unallocated. One name in the usage data matched seven customers.</p></div></div>
+          <div class="uc"><span class="uc-id">Customer 02</span><h4>Cost per squad</h4><p class="uc-goal"><b>Goal</b>Split shared Kubernetes costs across engineering squads.</p><span class="uc-k">The challenge</span><ul><li>Link API usage to squads, since the usage feed doesn't carry squad IDs.</li><li>Share infrastructure cost by each squad's API usage.</li><li>Catch usage data that covers only part of the month.</li></ul><div class="uc-ex"><span>Documented example</span><p>A usage feed covered <b>29 of 31 days</b>, understating every squad's cost. The shares still added up to 100%, so nothing else flagged it.</p></div></div>
+          <div class="uc"><span class="uc-id">Customer 03</span><h4>Cost per loan type</h4><p class="uc-goal"><b>Goal</b>Work out what each loan type costs to run, across business units and shared platforms.</p><span class="uc-k">The challenge</span><ul><li>Split business-unit costs within each unit.</li><li>Split shared platform costs across all loan types.</li><li>Use the same usage metric at both scopes without mixing them up.</li></ul><div class="uc-ex"><span>Documented example</span><p>Averaging the per-loan column gave <b>$439.89</b> instead of the true <b>$444</b>. A product launched mid-month would have carried a full month of cost against 19 days of traffic.</p></div></div>
+          <div class="uc"><span class="uc-id">Customer 04</span><h4>Margin by line of business</h4><p class="uc-goal"><b>Goal</b>Calculate margin for each line of business from several finance feeds.</p><span class="uc-k">The challenge</span><ul><li>Combine five financial data feeds, including revenue and budget.</li><li>Convert annual budget figures into monthly ones.</li><li>Stop the run when revenue data arrives late.</li></ul><div class="uc-ex"><span>Documented example</span><p>Averaging the margin column gave <b>71.28%</b> instead of the true <b>75.02%</b>. Treating annual budget as monthly would have made the variance twelve times too large.</p></div></div>
+        </div>
+        <h3>What these four scenarios revealed</h3>
+        <p>Each customer needed something different, but the scenarios shared the same underlying product requirements.</p>
+        <ul class="reqs"><li>Flexible relationships between datasets</li><li>Different allocation methods and scopes</li><li>Support for different data grains</li><li>Transparent intermediate calculations</li><li>Validation of incomplete or mismatched data</li><li>Financial accuracy and traceability</li></ul>
+        <h3>Recurring challenges across the conversations</h3>
+        <div class="cards two">
+          <div class="card"><span class="k">Pattern 01</span><h4>Fragmented data and dependencies</h4><p>Allocation meant combining financial data with business metrics, customer mappings and operational datasets that weren't available in billing exports.</p></div>
+          <div class="card"><span class="k">Pattern 02</span><h4>Heavy dependence on engineering</h4><p>Complex logic lived in SQL queries and spreadsheets, so routine changes needed a data engineer.</p></div>
+          <div class="card"><span class="k">Pattern 03</span><h4>Limited visibility into the logic</h4><p>Users struggled to see how intermediate calculations contributed to final costs, which made validation and troubleshooting hard.</p></div>
+          <div class="card"><span class="k">Pattern 04</span><h4>Enterprise complexity</h4><p>Business units, product hierarchies, shared infrastructure and customer relationships meant a simple one-step allocation model wasn't enough.</p></div>
+        </div>
+        <div class="callout"><b>Standard vs. flexible</b><p>Comparing the four use cases showed which capabilities could be standardised across every customer, and where each one needed room for its own logic. That split shaped the product architecture.</p></div>
+      </section>
+
+      <!-- 04 PROBLEM -->
+      <section class="sec" id="problem">
+        <span class="sec-k">04 · The problem</span>
+        <h2>A bill says what you spent. Not what one customer costs.</h2>
+        <p class="lead">Cloud billing data shows infrastructure spend, but it doesn't explain how that spend should be attributed to the customers, products or business units that consume shared resources.</p>
+        <p>The problem gets significantly harder at enterprise scale. Every extra product, customer segment and business unit adds another layer of shared cost to untangle:</p>
+        <div class="tscroll"><table class="ctable">
+          <thead><tr><th scope="col">Enterprise complexity</th><th scope="col">Allocation challenge</th></tr></thead>
+          <tbody>
+            <tr><td>Multiple products</td><td>Distributing shared infrastructure costs</td></tr>
+            <tr><td>Large customer bases</td><td>Attributing costs to individual customers</td></tr>
+            <tr><td>Multiple business units</td><td>Rolling costs into organisational hierarchies</td></tr>
+            <tr><td>Shared infrastructure</td><td>Splitting costs using custom business metrics</td></tr>
+            <tr><td>Changing relationships</td><td>Maintaining reliable allocation logic over time</td></tr>
+          </tbody>
+        </table></div>
+        <p>Traditional allocation methods struggled with these interconnected requirements without adding more manual work and operational overhead.</p>
+        <figure><img class="shot" src="img/ue/workflow.webp" alt="The existing workflow: provider bills and business data go into spreadsheets and custom SQL, then manual allocation rules, then reports. When a number looks wrong, the FinOps analyst asks a data engineer, who writes and updates the spreadsheets, SQL and rules." width="1800" height="714" loading="lazy" decoding="async"><figcaption>Before: every change to the allocation logic went through a data engineer.</figcaption></figure>
+      </section>
+
+      <!-- 05 DESIGN CHALLENGE -->
       <section class="sec" id="challenge">
-        <span class="sec-k">03 · Challenge</span>
-        <h2>Complex logic, without a data engineer.</h2>
-        <div class="callout hmw"><b>How might we</b><p>How might we let FinOps teams build multi-step allocation logic, validate it and trust the output, without relying on spreadsheets, disconnected configuration screens or constant engineering support?</p></div>
-        <div class="cards"><div class="card"><span class="k">Tension 01</span><h4>Complexity vs. usability</h4><p>Expose datasets, calculations and relationships without overwhelming users with implementation details.</p></div><div class="card"><span class="k">Tension 02</span><h4>Flexibility vs. structure</h4><p>Support organisation-specific allocation logic while keeping workflows consistent and manageable.</p></div><div class="card"><span class="k">Tension 03</span><h4>Transparency vs. trust</h4><p>Help users understand how costs were calculated, what changed and whether a rule produced the expected result.</p></div></div>
-        <h3>Design objective</h3>
-        <p>Create one environment where FinOps teams can prepare data, build multi-step allocation logic, validate outputs and manage changes with confidence.</p>
+        <span class="sec-k">05 · Design challenge</span>
+        <h2>Translating varied requirements into one cohesive experience.</h2>
+        <div class="persona"><span class="av" aria-hidden="true">FA</span><div><span class="k">Primary user</span><h4>FinOps analyst</h4><p>Responsible for understanding and explaining cost distribution across products, customers and business units, while keeping allocation models accurate and up to date.</p></div></div>
+        <div class="callout hmw"><b>How might we</b><p>How might we help enterprise FinOps teams build, manage and validate complex cost allocation workflows independently, while keeping the experience understandable, flexible and trustworthy?</p></div>
+        <h3>From four use cases to one framework</h3>
+        <ol class="thread">
+          <li><b>Customer requirements</b><span>Four distinct allocation scenarios from four enterprise customers.</span></li>
+          <li><b>Discovery insights</b><span>Common patterns, with workflow requirements that varied by customer.</span></li>
+          <li><b>Product insight</b><span>A flexible framework was needed instead of four isolated solutions.</span></li>
+          <li><b>Design response</b><span>A visual, multi-stage allocation experience with reusable datasets and intermediate calculations.</span></li>
+          <li><b>Business outcome</b><span>A capability that addressed a critical enterprise requirement and contributed to two large deals.</span></li>
+        </ol>
       </section>
 
-      <!-- 04 FOUNDATION -->
+      <!-- 05 PRINCIPLES -->
+      <section class="sec" id="principles">
+        <span class="sec-k">06 · Design principles</span>
+        <h2>Five principles that shaped the direction.</h2>
+        <p class="lead">The patterns across the four use cases pointed to a set of experience requirements.</p>
+        <div class="numcards five">
+          <div><i>01</i><h4>Flexibility without unnecessary complexity</h4><p>Support different allocation methods, business metrics and data relationships without forcing users into a rigid workflow.</p></div>
+          <div><i>02</i><h4>Transparency at every stage</h4><p>Make intermediate calculations and transformations visible, so users can see how final costs are derived.</p></div>
+          <div><i>03</i><h4>Reusable building blocks</h4><p>Let users create and reuse datasets and allocation logic instead of rebuilding the same foundations.</p></div>
+          <div><i>04</i><h4>Confidence before execution</h4><p>Give users ways to validate logic and inspect outputs before applying allocation changes.</p></div>
+          <div><i>05</i><h4>Control over ongoing operations</h4><p>Support iteration, versioning and execution history, so teams can manage workflows as business needs evolve.</p></div>
+        </div>
+      </section>
+
+      <!-- 06 BUILDING BLOCKS -->
       <section class="sec" id="foundation">
-        <span class="sec-k">04 · Building the foundation</span>
+        <span class="sec-k">07 · Building blocks</span>
         <h2>The data the bill doesn't have.</h2>
-        <p class="lead">Before designing the builder, I worked on the data model underneath it. Allocation depends on more than billing exports, so users needed a consistent way to bring business data into OneLens and prepare it for calculations.</p>
-        <div class="cards"><div class="card"><span class="k">Entity · Target</span><h4>Things that receive cost</h4><p>Products or lines of business that become the rows of the output report.</p></div><div class="card"><span class="k">Entity · Source</span><h4>Dimensions used in rules</h4><p>Customers or other business dimensions that rules can split or filter by.</p></div><div class="card"><span class="k">Mapping</span><h4>Relationships between entities</h4><p>ID pairs such as Customer → Product, with effective dates when relationships change over time.</p></div><div class="card"><span class="k">Metric</span><h4>Usage and business numbers</h4><p>Revenue, database size or cost drivers that determine how shared costs are distributed.</p></div><div class="card"><span class="k">Derived dataset</span><h4>Transformed raw data</h4><p>Cleaned and standardised data, such as normalised usage by customer, ready for allocation.</p></div></div>
+        <p class="lead">The solution needed more than a single allocation step. It needed a framework that brings data inputs, transformations and allocation logic together. So before designing the builder, I worked on the data model underneath it.</p>
+        <p>Each of the five building blocks answers a requirement that came up in discovery.</p>
+        <div class="cards"><div class="card"><span class="k">Entity · Target</span><h4>Things that receive cost</h4><p>Products or lines of business that become the rows of the output report.</p><p class="why">Solves: rolling costs up into products and business units.</p></div><div class="card"><span class="k">Entity · Source</span><h4>Dimensions used in rules</h4><p>Customers or other business dimensions that rules can split or filter by.</p><p class="why">Solves: attributing costs to individual customers.</p></div><div class="card"><span class="k">Mapping</span><h4>Relationships between entities</h4><p>ID pairs such as Customer → Product, with effective dates when relationships change over time.</p><p class="why">Solves: relationships that change over time.</p></div><div class="card"><span class="k">Metric</span><h4>Usage and business numbers</h4><p>Revenue, database size or cost drivers that determine how shared costs are distributed.</p><p class="why">Solves: splitting shared infrastructure by custom business metrics.</p></div><div class="card"><span class="k">Derived dataset</span><h4>Transformed raw data</h4><p>Cleaned and standardised data, such as normalised usage by customer, ready for allocation.</p><p class="why">Solves: fragmented data that isn't in billing exports.</p></div></div>
         <figure><img class="shot" src="img/ue/building-blocks.webp?v=2" alt="How the building blocks connect: the Customer (source) and Product (target) entities link through a Customer to Product mapping. Revenue and Usage metrics combine into a derived dataset. The mapping and the derived dataset both feed the allocation input, and the mapping can also inform the derived dataset." width="1128" height="1015" loading="lazy" decoding="async"><figcaption>Example: how the building blocks connect.</figcaption></figure>
         <h3>Decisions that shaped the dataset experience</h3>
         <ul class="kv">
           <li><b>One list with health</b><span>Show each dataset's key, grain, input method, record count, owner and health status.</span></li>
-          <li><b>Two ways to add data</b><span>Support CSV/XLSX upload from a template as well as manual entry.</span></li>
+          <li><b>Four ways to add data</b><span>API pull, manual CSV/XLSX upload, CSV/XLSX from an S3 bucket, or manual entry in a OneLens table.</span></li>
           <li><b>Upload first, fields second</b><span>Let users start with a file and review suggested metadata.</span></li>
           <li><b>Reuse existing dimensions</b><span>Use dimensions and cost centres already available in OneLens where possible.</span></li>
           <li><b>Time-aware relationships</b><span>Effective dates let mappings change without rewriting historical periods.</span></li>
         </ul>
         <div class="pair">
           <figure><span class="pill">List</span><img class="shot" src="img/ue/datasets-list.webp" alt="Datasets list with type, key, grain, input, records, owner and health" width="1600" height="900" loading="lazy" decoding="async"><figcaption>Health, grain, owner and input method for every dataset.</figcaption></figure>
-          <figure><span class="pill">Add</span><img class="shot" src="img/ue/add-mapping.webp" alt="Add Mapping panel: mapping name, cardinality, entities, owner, granularity and input method" width="1600" height="900" loading="lazy" decoding="async"><figcaption>Upload a file or enter rows by hand.</figcaption></figure>
+          <figure><span class="pill">Add</span><img class="shot" src="img/ue/add-mapping.webp" alt="Add Mapping panel: mapping name, cardinality, entities, owner, granularity and input method" width="1600" height="900" loading="lazy" decoding="async"><figcaption>Pick the input method: API pull, file upload, S3 bucket or manual entry.</figcaption></figure>
         </div>
       </section>
 
-      <!-- 05 EXPLORATION -->
+      <!-- 07 INTERACTION MODEL -->
       <section class="sec" id="exploration">
-        <span class="sec-k">05 · Exploration &amp; iteration</span>
+        <span class="sec-k">08 · Explorations</span>
         <h2>From a guided wizard to a visual canvas.</h2>
-        <p class="lead">An allocation rule has several stages: which costs are being allocated, which inputs contribute, and how the results flow into the final report. My first approach was a guided, four-step wizard.</p>
+        <p class="lead">The four use cases made one thing clear: enterprise workflows were interconnected rather than strictly linear. Users worked across datasets, intermediate calculations and allocation steps, often revisiting earlier logic as requirements changed.</p>
+        <p>An allocation rule has several stages: which costs are being allocated, which inputs contribute, and how the results flow into the final report. My first approach was a guided, four-step wizard.</p>
         <ol class="steps4">
           <li><b>Targets and contributors</b><span>Choose the primary target and add datasets, cost centres and other inputs.</span></li>
           <li><b>Report computation</b><span>Define calculation rules, each producing a column in the output.</span></li>
@@ -165,13 +235,22 @@
         <h3>Choosing the right entry point</h3>
         <p>I also explored ways to add a working table: from the toolbar, from an empty column, from an existing node, and through a question-led prompt.</p>
         <figure><img class="shot" src="img/ue/entry-points.webp" alt="Four ways to add a working table on the canvas" width="1764" height="1120" loading="lazy" decoding="async"><figcaption>The selected entry point, marked.</figcaption></figure>
+        <div class="callout"><b>Why the canvas won</b><p>The four customer scenarios showed that a rigid, linear form-based workflow wouldn't be enough. A form hides the thing that matters most: when several tables feed a calculation, the real question is where a number comes from and what happens if a feed is late. The canvas let users:</p></div>
+        <ul class="kv">
+          <li><b>See connections</b><span>See how datasets connect to each other.</span></li>
+          <li><b>Trace values</b><span>Understand where calculated values originate.</span></li>
+          <li><b>Configure relationships</b><span>Set up relationships between tables.</span></li>
+          <li><b>Inspect working tables</b><span>Open intermediate working tables and check their output.</span></li>
+          <li><b>Locate failures</b><span>Identify failures at the relevant node and column.</span></li>
+          <li><b>Manage validation</b><span>Manage validation rules and execution outcomes. Each of the 27 rules says what to do with the data and who to tell.</span></li>
+        </ul>
       </section>
 
-      <!-- 06 SOLUTION -->
+      <!-- 08 SOLUTION -->
       <section class="sec" id="solution">
-        <span class="sec-k">06 · The solution</span>
-        <h2>The logic, on one canvas.</h2>
-        <p class="lead">The canvas lays allocation out from left to right in three stages: contributors, working tables and the final report. Every input, table and output is represented as a node; connecting lines show what feeds what.</p>
+        <span class="sec-k">09 · The solution</span>
+        <h2>A unified framework for complex allocation workflows.</h2>
+        <p class="lead">The canvas lays allocation out from left to right in three stages: contributors, working tables and the final report. Every input, table and output is a node, and connecting lines show what feeds what.</p>
         <figure><img class="shot" src="img/ue/canvas-build.webp" alt="The canvas in build mode, with the three stages across the top" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>Contributors, working tables and the final report on one canvas.</figcaption></figure>
         <div class="numcards">
           <div><i>01</i><h4>Prepare the data</h4><p>Bring entities, mappings, metrics and cost inputs into one managed dataset layer. Surface data health and metadata before a rule uses the input.</p></div>
@@ -180,28 +259,34 @@
           <div><i>04</i><h4>Analyse and manage</h4><p>Explore allocation reports, compare versions, group and filter by business dimensions, and understand how costs roll up through the hierarchy.</p></div>
         </div>
         <div class="feature">
-          <div class="txt"><h3>Keeping the canvas readable, with depth one click away</h3><p>Nodes communicate contributor type and relevant cost context at a glance. Selecting a node opens a side panel for its definition, structure, connections, safeguards, SQL and test results. The canvas stays focused on the overall flow while detailed configuration remains accessible when needed.</p></div>
+          <div class="txt"><h3>Keeping the canvas readable, with depth one click away</h3><p>Customers needed to see how intermediate calculations contributed to final costs. Nodes communicate contributor type and relevant cost context at a glance. Selecting a node opens a side panel for its definition, structure, connections, safeguards, SQL and test results. The canvas stays focused on the overall flow while detailed configuration remains accessible when needed.</p></div>
           <img class="shot" src="img/ue/node-panel.webp" alt="A working table selected, with its run details, SQL, warnings and output preview in the side panel" width="1600" height="900" loading="lazy" decoding="async">
         </div>
         <div class="feature flip">
-          <div class="txt"><h3>Making data transformation accessible</h3><p>Derived datasets let users standardise inconsistent source data before it enters an allocation rule. Users can define transformations, map values to standard entities, normalise metrics and preview the result.</p></div>
+          <div class="txt"><h3>Making data transformation accessible</h3><p>The data allocation needs is rarely in one place or one format. Derived datasets let users standardise inconsistent source data before it enters an allocation rule. Users can define transformations, map values to standard entities, normalise metrics and preview the result.</p></div>
           <img class="shot tall" src="img/ue/derived-sql.webp" alt="Derived dataset step 4: paste SQL, dry-run, map metadata fields and preview the data" width="667" height="1080" loading="lazy" decoding="async">
         </div>
         <div class="feature">
-          <div class="txt"><h3>Lowering the SQL barrier</h3><p>For users who don't write SQL, the AI-assisted query flow turns a plain-language description into a starting query. Technical users can inspect, edit and test the generated SQL before it runs.</p></div>
+          <div class="txt"><h3>Lowering the SQL barrier</h3><p>Allocation logic lived in SQL that only data engineers could change. For users who don't write SQL, the AI-assisted query flow turns a plain-language description into a starting query. Technical users can inspect, edit and test the generated SQL before it runs.</p></div>
           <img class="shot tall" src="img/ue/ai-guide.webp" alt="Derived dataset step 3: a generated guide to hand to an LLM, which returns the SQL" width="864" height="1080" loading="lazy" decoding="async">
         </div>
         <div class="feature flip">
-          <div class="txt"><h3>From allocation to analysis</h3><p>The analytics view turns allocation outputs into charts and tables. Users can compare columns, group and filter by dimensions, switch report versions, save views and add report widgets to dashboards. Hierarchy management shows how costs roll up across the business.</p></div>
+          <div class="txt"><h3>From allocation to analysis</h3><p>Allocated costs only matter if people can read and act on them. The analytics view turns allocation outputs into charts and tables. Users can compare columns, group and filter by dimensions, switch report versions, save views and add report widgets to dashboards. Hierarchy management shows how costs roll up across the business.</p></div>
           <img class="shot" src="img/ue/analytics.webp" alt="Analytics: cost per customer by month, grouped by customer, with the data table below" width="1600" height="977" loading="lazy" decoding="async">
         </div>
       </section>
 
       <!-- 07 TRUST -->
       <section class="sec" id="trust">
-        <span class="sec-k">07 · Trust &amp; governance</span>
+        <span class="sec-k">10 · Building trust</span>
         <h2>Knowing which rule made which number.</h2>
-        <p class="lead">Allocation frameworks change as businesses change. When a finance lead asks why cost per customer increased, they need to trace the report back to the rule and configuration that produced it.</p>
+        <p class="lead">Complex financial workflows need to be explainable and dependable. Users need to understand not only the final allocated cost, but how that result was produced. When a finance lead asks why cost per customer went up, they need to trace the report back to the rule and configuration behind it.</p>
+        <ul class="kv">
+          <li><b>Versioning</b><span>Helps teams manage changes to allocation logic as the business changes.</span></li>
+          <li><b>Execution history</b><span>Makes it easier to inspect previous runs and investigate unexpected results.</span></li>
+          <li><b>Change tracking</b><span>Shows how a workflow evolved, and who changed what.</span></li>
+          <li><b>Report history</b><span>Lets users refer back to previously generated outputs.</span></li>
+        </ul>
         <div class="cards"><div class="card"><span class="k">State</span><h4>Draft and published</h4><p>Distinguish working configurations from rules that are live.</p></div><div class="card"><span class="k">Mode</span><h4>View and edit</h4><p>Inspect a rule without risking an accidental change.</p></div><div class="card"><span class="k">History</span><h4>Change log and revert</h4><p>See who changed what and when, with a controlled way to return to a previous version.</p></div><div class="card"><span class="k">Reports</span><h4>Report versions</h4><p>Connect a report output to the version of the rule that generated it.</p></div><div class="card"><span class="k">Runs</span><h4>Execution logs</h4><p>Inspect run status and timing to understand whether an allocation completed.</p></div><div class="card"><span class="k">Findability</span><h4>Meaningful names</h4><p>Name rules and reports so they're easier to find in logs and history.</p></div></div>
         <div class="pair">
           <figure><span class="pill">History</span><img class="shot" src="img/ue/changelog.webp" alt="Change log with dated events, including View Details and Revert to this version" width="1600" height="900" loading="lazy" decoding="async"><figcaption>Version details and the revert confirmation.</figcaption></figure>
@@ -209,34 +294,33 @@
         </div>
       </section>
 
-      <!-- 08 OUTCOME -->
+      <!-- 10 OUTCOMES -->
       <section class="sec" id="outcome">
-        <span class="sec-k">08 · Outcome</span>
-        <h2>One framework instead of six disconnected parts.</h2>
-        <p class="lead">The engine brought together dataset management, a visual rule builder, SQL-based transformations, AI-assisted queries, versioning and change tracking, and allocation analytics with hierarchy management.</p>
-        <div class="outs">
-          <div><span class="k">Product outcome</span><h4>A connected framework</h4><p>Six capabilities brought together around one allocation workflow.</p></div>
-          <div><span class="k">Design outcome</span><h4>A shared visual model</h4><p>Five data building blocks feed a canvas that makes dependencies visible.</p></div>
-          <div><span class="k">Workflow outcome</span><h4>More user control</h4><p>Configuration, validation and governance are available in one environment.</p></div>
+        <span class="sec-k">11 · Outcomes</span>
+        <h2>A capability that strengthened our enterprise proposition.</h2>
+        <p class="lead">The Unit Economics Cost Engine brought six previously separate capabilities into one framework for building, managing and analysing allocation logic: dataset management, a visual rule builder, SQL-based transformations, AI-assisted queries, versioning and change tracking, and allocation analytics with hierarchy management.</p>
+        <p>Beyond improving the product experience, the work addressed a critical requirement raised by some of our largest enterprise prospects.</p>
+        <div class="outs two">
+          <div><span class="k">Business impact</span><h4>Contributed to two large enterprise deals</h4><ul><li>Addressed a critical requirement raised by some of Astuto's largest enterprise customers.</li><li>Helped strengthen OneLens' positioning for complex enterprise environments.</li><li>Contributed to securing two large enterprise deals.</li></ul></div>
+          <div><span class="k">Product impact</span><h4>One framework instead of six parts</h4><ul><li>Unified six separate capabilities into one framework.</li><li>Established five data building blocks for reusable allocation logic.</li><li>Introduced a visual, multi-stage allocation workflow with testing, versioning and execution history.</li></ul></div>
         </div>
-        <p>The larger challenge was making these capabilities feel like one product around a demanding financial and technical workflow. The work extended beyond individual screens: it required designing the relationships, states and interactions that connect them.</p>
       </section>
 
-      <!-- 09 LEARNINGS -->
+      <!-- 11 LEARNINGS -->
       <section class="sec" id="learnings">
-        <span class="sec-k">09 · Learnings</span>
-        <h2>Complexity can't always be removed. It can be organised.</h2>
+        <span class="sec-k">12 · Learnings</span>
+        <h2>Start with the workflow, not the feature request.</h2>
         <div class="numcards">
-          <div><i>01</i><h4>The right abstraction matters</h4><p>Complex workflows don't always need fewer steps. They need a structure that reflects how users understand and work with the system.</p></div>
-          <div><i>02</i><h4>Data architecture is product design</h4><p>Decisions about relationships, dependencies and information structure directly influence how usable a data-heavy product can be.</p></div>
-          <div><i>03</i><h4>Trust belongs in the workflow</h4><p>For products that inform financial decisions, validation, versioning and traceability are core parts of the experience.</p></div>
-          <div><i>04</i><h4>Flexibility needs boundaries</h4><p>Giving users more control doesn't automatically make a product easier to use. The challenge is exposing flexibility progressively.</p></div>
+          <div><i>01</i><h4>Start with the workflow</h4><p>The initial ask was for better cost allocation. Customer conversations revealed a broader systems problem.</p></div>
+          <div><i>02</i><h4>Make enterprise complexity visible</h4><p>Hiding complexity behind a simple interface isn't always the answer. Users also need to inspect and understand the relationships behind their data.</p></div>
+          <div><i>03</i><h4>Design decisions support business outcomes</h4><p>The work connected a customer pain point to a product capability that strengthened the enterprise proposition.</p></div>
+          <div><i>04</i><h4>Trust is part of the experience</h4><p>In financial workflows, transparency, validation and history are essential parts of usability.</p></div>
         </div>
       </section>
 
-      <!-- 10 WHAT'S NEXT -->
+      <!-- 12 WHAT'S NEXT -->
       <section class="sec" id="whats-next">
-        <span class="sec-k">10 · What's next</span>
+        <span class="sec-k">13 · What's next</span>
         <h2>Bringing allocation closer to the way the business is structured.</h2>
         <span class="future">In progress · not yet shipped</span>
         <p class="lead">A third version of the experience is currently in progress. The next iteration will connect advanced allocation more deeply with OneLens' existing hierarchy and cost-centre system, while making conversational assistance a more integrated part of the product.</p>
@@ -262,5 +346,6 @@
 </main>
 <div class="toast" id="toast" hidden></div>
 <script src="case.js"></script>
+<script src="motion.js"></script>
 </body>
 </html>

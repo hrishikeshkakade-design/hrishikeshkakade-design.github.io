@@ -142,3 +142,16 @@
   cards.forEach((c,k)=>{const img=c.querySelector('img'); img.tabIndex=0; img.setAttribute('role','button'); img.setAttribute('aria-label','Open step '+(k+1)+' full screen');
     img.addEventListener('click',()=>open(k)); img.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(k)}})});
 })();
+
+/* Always open at the hero. In-page links scroll without writing a #hash, so the viewer's
+   address bar never remembers a section and reopening the page doesn't jump to it. */
+(function(){
+  try{history.scrollRestoration='manual'}catch(e){}
+  if(location.hash){try{history.replaceState(null,'',location.pathname+location.search)}catch(e){} scrollTo(0,0); addEventListener('load',()=>scrollTo(0,0),{once:true})}
+  document.addEventListener('click',e=>{
+    const a=e.target.closest('a[href^="#"]'); if(!a) return;
+    const id=a.getAttribute('href').slice(1); if(!id) return;
+    const t=document.getElementById(id); if(!t) return;
+    e.preventDefault(); t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+  });
+})();

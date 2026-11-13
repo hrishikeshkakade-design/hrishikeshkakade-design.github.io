@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Case study by Hrishikesh Kakade: designing AI cost observability and governance for OneLens by Astuto.ai.">
+<title>AI Costs &amp; Usage — Hrishikesh Kakade</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="case.css">
+</head>
+<body>
+<!-- Content source: the "AI Costs & Usage" tab of the Portfolio Case Studies doc.
+     Screenshots come from anonymised copies of the AI Usage & Cost Observability & Governance Figma file, in img/ai/. -->
+<nav class="cnav" aria-label="Case study">
+  <a class="nbtn back" href="index.html#work" aria-label="Back to all work"><i class="mark" aria-hidden="true"></i><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg><span class="nlabel">All work</span></a>
+  <span class="nsep" aria-hidden="true"></span>
+  <div class="ntitle">OneLens / <b>AI Costs &amp; Usage</b></div>
+  <button class="nbtn" id="themeBtn" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+  <a class="nbtn" href="#" data-pdf=""><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L12.5 4.5v10h-8.5z M9.5 1.5v3h3"/></svg><span class="nlabel">View PDF</span></a>
+  <a class="nbtn nprimary" href="index.html#contact">Let's talk</a>
+  <span class="nprog" aria-hidden="true"></span>
+</nav>
+
+<main>
+  <header class="hero wrap">
+    <div class="crumb"><b>Case study</b><span>·</span><span>OneLens by Astuto.ai</span><span>·</span><span>AI FinOps / B2B SaaS</span></div>
+    <h1>AI costs and usage: from observability to governance.</h1>
+    <p class="sum">Making AI usage and cost understandable at the level where teams can investigate it, connect it to business ownership and take meaningful action.</p>
+    <dl class="meta">
+      <div><dt>Product</dt><dd>OneLens by Astuto</dd></div>
+      <div><dt>Area</dt><dd>AI cost observability and governance</dd></div>
+      <div><dt>Role</dt><dd>Senior Product Designer</dd></div>
+      <div><dt>Contribution</dt><dd>Product UX, information architecture, interaction and interface design</dd></div>
+    </dl>
+    <div class="hero-actions">
+      <a class="btn primary" href="#overview">Explore the case study ↓</a>
+      <a class="btn" href="#" data-pdf="">View PDF ↗</a>
+    </div>
+    <figure class="cover"><img class="shot" src="img/ai/inventory.webp" alt="Keys and Caller Inventory in AI Governance: keys, users and service accounts with their hierarchy node, provider, key status, cost and policies" width="1600" height="900" fetchpriority="high" decoding="async"><figcaption class="cover-cap">Every AI caller, its owner, its cost and the policies that apply to it.</figcaption></figure>
+  </header>
+
+  <div class="wrap body">
+    <nav class="toc" aria-label="Contents">
+      <span class="lbl">On this page</span>
+      <a href="#overview"><i>01</i>Overview</a><a href="#challenge"><i>02</i>The challenge</a><a href="#experience"><i>03</i>Defining the experience</a><a href="#observe"><i>04</i>Observe</a><a href="#investigate"><i>05</i>Investigate</a><a href="#allocate"><i>06</i>Allocate</a><a href="#govern"><i>07</i>Govern</a><a href="#connecting"><i>08</i>Connecting it</a><a href="#considerations"><i>09</i>Design considerations</a><a href="#learnings"><i>10</i>What I learned</a><a href="#outcome"><i>11</i>Outcome</a>
+    </nav>
+    <article>
+
+      <!-- 01 OVERVIEW -->
+      <section class="sec" id="overview">
+        <span class="sec-k">01 · Overview</span>
+        <h2>A new layer of spend, with no clear owner.</h2>
+        <p class="lead">AI adoption introduces a new layer of infrastructure spend. As teams experiment with models, providers, applications and internal AI services, it gets harder to see where that spend comes from and who is responsible for it.</p>
+        <p>This project explores how OneLens can help teams move beyond a high-level view of AI cost, towards one connected experience for observing usage, investigating callers, allocating spend and applying governance.</p>
+        <div class="callout hmw"><b>The design challenge</b><p>Make AI usage and cost understandable at the level where teams can investigate it, connect it to business ownership and take meaningful action.</p></div>
+      </section>
+
+      <!-- 02 CHALLENGE -->
+      <section class="sec" id="challenge">
+        <span class="sec-k">02 · The challenge</span>
+        <h2>A provider bill doesn't say who spent it.</h2>
+        <p class="lead">AI costs are hard to interpret from a provider-level bill. A useful view connects the cost to the activity behind it: the provider, model, key or caller, application, team and business context.</p>
+        <p>Without those connections, teams struggle to answer questions like these:</p>
+        <ul class="kv">
+          <li><b>What drives spend?</b><span>Which applications, users or services are driving AI spend?</span></li>
+          <li><b>Is it expected?</b><span>Where is usage coming from, and should it be?</span></li>
+          <li><b>Who owns it?</b><span>Which business team or function should own the cost?</span></li>
+          <li><b>How to control it?</b><span>How can teams apply guardrails without disrupting legitimate usage?</span></li>
+        </ul>
+        <p>The opportunity was to bring these questions into one connected experience, rather than treating cost visibility, ownership and governance as separate tasks.</p>
+      </section>
+
+      <!-- 03 EXPERIENCE -->
+      <section class="sec" id="experience">
+        <span class="sec-k">03 · Defining the experience</span>
+        <h2>Four connected jobs.</h2>
+        <p class="lead">I approached the experience as four jobs that build on each other: see the spend, understand its source, assign accountability and manage it.</p>
+        <ol class="thread">
+          <li><b>Observe</b><span>Establish a clear view of AI usage and cost.</span></li>
+          <li><b>Investigate</b><span>Identify the callers and activity behind the numbers.</span></li>
+          <li><b>Allocate</b><span>Connect usage to business hierarchy and ownership.</span></li>
+          <li><b>Govern</b><span>Define and manage controls on usage.</span></li>
+        </ol>
+        <p>These are not steps users must complete in order. They're the narrative of the experience, and each one is reachable from the others.</p>
+      </section>
+
+      <!-- 04 OBSERVE -->
+      <section class="sec" id="observe">
+        <span class="sec-k">04 · Observe</span>
+        <h2>Make AI usage and cost visible.</h2>
+        <p class="lead">The starting point is one view of AI usage and cost, so teams can understand the scale and spread of activity before drilling into individual callers.</p>
+        <figure><img class="shot" src="img/ai/analyzer.webp" alt="AI Costs and Usage Analyzer: total cost, tokens and invocations, metric chips, group by provider and a monthly cost chart by provider" width="1600" height="900" loading="lazy" decoding="async"><figcaption>Cost, tokens and invocations at the top; metrics to compare; cost grouped by provider over time.</figcaption></figure>
+        <ul class="kv">
+          <li><b>Orient</b><span>Total cost, tokens and invocations, each with change against the previous period.</span></li>
+          <li><b>Compare</b><span>Metric chips for cost, tokens, invocations and estimated cache costs; up to two at once.</span></li>
+          <li><b>Narrow</b><span>Modality, report, date range and granularity filters, plus an AI Query bar for plain-language questions.</span></li>
+          <li><b>Pivot</b><span>Group by provider, caller and other dimensions, as a chart or a table with change by % or $.</span></li>
+        </ul>
+        <p>The overview is a starting point for exploration rather than a dead-end report. Grouping the same view by caller moves straight into investigation.</p>
+      </section>
+
+      <!-- 05 INVESTIGATE -->
+      <section class="sec" id="investigate">
+        <span class="sec-k">05 · Investigate</span>
+        <h2>Connect spend to its source.</h2>
+        <p class="lead">Aggregate cost shows that something is happening; teams need more context to understand why. The caller is the useful level of detail: the key, user or service account behind each request.</p>
+        <figure><img class="shot" src="img/ai/analyzer-callers.webp" alt="Analyzer grouped by caller: unknown workloads, API keys, an assumed role session and an IAM role, each with cost by month" width="1600" height="900" loading="lazy" decoding="async"><figcaption>The same analyzer, grouped by caller instead of provider.</figcaption></figure>
+        <h3>Keys &amp; Caller Inventory</h3>
+        <p>The inventory brings every AI caller into one table: API keys, SSO users and service accounts, with the hierarchy node it belongs to, the provider, the key's status, cost and the policies that apply. Summary cards count keys, users, service accounts and callers with no owner, and each one filters the table.</p>
+        <figure><img class="shot" src="img/ai/inventory-select.webp" alt="Caller inventory with three callers selected and a Create Policy button in the toolbar" width="1600" height="900" loading="lazy" decoding="async"><figcaption>Select callers and create a policy for them, straight from the inventory.</figcaption></figure>
+        <div class="feature flip">
+          <div class="txt"><h3>Caller details</h3><p>Opening a caller shows its full context in a side panel: users, models and cost, key metadata such as provider, workspace, status and last use, and a usage and cost trend. Tabs cover models, anomalies, budgets and policies. From here, a user can set a budget or create a policy for that caller.</p></div>
+          <img class="shot tall" src="img/ai/key-detail.webp" alt="Caller detail panel: overview tab with users, models and cost, key metadata, usage and cost trend, and actions to set a budget or create a policy" width="960" height="1024" loading="lazy" decoding="async">
+        </div>
+      </section>
+
+      <!-- 06 ALLOCATE -->
+      <section class="sec" id="allocate">
+        <span class="sec-k">06 · Allocate</span>
+        <h2>Connect AI activity to business ownership.</h2>
+        <p class="lead">Visibility becomes more useful when teams know who is responsible for the spend. The experience maps AI callers onto the business hierarchy that OneLens already uses for cost allocation.</p>
+        <p>A hierarchy can now serve two purposes: cost allocation, which maps cloud resources to cost centres, and AI mapping, which maps AI keys and callers for guardrail policies. Each cost centre gets a Callers Mapping tab with rules, such as "key name contains Codex", and shows which callers match.</p>
+        <div class="pair">
+          <figure><span class="pill">Purpose</span><img class="shot" src="img/ai/new-hierarchy.webp" alt="New hierarchy dialog with purpose options: cost allocation and AI mapping" width="1440" height="1024" loading="lazy" decoding="async"><figcaption>A hierarchy can be used for cost allocation, AI mapping or both.</figcaption></figure>
+          <figure><span class="pill">Mapping</span><img class="shot" src="img/ai/callers-mapping.webp" alt="Callers Mapping tab for a cost centre: a rule where key name contains Codex, with one match" width="1440" height="1024" loading="lazy" decoding="async"><figcaption>Rules decide which callers belong to a cost centre.</figcaption></figure>
+        </div>
+        <div class="callout"><b>Ownership in context</b><p>Allocation shouldn't feel separate from observability. In the inventory, each caller shows its hierarchy node and where its cost is allocated, and flags conflicts, so business ownership is part of understanding the cost rather than a separate reporting exercise.</p></div>
+      </section>
+
+      <!-- 07 GOVERN -->
+      <section class="sec" id="govern">
+        <span class="sec-k">07 · Govern</span>
+        <h2>Bring controls closer to usage.</h2>
+        <p class="lead">Once teams can see AI activity and know where it belongs, the next job is deciding how it should be managed. Guardrail policies sit in the same AI Governance area as the inventory.</p>
+        <h3>Guardrail policies</h3>
+        <p>The policy list shows each policy's scope, condition, the actions at its top threshold (notify, require approval, disable a key), how many units are breaching and its status. Summary cards count policies, open violations and policies waiting for approval.</p>
+        <figure><img class="shot" src="img/ai/policies.webp" alt="Guardrail Policies list: 11 policies, 7 open violations, 1 waiting for approval, with scope, condition, actions, breaching and status" width="1600" height="900" loading="lazy" decoding="async"><figcaption>Every policy, what it checks and what it does when breached.</figcaption></figure>
+        <h3>Creating a policy</h3>
+        <p>Policy creation is a four-step flow with a live preview beside it. The preview updates as the policy takes shape, and a Policy YAML tab shows the same policy for technical users.</p>
+        <div class="stages wide" aria-roledescription="carousel" aria-label="The four steps of creating a policy">
+          <div class="stages-bar">
+            <span class="stages-count" aria-live="polite">Step <b id="stageNow">1</b> of 4</span>
+            <div class="stages-nav"><button type="button" class="sbtn" id="stagePlay" aria-pressed="true" aria-label="Pause auto-play">❚❚</button><button type="button" class="sbtn" id="stagePrev" aria-label="Previous step">←</button><button type="button" class="sbtn" id="stageNext" aria-label="Next step">→</button></div>
+          </div>
+          <ol class="stages-track" id="stageTrack">
+            <li class="sc" id="stage-1">
+              <img class="shot" src="img/ai/step-1.webp" alt="Step 1, Select policy scope: evaluate per caller, provider, hierarchy level or entire scope, with conditions and a live preview" width="1600" height="900" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 1 <i>of 4</i></span><h4>Select policy scope</h4><p>Choose how cost is grouped: per caller, per provider, per hierarchy level or one total. Conditions narrow which callers are covered, and the preview shows the cost, callers and units in scope.</p></div>
+            </li>
+            <li class="sc" id="stage-2">
+              <img class="shot" src="img/ai/step-2.webp" alt="Step 2, Evaluate: choose fixed limit, budget, anomaly or period-over-period change, then select a budget" width="1600" height="900" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 2 <i>of 4</i></span><h4>Evaluate</h4><p>Pick how the scoped cost is judged: a fixed limit, a prepared budget, an anomaly or growth against a previous period. A budget can be selected or created without leaving the flow.</p></div>
+            </li>
+            <li class="sc" id="stage-3">
+              <img class="shot" src="img/ai/step-3.webp" alt="Step 3, Thresholds and actions: when forecasted cost reaches 80% of the line item budget, notify owners" width="1600" height="900" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 3 <i>of 4</i></span><h4>Thresholds &amp; actions</h4><p>Set when the policy acts, such as forecasted cost reaching 80% of the budget, and what happens next. Several threshold rules can stack, each with its own actions.</p></div>
+            </li>
+            <li class="sc" id="stage-4">
+              <img class="shot" src="img/ai/step-4.webp" alt="Step 4, Publish: effective dates, how often to evaluate, policy owner, with dry run, save as draft and publish" width="1600" height="900" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 4 <i>of 4</i></span><h4>Publish</h4><p>Set effective dates, how often the policy checks and who owns it. The summary on the right restates the policy in plain language before it goes live.</p></div>
+            </li>
+          </ol>
+          <div class="stages-dots" role="tablist" aria-label="Choose a step"><button type="button" role="tab" aria-label="Step 1" data-i="0"></button><button type="button" role="tab" aria-label="Step 2" data-i="1"></button><button type="button" role="tab" aria-label="Step 3" data-i="2"></button><button type="button" role="tab" aria-label="Step 4" data-i="3"></button></div>
+        </div>
+        <div class="feature">
+          <div class="txt"><h3>Dry run before it goes live</h3><p>A dry run checks the policy against the last three months of data and shows, for each unit, the breach line, latest and highest cost, and whether it would have breached and what would have run. Nothing is sent and nothing changes until the user publishes.</p></div>
+          <img class="shot tall" src="img/ai/dry-run.webp" alt="Dry run modal: seven teams checked against the policy over the last three months, none would have breached" width="869" height="628" loading="lazy" decoding="async">
+        </div>
+        <h3>After publishing</h3>
+        <p>Each policy has its own page with its scope, measure, evaluation and actions in plain language, today's evaluation units against the limit, and tabs for runs, overrides and history. The Runs view lists every evaluation and the actions it took, and Effective Limits shows every limit that applies to each caller.</p>
+        <div class="pair">
+          <figure><span class="pill">Policy</span><img class="shot" src="img/ai/policy-detail.webp" alt="Policy detail page for Developer Tools monthly limit, with scope, measure, evaluate, actions and evaluation units today" width="1600" height="900" loading="lazy" decoding="async"><figcaption>A policy, in plain language.</figcaption></figure>
+          <figure><span class="pill">Limits</span><img class="shot" src="img/ai/limits.webp" alt="Effective Limits: each caller with the policies that apply, now versus limit, progress against the limit, when it will reach it and level" width="1600" height="900" loading="lazy" decoding="async"><figcaption>Every limit on every caller, and how close it is.</figcaption></figure>
+        </div>
+        <figure><img class="shot" src="img/ai/runs.webp" alt="Policy runs: each run with units checked, breaches, actions taken and status, including one waiting for approval" width="1600" height="900" loading="lazy" decoding="async"><figcaption>Runs show what each evaluation found and what it did.</figcaption></figure>
+      </section>
+
+      <!-- 08 CONNECTING -->
+      <section class="sec" id="connecting">
+        <span class="sec-k">08 · Connecting the experience</span>
+        <h2>See the spend, find the source, know the owner, manage the usage.</h2>
+        <p class="lead">The strength of the concept is the relationship between its parts. A user can start from a high-level view of AI cost, narrow down to a caller, understand where it belongs and move into governance.</p>
+        <ol class="thread">
+          <li><b>See the spend</b><span>The analyzer shows cost, tokens and invocations by provider.</span></li>
+          <li><b>Identify the source</b><span>Group by caller, or open the inventory to see each key, user and service account.</span></li>
+          <li><b>Understand ownership</b><span>Each caller carries its hierarchy node and where its cost is allocated.</span></li>
+          <li><b>Manage usage</b><span>Create a policy from selected callers, or from a caller's detail panel.</span></li>
+        </ol>
+      </section>
+
+      <!-- 09 CONSIDERATIONS -->
+      <section class="sec" id="considerations">
+        <span class="sec-k">09 · Key design considerations</span>
+        <h2>What shaped the decisions.</h2>
+        <div class="numcards">
+          <div><i>01</i><h4>Technical activity in business context</h4><p>Showing caller identity alongside provider, cost and hierarchy reduces the need to connect information across separate views.</p></div>
+          <div><i>02</i><h4>Scanning and investigation</h4><p>Summary cards help users orient; searchable, filterable and groupable tables support focused investigation.</p></div>
+          <div><i>03</i><h4>Governance next to observability</h4><p>Policies live in the same area as the inventory, and can be created straight from the callers they apply to.</p></div>
+          <div><i>04</i><h4>Progressive disclosure</h4><p>Tables lead to side panels and detail pages; the policy builder's live preview and YAML tab reveal depth only when needed.</p></div>
+        </div>
+      </section>
+
+      <!-- 10 LEARNINGS -->
+      <section class="sec" id="learnings">
+        <span class="sec-k">10 · What I learned</span>
+        <h2>Design for the relationship between systems and decisions.</h2>
+        <p class="lead">A cost dashboard alone can't explain ownership, and a governance interface alone can't give the context needed to make good decisions. The experience becomes coherent when usage, caller identity, business hierarchy and controls are designed as parts of one system.</p>
+        <p>It also showed the value of designing at several levels of detail: a clear overview for orientation, structured tables for exploration and focused configuration flows for complex tasks.</p>
+      </section>
+
+      <!-- 11 OUTCOME -->
+      <section class="sec" id="outcome">
+        <span class="sec-k">11 · Outcome</span>
+        <h2>One connected experience for AI cost.</h2>
+        <p class="lead">I designed a connected AI cost observability and governance experience for OneLens, covering the workflows in the final product designs.</p>
+        <div class="outs">
+          <div><span class="k">Observe &amp; investigate</span><h4>Analyzer and caller inventory</h4><p>AI cost by provider and by caller, with an inventory of every key, user and service account and a detail panel for each.</p></div>
+          <div><span class="k">Allocate</span><h4>AI mapping on the hierarchy</h4><p>Hierarchies that map AI callers to cost centres with rules, alongside existing cost allocation.</p></div>
+          <div><span class="k">Govern</span><h4>Guardrail policies</h4><p>A four-step policy builder with a live preview and dry run, plus policy pages, runs and effective limits.</p></div>
+        </div>
+      </section>
+
+    </article>
+  </div>
+
+  <div class="wrap nextwrap">
+    <a class="next" href="index.html#work"><div><span class="k">More work</span><h3>See all case studies</h3></div><span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+  <footer class="wrap foot"><span>© 2026 Hrishikesh Kakade</span><a href="index.html#work" class="back">Back to all work ↑</a></footer>
+</main>
+<div class="toast" id="toast" hidden></div>
+<script src="case.js"></script>
+</body>
+</html>

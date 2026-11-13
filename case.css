@@ -295,3 +295,6 @@ html.cc.cc-in .ccur{opacity:1}
 .uc ul{align-content:start}
 
 .cover .uem{border-radius:var(--r);border:1px solid var(--line)}
+/* Landscape step slider: image on top, text below */
+.stages.wide .sc{grid-template-columns:1fr;gap:16px}
+.stages.wide .sc .shot{max-height:none;width:100%}

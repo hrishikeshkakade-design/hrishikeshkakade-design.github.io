@@ -296,5 +296,11 @@ html.cc.cc-in .ccur{opacity:1}
 
 .cover .uem{border-radius:var(--r);border:1px solid var(--line)}
 /* Landscape step slider: image on top, text below */
-.stages.wide .sc{grid-template-columns:1fr;gap:16px}
-.stages.wide .sc .shot{max-height:none;width:100%}
+.stages.landscape .sc{grid-template-columns:1fr;gap:16px}
+.stages.landscape .sc .shot{max-height:none;width:100%}
+/* Keep every block inside the text column (wide images can push grid min-content wider) */
+.sec>*{min-width:0;max-width:100%}
+.stages.landscape,.stages.landscape .stages-track{width:100%}
+.stages.landscape .sc{min-width:0}
+.stages.landscape .sc .shot{min-width:0;height:auto}
+.sec{grid-template-columns:minmax(0,1fr)}

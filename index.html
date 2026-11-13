@@ -156,6 +156,7 @@ section{padding-block:clamp(64px,10vw,120px)}
 .glance dt{font:500 .68rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .glance dd{margin:0;font-weight:600;font-size:.98rem}
 .glance .st{display:flex;gap:8px;align-items:baseline}
+.glance .co{display:block;font-weight:500;color:var(--muted);margin-top:2px}
 @media (max-width:760px){.glance{grid-template-columns:1fr 1fr}.glance>div:nth-child(3){padding-left:0;border-left:0}.glance>div:nth-child(n+3){border-top:1px solid var(--line)}}
 .fig-canvas{position:relative;overflow:hidden;background-color:var(--canvas);
   background-image:radial-gradient(var(--grid) 1px,transparent 1px);background-size:20px 20px;touch-action:pan-y}
@@ -650,9 +651,9 @@ html.cc.cc-in .ccur{opacity:1}
 
   <section class="wrap glance-wrap" aria-label="At a glance">
     <dl class="glance">
-      <div><dt>Now</dt><dd>Senior Product Designer, Astuto.ai</dd></div>
-      <div><dt>Before</dt><dd>UI/UX Designer, Kristal.AI</dd></div>
-      <div><dt>Focus</dt><dd>0 → 1 products, design systems</dd></div>
+      <div><dt>Now</dt><dd>Senior Product Designer<span class="co">Astuto.ai</span></dd></div>
+      <div><dt>Before</dt><dd>UI/UX Designer<span class="co">Kristal.AI</span></dd></div>
+      <div><dt>Focus</dt><dd>B2B SaaS, AI and complex enterprise products</dd></div>
       <div><dt>Status</dt><dd class="st"><span class="dot" aria-hidden="true"></span><span>Open to conversations · <span id="clock">India (IST)</span></span></dd></div>
     </dl>
   </section>

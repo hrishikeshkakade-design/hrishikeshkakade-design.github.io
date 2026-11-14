@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="The Astuto Design Library by Hrishikesh Kakade: foundations, 68 coded components, 2,801 icons and page templates for OneLens.">
+<title>Astuto Design Library — Hrishikesh Kakade</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap">
+<style>@layer site, page;</style>
+<style>@import url("case.css") layer(site);</style>
+<link rel="stylesheet" href="ds/tokens.css">
+<link rel="stylesheet" href="ds/bundle.css">
+<style>
+@layer page{
+/* case.css sits in a lower layer so the unlayered Astuto bundle always wins inside specimens */
+/* ---------- Design library page ---------- */
+/* Specimens carry their own Astuto theme, independent of the site theme */
+.dsx{max-width:100%;font-family:var(--font-sans);color:var(--text-header-1);background:var(--glass);border:1px solid var(--glass-edge);border-radius:12px;line-height:1.4;font-size:14px;transition:background .2s}
+
+
+/* Live pages get the same treatment as screenshots in the other case studies */
+.scaler.live{border:1px solid var(--line);border-radius:12px;box-shadow:0 18px 40px -28px rgba(20,23,31,.45)}
+.cover .scaler.live{border-radius:var(--r)}
+.scaler{position:relative;overflow:hidden;background:var(--background-secondary-2)}
+.scaler>.stage{position:absolute;left:0;top:0;width:1440px;transform-origin:0 0;font-family:var(--font-sans)}
+.scaler .stage *{max-width:none}
+
+
+/* Principles */
+.pgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pgrid .card h4{font-size:1.02rem;font-weight:600}
+.pgrid .card p{font-size:.93rem}
+.pgrid .demo{background:transparent;border-color:var(--line);display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px;margin-bottom:4px;border-radius:8px;min-height:60px}
+@media (max-width:700px){.pgrid{grid-template-columns:1fr}}
+
+/* Colour */
+.swgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;padding:16px}
+.sw{display:grid;gap:6px;min-width:0}
+.sw i{display:block;height:56px;border-radius:8px;border:1px solid var(--stroke-primary-1)}
+.sw b{font:500 12px/16px var(--font-sans);color:var(--text-header-1);overflow-wrap:anywhere}
+.sw span{font:400 11px/14px ui-monospace,Menlo,monospace;color:var(--text-body-1)}
+.dsx-h{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--glass-edge);font:600 11px/16px var(--font-sans);letter-spacing:.06em;text-transform:uppercase;color:var(--text-body-1)}
+.dsx-h em{font-style:normal;text-transform:none;letter-spacing:0;font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:16px}
+.series{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:6px;padding:16px}
+.series div{display:grid;gap:4px;text-align:center;font:500 11px var(--font-sans);color:var(--text-body-1)}
+.series i{height:40px;border-radius:6px;display:block}
+@media (max-width:600px){.series{grid-template-columns:repeat(5,minmax(0,1fr))}}
+
+/* Type scale */
+.tscale{padding:6px 16px}
+.trow{display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:16px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--line)}
+.trow:last-child{border-bottom:0}
+.trow code{font:500 12px ui-monospace,Menlo,monospace;color:var(--text-brand-1)}
+.trow span{color:var(--text-header-1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trow small{font:400 12px var(--font-sans);color:var(--text-body-1);white-space:nowrap}
+@media (max-width:600px){.trow{grid-template-columns:70px minmax(0,1fr)}.trow small{display:none}}
+
+/* Spacing / radius / elevation */
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.trio .dsx{display:grid;align-content:start}
+.sp{display:grid;gap:8px;padding:16px}
+.sp div{display:grid;grid-template-columns:62px 1fr 20px;align-items:center;gap:10px;font:500 12px var(--font-sans);color:var(--text-body-1)}
+.sp b{font-weight:500;text-align:right;color:var(--text-header-1)}
+.sp i{height:10px;border-radius:3px;background:var(--background-brand-1);display:block}
+.rad{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 8px;padding:16px 12px}
+.rad div,.elev div{display:grid;gap:6px;justify-items:center;font:500 11px var(--font-sans);color:var(--text-body-1);text-align:center}
+.rad i{width:40px;height:40px;background:var(--background-primary-1);border:1.5px solid var(--stroke-brand-1);display:block}
+.elev{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 12px;padding:16px 14px}
+.elev i{width:100%;height:46px;border-radius:8px;background:var(--background-primary-1);display:block}
+@media (max-width:760px){.trio{grid-template-columns:1fr}}
+
+/* Component gallery */
+.cfilter{display:flex;flex-wrap:wrap;gap:6px}
+.cfilter button{height:32px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted);font:500 .85rem var(--f-body);cursor:pointer}
+.cfilter button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+/* Component playground: a pannable canvas of live components, grouped by category */
+.pg{position:relative;height:clamp(460px,70vh,640px);border-radius:var(--r);border:1px solid var(--line);overflow:hidden;
+  background-color:var(--background-secondary-2);background-image:radial-gradient(circle,color-mix(in srgb,var(--stroke-primary-2) 70%,transparent) 1px,transparent 1.2px);background-size:22px 22px;
+  cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;font-family:var(--font-sans);font-size:14px;line-height:1.4;color:var(--text-header-1)}
+.pg.dragging{cursor:grabbing}
+.pg-world{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+.pg-world.anim{transition:transform .65s cubic-bezier(.2,.7,.2,1)}
+.pg-cl{position:absolute;font:500 13px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--text-body-1);white-space:nowrap;pointer-events:none}
+.pg-cl b{color:var(--select);font-weight:500}
+.pg-tile{position:absolute;width:max-content;min-width:240px;max-width:960px;display:grid;gap:10px;padding:14px 16px 18px;border-radius:14px;background:var(--background-primary-1);border:1px solid var(--stroke-primary-1);
+  box-shadow:0 1px 2px rgba(16,24,40,.06),0 18px 40px -20px rgba(16,24,40,.35);transition:filter .25s,opacity .25s,box-shadow .25s;cursor:default;user-select:text;-webkit-user-select:text}
+.pg-tile.soft{cursor:zoom-in;user-select:none;-webkit-user-select:none}
+.pg-tile.focus{box-shadow:0 0 0 2px var(--select),0 24px 60px -24px rgba(16,24,40,.5)}
+.pg-tag{display:flex;justify-content:space-between;gap:12px;font:600 11px/16px var(--font-sans);letter-spacing:.06em;text-transform:uppercase;color:var(--text-body-1)}
+.pg-tag em{font-style:normal;text-transform:none;letter-spacing:0;font-weight:500;color:var(--text-body-2)}
+.pg-body{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.pg-body.col{flex-direction:column;align-items:stretch}
+.pg-body.left{align-items:flex-start}
+.pg-body>*{flex-shrink:0}
+.pg-body .as-widget{height:auto}.pg-body .as-widget-body{flex:none}
+.pg-hint{position:absolute;left:14px;bottom:14px;padding:8px 14px;border-radius:999px;background:var(--ink);color:var(--bg);font:500 .66rem var(--f-mono);letter-spacing:.1em;text-transform:uppercase;pointer-events:none;transition:opacity .3s}
+.pg-ctrl{position:absolute;right:12px;bottom:12px;display:flex;gap:4px;padding:4px;border-radius:12px;background:var(--glass);border:1px solid var(--glass-edge);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.pg-ctrl button{width:32px;height:32px;border:0;border-radius:8px;background:none;color:var(--ink);font:500 16px/1 var(--f-body);cursor:pointer;display:grid;place-items:center}
+.pg-ctrl button:hover{background:var(--line)}
+.pg-ctrl svg{width:16px;height:16px}
+@media (max-width:640px){.pg-hint{display:none}}
+
+/* Icons */
+.icount{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.icount .dsx{padding:16px;display:grid;gap:10px}
+.icount b{font:600 22px/28px var(--font-sans);color:var(--text-header-1)}
+.icount p{font-size:13px;color:var(--text-body-1)!important}
+.irow{display:flex;flex-wrap:wrap;gap:10px;color:var(--text-header-1)}
+.gallery{height:560px;overflow:auto;background:transparent}
+@media (max-width:760px){.icount{grid-template-columns:1fr}}
+
+/* Template tabs */
+.ttabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.ttabs::-webkit-scrollbar{display:none}
+.ttabs button{flex:none;height:34px;padding:0 14px;border-radius:9px;border:1px solid var(--line);background:var(--surface);color:var(--muted);font:500 .86rem var(--f-body);cursor:pointer}
+.ttabs button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tdesc{font-size:.95rem;color:var(--muted)!important}
+
+/* Pipeline + code */
+.pipe{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;counter-reset:p}
+.pipe>div{border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:6px;align-content:start;position:relative}
+.pipe>div::before{counter-increment:p;content:"0" counter(p);font:500 .7rem var(--f-mono);color:var(--select);letter-spacing:.06em}
+.pipe h4{font-size:1rem;font-weight:600}
+.pipe p{font-size:.88rem}
+.pipe code{font:500 .78rem var(--f-mono);color:var(--ink)}
+@media (max-width:860px){.pipe{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.pipe{grid-template-columns:1fr}}
+pre.code{margin:0;padding:18px 20px;border-radius:12px;background:#14171F;color:#E6E8EC;font:400 .82rem/1.65 var(--f-mono);overflow-x:auto}
+pre.code .c{color:#7D8494}pre.code .k{color:#FF8A45}pre.code .s{color:#9BE3BF}
+.gaps{columns:2;column-gap:28px}
+.gaps li{break-inside:avoid}
+@media (max-width:600px){.gaps{columns:1}}
+.err{font:500 12px var(--f-mono);color:var(--muted)}
+}
+</style>
+</head>
+<body>
+<!-- Live specimens use the Astuto runtime copied into ds/ from the "Astuto" design system artifact.
+     The AppShell demo user is set to a placeholder (Jamie Lee) in ds/bundle.js. -->
+<nav class="cnav" aria-label="Design library">
+  <a class="nbtn back" href="index.html#earlier" aria-label="Back to all work"><i class="mark" aria-hidden="true"></i><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg><span class="nlabel">All work</span></a>
+  <span class="nsep" aria-hidden="true"></span>
+  <div class="ntitle">OneLens / <b>Astuto Design Library</b></div>
+  <button class="nbtn" id="themeBtn" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+  <a class="nbtn" href="#" data-pdf=""><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L12.5 4.5v10h-8.5z M9.5 1.5v3h3"/></svg><span class="nlabel">View PDF</span></a>
+  <a class="nbtn nprimary" href="index.html#contact">Let's talk</a>
+  <span class="nprog" aria-hidden="true"></span>
+</nav>
+
+<main>
+  <header class="hero wrap">
+    <div class="crumb"><b>Case study</b><span>·</span><span>OneLens by Astuto.ai</span><span>·</span><span>Design systems / B2B SaaS</span></div>
+    <h1>One library for a calm, data-dense cloud cost product.</h1>
+    <p class="sum">The Astuto Design Library is the system behind OneLens: tokens, components, icons and page patterns, built in Figma and mirrored in code. Everything on this page is rendered live from that coded library.</p>
+    <dl class="meta">
+      <div><dt>Product</dt><dd>OneLens by Astuto</dd></div>
+      <div><dt>Area</dt><dd>Design system</dd></div>
+      <div><dt>Role</dt><dd>Senior Product Designer</dd></div>
+      <div><dt>Contribution</dt><dd>Foundations, components, icons, page patterns and documentation</dd></div>
+    </dl>
+    <div class="hero-actions">
+      <a class="btn primary" href="#overview">Explore the case study ↓</a>
+      <a class="btn" href="#" data-pdf="">View PDF ↗</a>
+    </div>
+    <figure class="cover"><div class="scaler live" role="img" aria-label="Savings Overview page built entirely from library components: side nav, header with tabs, toolbar, stats and a stacked bar chart" style="aspect-ratio:1440/720"></div><figcaption class="cover-cap">A full OneLens page, assembled only from library components.</figcaption></figure>
+  </header>
+
+  <div class="wrap body">
+    <nav class="toc" aria-label="Contents">
+      <span class="lbl">On this page</span>
+      <a href="#overview"><i>01</i>Overview</a><a href="#challenge"><i>02</i>The challenge</a><a href="#principles"><i>03</i>Principles</a><a href="#foundations"><i>04</i>Foundations</a><a href="#components"><i>05</i>Components</a><a href="#icons"><i>06</i>Iconography</a><a href="#templates"><i>07</i>Page templates</a><a href="#code"><i>08</i>Figma to code</a><a href="#outcome"><i>09</i>Outcome</a><a href="#next"><i>10</i>What's next</a>
+    </nav>
+    <article>
+
+      <!-- 01 OVERVIEW -->
+      <section class="sec" id="overview">
+        <span class="sec-k">01 · Overview</span>
+        <h2>A shared language for a product built on tables, charts and decisions.</h2>
+        <p class="lead">OneLens helps teams understand and reduce cloud spend. Most screens are dense: stats, trend charts, long tables, filters and set-up flows. The library gives every one of those screens the same structure, the same controls and the same rules for colour and status.</p>
+        <p>It covers the full stack of the product UI: semantic colour tokens for Light and Dark, an Inter type scale, spacing, radius and elevation, 68 components from buttons to wizards, three icon sets and the layout recipes for each page type.</p>
+        <div class="stats">
+          <div class="stat"><b>68</b><span>coded components, from buttons to set-up wizards</span></div>
+          <div class="stat"><b>2,801</b><span>icons across line, solid and full-colour sets</span></div>
+          <div class="stat"><b>161</b><span>colour tokens, defined for Light and Dark</span></div>
+        </div>
+        <div class="duo">
+          <div class="card"><span class="k">My role</span><p>Senior Product Designer. I defined the foundations and component set, documented usage and page patterns, and kept the Figma library and its coded mirror in sync.</p></div>
+          <div class="card"><span class="k">Who it serves</span><p>Designers composing new OneLens flows, and engineers building them from the same tokens and component names.</p></div>
+        </div>
+      </section>
+
+      <!-- 02 CHALLENGE -->
+      <section class="sec" id="challenge">
+        <span class="sec-k">02 · The challenge</span>
+        <h2>Many modules, one product.</h2>
+        <p class="lead">OneLens spans cost analytics, savings, recommendations, governance, integrations and settings. Each area is data-heavy, and each was designed for a different job.</p>
+        <p>Without shared foundations, the same idea drifts: a status colour means one thing in a table and another in a chart, toolbars order their controls differently, and every new page starts from scratch. The library needed to make the right choice the easy one, for designers in Figma and engineers in code.</p>
+        <div class="callout hmw"><b>The design challenge</b><p>Give a dense, multi-module product one consistent language that holds up in both themes and maps one-to-one from Figma to code.</p></div>
+      </section>
+
+
+      <section class="sec" id="principles">
+        <span class="sec-k">03 · Principles</span>
+        <h2>Four rules that keep dense screens readable.</h2>
+        <div class="pgrid">
+          <div class="card"><div class="dsx demo" data-mount="p1"></div><h4>Data first, chrome second</h4><p>White surfaces on a near-white canvas, separated by 1px hairlines rather than shadows. Shadows are kept for things that float: menus, pickers, toasts and modals.</p></div>
+          <div class="card"><div class="dsx demo" data-mount="p2"></div><h4>Green means act or selected</h4><p>The brand green is reserved for the primary button, checked controls, the selected tab and selected dates. Never decoration, never large fills.</p></div>
+          <div class="card"><div class="dsx demo" data-mount="p3"></div><h4>Status is always labelled</h4><p>Success, warning and error colours always travel with a word or an icon, so meaning never depends on colour alone.</p></div>
+          <div class="card"><div class="dsx demo" data-mount="p4"></div><h4>Compact and consistent</h4><p>Controls default to 32px and inputs to 36px, with 14px Medium text. The same heights line up across toolbars, tables and forms.</p></div>
+        </div>
+      </section>
+
+      <!-- 04 FOUNDATIONS -->
+      <section class="sec" id="foundations">
+        <span class="sec-k">04 · Foundations</span>
+        <h2>Semantic tokens, one type family and a 4px grid.</h2>
+        <h3>Colour</h3>
+        <p>Components only use semantic tokens such as <code>background-primary-1</code> or <code>text-body-1</code>; the primitive scales are reference only. Switching theme swaps the values behind the names, so no component needs a dark variant. Switch this page to dark mode to see it.</p>
+        <div class="dsx"><div class="dsx-h">Surfaces, text and borders <em>161 colour tokens in total</em></div><div class="swgrid" id="swCore"></div></div>
+        <div class="dsx"><div class="dsx-h">Status <em>primary-1 for ink, bg-1 / bg-2 for tints</em></div><div class="swgrid" id="swStatus"></div></div>
+        <div class="dsx"><div class="dsx-h">Badge pairs <em>ten hues, ink on tint</em></div><div class="chips" data-mount="badges"></div></div>
+        <div class="dsx"><div class="dsx-h">Chart series <em>A–S, used in alphabetical order</em></div><div class="series" id="series"></div></div>
+        <div class="callout"><b>Contrast is documented, not hidden</b><p>A few values come straight from the source and fall short of AA: white on the brand green is 2.9:1, and <code>text-body-2</code> on white is 2.6:1. The guidance works around them: short, 14px Medium labels on green buttons, and nothing essential in <code>text-body-2</code>.</p></div>
+        <h3>Type</h3>
+        <p>Inter throughout. Medium (500) is the product default, Normal (400) is for running text and Semibold (600) is for emphasis. Each size is paired with a fixed line height so rows and controls stay on the 4px grid.</p>
+        <div class="dsx"><div class="tscale" id="tscale"></div></div>
+        <h3>Space &amp; depth</h3>
+        <p>A 4px spacing scale, a small set of radii, and shadows only for things that float.</p>
+        <div class="trio">
+          <div class="dsx"><div class="dsx-h">Spacing <em>4px scale</em></div><div class="sp" id="sp"></div></div>
+          <div class="dsx"><div class="dsx-h">Radius</div><div class="rad"><div><i style="border-radius:4px"></i>4 · checkbox</div><div><i style="border-radius:6px"></i>6 · button</div><div><i style="border-radius:8px"></i>8 · card</div><div><i style="border-radius:12px"></i>12 · wizard</div><div><i style="border-radius:9999px"></i>full · toggle</div><div><i style="border-radius:2px"></i>2 · chip</div></div></div>
+          <div class="dsx"><div class="dsx-h">Elevation</div><div class="elev"><div><i style="box-shadow:none;border:1px solid var(--stroke-primary-1)"></i>Resting card · none</div><div><i style="box-shadow:var(--shadow-sm)"></i>shadow-sm · handle</div><div><i style="box-shadow:var(--shadow-lg)"></i>shadow-lg · menu</div><div><i style="box-shadow:var(--shadow-xl)"></i>shadow-xl · modal</div></div></div>
+        </div>
+      </section>
+
+      <!-- 06 COMPONENTS -->
+      <section class="sec" id="components">
+        <span class="sec-k">05 · Components</span>
+        <h2>68 components, from a button to a set-up wizard.</h2>
+        <p>Each one mirrors a Figma component, with the same name and props that map to its variants. The playground below holds a working selection, grouped by category. Drag to explore, Ctrl + scroll to zoom, and click a component to bring it into focus, then use it.</p>
+        <div class="cfilter" role="group" aria-label="Jump to a category" id="cfilter"></div>
+        <div class="pg" id="pg" aria-label="Component playground">
+          <div class="pg-world" id="pgWorld"></div>
+          <span class="pg-hint" id="pgHint">Drag to explore · Ctrl + scroll to zoom · Click to focus</span>
+          <div class="pg-ctrl"><button type="button" id="pgOut" aria-label="Zoom out">−</button><button type="button" id="pgIn" aria-label="Zoom in">+</button><button type="button" id="pgHome" aria-label="Back to start"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="2.5"/><path d="M8 1v3M8 12v3M1 8h3M12 8h3"/></svg></button></div>
+        </div>
+      </section>
+
+      <!-- 07 ICONS -->
+      <section class="sec" id="icons">
+        <span class="sec-k">06 · Iconography</span>
+        <h2>A curated icon set, searchable and in code.</h2>
+        <p>Most of the line and solid icons come from the Untitled UI icon library, curated and named for OneLens so the same name works in Figma and in code. The full-colour set collects the cloud, AI and brand marks the product needs.</p>
+        <div class="icount">
+          <div class="dsx"><b>1,181</b><p>Line icons, mostly from Untitled UI. The default UI set: 24px grid, 2px round strokes, current colour.</p><div class="irow" data-mount="iline"></div></div>
+          <div class="dsx"><b>1,200</b><p>Solid icons, mostly from Untitled UI, with the same names as the line set, for active states and dense navigation.</p><div class="irow" data-mount="isolid"></div></div>
+          <div class="dsx"><b>420</b><p>Full-colour marks: cloud and AI providers, services, brands and flags.</p><div class="irow" data-mount="iextra"></div></div>
+        </div>
+        <div class="dsx"><div class="dsx-h">Icon gallery <em>search, switch sets, click to copy</em></div><div class="gallery" data-mount="gallery"></div></div>
+      </section>
+
+      <!-- 08 TEMPLATES -->
+      <section class="sec" id="templates">
+        <span class="sec-k">07 · Page templates</span>
+        <h2>Page types that assemble the same way every time.</h2>
+        <p>Every OneLens page is the same stack: side nav, a 64px header, optional tabs, a sticky 68px toolbar, then content sections. The library documents seven page types; six are built here entirely from library components.</p>
+        <div class="ttabs" role="tablist" aria-label="Page templates" id="ttabs"></div>
+        <p class="tdesc" id="tdesc" aria-live="polite"></p>
+        <figure><div class="scaler live" id="tframe"></div><figcaption id="turl"></figcaption></figure>
+      </section>
+
+      <!-- 09 CODE -->
+      <section class="sec" id="code">
+        <span class="sec-k">08 · Figma to code</span>
+        <h2>The same names in the file and in the codebase.</h2>
+        <p>Every value starts in the Figma library. Tokens are exported as data, compiled to CSS variables for both themes, and consumed by components that use Figma's own names and variant props.</p>
+        <div class="pipe">
+          <div><h4>Figma library</h4><p>Variables, text styles, effects and components. The source of truth.</p></div>
+          <div><h4>Tokens</h4><p><code>tokens.json</code> holds colour, spacing, radius, line and shadow values for each theme.</p></div>
+          <div><h4>CSS variables</h4><p><code>tokens.css</code> exposes them as <code>--text-body-1</code> and friends, switched by <code>data-theme</code>.</p></div>
+          <div><h4>Components</h4><p>React components with prefixed <code>as-</code> classes. Props mirror Figma variants.</p></div>
+        </div>
+        <pre class="code"><span class="c">// A Figma "Button / Green / Base" becomes:</span>
+&lt;<span class="k">Button</span> color=<span class="s">"green"</span> size=<span class="s">"base"</span> leftIcon=<span class="s">"plus"</span>&gt;Create Policy&lt;/<span class="k">Button</span>&gt;
+
+<span class="c">// A compliance column, coloured by threshold (&lt;60 red, &lt;85 yellow):</span>
+{ key: <span class="s">'c'</span>, label: <span class="s">'Compliance'</span>, type: <span class="s">'meter'</span> }</pre>
+      </section>
+
+      <!-- 09 OUTCOME -->
+      <section class="sec" id="outcome">
+        <span class="sec-k">09 · Outcome</span>
+        <h2>One system from foundations to full pages.</h2>
+        <p class="lead">The library gives OneLens one source for how the product looks and behaves, from a single colour token to a complete page.</p>
+        <div class="outs">
+          <div><span class="k">Foundations</span><h4>Tokens for both themes</h4><p>161 colour tokens plus type, spacing, radius, line and shadow scales, defined for Light and Dark.</p></div>
+          <div><span class="k">Components</span><h4>68 coded components</h4><p>Named and structured like their Figma counterparts, with props that map to variants.</p></div>
+          <div><span class="k">Patterns</span><h4>Documented page types</h4><p>Layout recipes for dashboards, explorers, queues, catalogues, marketplaces and settings.</p></div>
+        </div>
+      </section>
+
+      <!-- 10 NEXT -->
+      <section class="sec" id="next">
+        <span class="sec-k">10 · What's next</span>
+        <h2>What still lives only in Figma.</h2>
+        <p>The library is honest about its gaps. These patterns exist in the Figma file but are not yet coded components:</p>
+        <ul class="gaps">
+          <li>Line, area, heat-map, tree-map, leaderboard and Sankey charts</li>
+          <li>The workflow builder canvas and its node cards</li>
+          <li>Tag input and split input buttons</li>
+          <li>Month, year and decade pickers</li>
+          <li>Saved-filter and saved-view dropdowns</li>
+          <li>Custom scroll bar and avatar photo placeholders</li>
+        </ul>
+      </section>
+
+    </article>
+  </div>
+
+  <div class="wrap nextwrap">
+    <a class="next" href="index.html#work"><div><span class="k">More work</span><h3>See all case studies</h3></div><span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+  <footer class="wrap foot"><span>© 2026 Hrishikesh Kakade</span><a href="index.html#earlier" class="back">Back to all work ↑</a></footer>
+</main>
+<div class="toast" id="toast" hidden></div>
+
+<script src="ds/lib/react.production.min.js"></script>
+<script src="ds/lib/react-dom.production.min.js"></script>
+<script src="ds/lib/astuto-icons-line.js"></script>
+<script src="ds/lib/astuto-icons-solid.js"></script>
+<script src="ds/lib/astuto-icons-extra.js"></script>
+<script src="ds/bundle.js"></script>
+<script src="case.js"></script>
+<script>
+(function(){
+var A=window.Astuto,h=React.createElement;
+function row(){return h.apply(null,['div',{className:'as-row'}].concat([].slice.call(arguments)));}
+function col(){return h.apply(null,['div',{className:'as-col'}].concat([].slice.call(arguments)));}
+
+/* ---------- Specimens follow the site theme ---------- */
+var root=document.documentElement,mq=matchMedia('(prefers-color-scheme: dark)');
+function applyLT(){
+  var LT=root.dataset.theme?root.dataset.theme:(mq.matches?'dark':'light');
+  document.querySelectorAll('.dsx,.scaler,.pg').forEach(function(n){n.setAttribute('data-theme',LT);});
+  requestAnimationFrame(hexes);
+}
+new MutationObserver(applyLT).observe(root,{attributes:true,attributeFilter:['data-theme']});
+if(mq.addEventListener)mq.addEventListener('change',applyLT);
+
+/* Error boundary so one specimen can't take the page down */
+function Safe(p){React.Component.call(this,p);this.state={e:null};}
+Safe.prototype=Object.create(React.Component.prototype);
+Safe.getDerivedStateFromError=function(e){return {e:e};};
+Safe.prototype.render=function(){return this.state.e?h('span',{className:'err'},'Preview unavailable'):this.props.children;};
+function mount(el,fn){if(!el)return;try{ReactDOM.createRoot(el).render(h(Safe,null,fn()));}catch(e){el.textContent='';}}
+function m(id,fn){document.querySelectorAll('[data-mount="'+id+'"]').forEach(function(el){mount(el,fn);});}
+
+/* ---------- Principles demos ---------- */
+m('p1',function(){return h('div',{style:{display:'flex',gap:8,width:'100%'}},
+  h('div',{style:{flex:1,background:'var(--background-primary-1)',border:'1px solid var(--stroke-primary-1)',borderRadius:8,padding:'8px 10px'}},h('div',{style:{font:'500 10px/14px var(--font-sans)',color:'var(--text-body-1)',textTransform:'uppercase',letterSpacing:'.04em'}},'Total cost'),h('div',{style:{font:'600 16px/22px var(--font-sans)'}},'$130,500')),
+  h('div',{style:{flex:1,background:'var(--background-primary-1)',border:'1px solid var(--stroke-primary-1)',borderRadius:8,padding:'8px 10px'}},h('div',{style:{font:'500 10px/14px var(--font-sans)',color:'var(--text-body-1)',textTransform:'uppercase',letterSpacing:'.04em'}},'Savings'),h('div',{style:{font:'600 16px/22px var(--font-sans)'}},'$18,240')));});
+m('p2',function(){return h(React.Fragment,null,h(A.Button,{color:'gray'},'Cancel'),h(A.Button,{color:'green'},'Apply'),h(A.Checkbox,{label:'Selected',defaultChecked:true}));});
+m('p3',function(){return h(React.Fragment,null,h(A.Badge,{theme:'green',icon:'check-circle'},'Healthy'),h(A.Badge,{theme:'yellow',icon:'alert-triangle'},'Pending'),h(A.Badge,{theme:'red',icon:'x-circle'},'Failed'));});
+m('p4',function(){return h(React.Fragment,null,h(A.SelectButton,{icon:'clock',label:'Daily'}),h(A.IconButton,{icon:'filter-lines',label:'Filters'}),h(A.Button,{color:'green',leftIcon:'plus'},'Create'));});
+
+/* ---------- Colour swatches ---------- */
+function swatches(id,names){var el=document.getElementById(id);el.innerHTML=names.map(function(n){return '<div class="sw"><i style="background:var(--'+n+')"></i><b>'+n+'</b><span data-v="'+n+'"></span></div>';}).join('');}
+swatches('swCore',['background-primary-1','background-primary-2','background-secondary-1','background-secondary-2','background-brand-1','stroke-primary-1','stroke-primary-2','stroke-brand-1','hover-primary-1','text-header-1','text-header-2','text-body-1','text-body-2','text-brand-1']);
+swatches('swStatus',['success-primary-1','success-bg-1','success-bg-2','warning-primary-1','warning-bg-1','warning-bg-2','error-primary-1','error-bg-1','error-bg-2']);
+function hexes(){document.querySelectorAll('[data-v]').forEach(function(s){var v=getComputedStyle(s).getPropertyValue('--'+s.dataset.v).trim();s.textContent=v;});}
+m('badges',function(){return h(React.Fragment,null,['gray','red','yellow','green','teal','blue','purple','pink','rose','orange'].map(function(t){return h(A.Badge,{key:t,theme:t},t.charAt(0).toUpperCase()+t.slice(1));}));});
+document.getElementById('series').innerHTML='abcdefghij'.split('').map(function(c){return '<div><i style="background:var(--data-'+c+'1)"></i>'+c.toUpperCase()+'</div>';}).join('');
+
+/* ---------- Type scale ---------- */
+document.getElementById('tscale').innerHTML=[['2xl',24,32,600,'$1,284,900','Hero numbers'],['xl',20,30,600,'Cost Analyzer','Page titles'],['lg',18,28,600,'$130,500','Stat values'],['md',16,24,500,'Potential savings','Tabs, widget titles'],['base',14,20,500,'Group by service','Default UI'],['sm',12,18,500,'TOTAL COST · 24 JAN – 6 FEB','Tables, badges'],['xs',10,16,500,'OBSERVE','Side-nav groups']].map(function(r){return '<div class="trow"><code>'+r[0]+' · '+r[1]+'/'+r[2]+'</code><span style="font:'+r[3]+' '+r[1]+'px/'+r[2]+'px var(--font-sans)">'+r[4]+'</span><small>'+r[5]+'</small></div>';}).join('');
+document.getElementById('sp').innerHTML=[1,2,3,4,6,8,12].map(function(n){return '<div><span>space-'+n+'</span><i style="width:'+Math.min(100,n*8)+'%"></i><b>'+n*4+'</b></div>';}).join('');
+
+/* ---------- Component gallery ---------- */
+var C=[
+ {n:'Button',c:'Actions',w:'w4',r:function(){return h(React.Fragment,null,h(A.Button,{color:'green'},'Apply'),h(A.Button,{color:'gray'},'Cancel'),h(A.Button,{color:'red'},'Delete'),h(A.Button,{color:'gray',outline:true,leftIcon:'download-01'},'Export'));}},
+ {n:'TextButton & IconButton',c:'Actions',r:function(){return h(React.Fragment,null,h(A.TextButton,{color:'green',rightIcon:'arrow-right'},'View details'),h(A.IconButton,{icon:'edit-01',label:'Edit'}),h(A.IconButton,{icon:'filter-lines',label:'Filters',active:true}),h(A.IconButton,{icon:'dots-vertical',label:'More'}));}},
+ {n:'SegmentedControl',c:'Actions',r:function(){return col(h(A.SegmentedControl,{label:'Chart Type',options:[{icon:'bar-chart-10',label:''},{icon:'line-chart-up-01',label:''}]}),h(A.SegmentedControl,{options:[{label:'Cumulative'},{label:'Distinct'}]}));}},
+ {n:'Input',c:'Inputs',w:'w3',k:'col',r:function(){return h(React.Fragment,null,h(A.Input,{label:'Integration name',defaultValue:'AWS Prod Integration'}),h(A.Input,{label:'Account ID',placeholder:'123412341234',error:'Enter a 12-digit account ID'}));}},
+ {n:'Selection controls',c:'Inputs',w:'w3',k:'left',r:function(){return col(row(h(A.Checkbox,{label:'Include credits',defaultChecked:true}),h(A.Checkbox,{label:'Partial',indeterminate:true})),row(h(A.Radio,{name:'gr',label:'Daily',defaultChecked:true}),h(A.Radio,{name:'gr',label:'Weekly'}),h(A.Radio,{name:'gr',label:'Monthly'})),h(A.Toggle,{label:'Forecasting enabled',defaultChecked:true}));}},
+ {n:'SelectButton & DateRange',c:'Inputs',w:'w3',k:'col',r:function(){return h(React.Fragment,null,h(A.SelectButton,{icon:'globe-02',label:'Global View'}),h(A.DateRangeButton,{}));}},
+ {n:'Dropdown',c:'Inputs',w:'w3',k:'left',r:function(){return h('div',{style:{minHeight:210}},h(A.Dropdown,{options:['Last 7 days','Last 2 weeks','Last month','Custom range'],value:'Last 2 weeks',icon:'calendar',defaultOpen:true}));}},
+ {n:'Slider & Progress',c:'Inputs',k:'col',r:function(){return h(React.Fragment,null,h(A.Slider,{defaultValue:60,label:'Threshold'}),h(A.ProgressBar,{value:72,label:true}));}},
+ {n:'FilterButton',c:'Inputs',k:'col',r:function(){return h(React.Fragment,null,h(A.FilterButton,{category:'Provider',items:'AWS',count:2,selected:true}),h(A.FilterButton,{category:'Region',items:'us-east-1',not:true}));}},
+ {n:'FileUpload',c:'Inputs',w:'w4',k:'col',r:function(){return h(A.FileUpload,{subtext:'CSV or XLSX, up to 20 MB'});}},
+ {n:'NavTabs',c:'Navigation',w:'w4',k:'left',r:function(){return h(A.NavTabs,{tabs:['Potential Savings','Achieved Progress','Cost Avoidance']});}},
+ {n:'Breadcrumb',c:'Navigation',r:function(){return h(A.Breadcrumb,{items:['Settings','Integrations','AWS']});}},
+ {n:'Pagination',c:'Navigation',w:'w4',r:function(){return h(A.Pagination,{page:1,total:104,perPage:10});}},
+ {n:'Stepper',c:'Navigation',w:'w3',k:'left',r:function(){return h(A.Stepper,{current:1,steps:[{title:'Connect organization',description:'Link the management account.'},{title:'Cross-account access',description:'Deploy a StackSet.'},{title:'Cost & usage reports',description:'Connect the CUR bucket.'}]});}},
+ {n:'StatsRow',c:'Data',w:'w6',k:'col',r:function(){return h(A.StatsRow,{columns:2,items:[{value:'$130,500',label:'Total cost',sublabel:'vs last month',icon:'currency-dollar',delta:'12.4%',trend:'up',deltaTone:'bad'},{value:'$18,240',label:'Potential savings',icon:'piggy-bank-01',tone:'green',delta:'8.1%',trend:'down',deltaTone:'good'},{value:'312',label:'Open recommendations',icon:'lightbulb-02',tone:'blue'},{value:'14',label:'Policy violations',icon:'alert-triangle',valueTone:'error'}]});}},
+ {n:'BarChart',c:'Data',w:'w4',k:'left',r:function(){return h('div',{style:{width:'100%'}},h(A.Widget,{title:'Cost trend'},h(A.BarChart,{categories:['4 Jul','5 Jul','6 Jul','7 Jul','8 Jul','9 Jul','10 Jul'],series:[{name:'Compute',values:[1800,2100,1700,2400,1800,2000,2000]},{name:'Storage',values:[1200,1300,1300,1500,1200,1400,1400]},{name:'Network',values:[800,600,800,700,800,600,600]}]})));}},
+ {n:'DonutChart',c:'Data',k:'col',r:function(){return h(A.Widget,{title:'By service'},h(A.DonutChart,{size:140,data:[{label:'EC2',value:2240},{label:'Compute Engine',value:2040},{label:'RDS',value:1820},{label:'Others',value:1000}]}));}},
+ {n:'DataTable',c:'Data',w:'w6',k:'col',r:function(){return h(A.DataTable,{actions:['edit-01','dots-vertical'],total:104,perPage:10,columns:[{key:'p',label:'Provider',type:'provider'},{key:'policy',label:'Policy',filter:true},{key:'type',label:'Type',type:'badge'},{key:'ev',label:'Evaluated',type:'number'},{key:'v',label:'Violations',type:'number',sort:'desc'},{key:'c',label:'Compliance',type:'meter'}],rows:[{p:'AWS',policy:'Mandatory tagging standard',type:{label:'Mandate Tags',theme:'green'},ev:'27,410',v:h(A.Badge,{theme:'red',size:'sm'},'11,170'),c:52.2},{p:'Azure',policy:'Project tag on Azure',type:{label:'Mandate Tags',theme:'green'},ev:'23,788',v:h(A.Badge,{theme:'red',size:'sm'},'5,378'),c:74.4},{p:'GCP',policy:'Owner label on all projects',type:{label:'Ownership',theme:'purple'},ev:'9,120',v:h(A.Badge,{theme:'red',size:'sm'},'412'),c:95.5}]});}},
+ {n:'Badge',c:'Data',r:function(){return h(React.Fragment,null,h(A.Badge,{theme:'green',outline:true},'Published'),h(A.Badge,{theme:'yellow',outline:true},'Draft'),h(A.Badge,{theme:'gray'},'Coming soon'),h(A.Badge,{theme:'purple'},'AI'));}},
+ {n:'Meter & Legend',c:'Data',k:'col',r:function(){return h(React.Fragment,null,row(h(A.Meter,{value:52}),h(A.Meter,{value:78}),h(A.Meter,{value:96})),row(h(A.LegendItem,{series:'A',name:'Compute',value:'$2.4k'}),h(A.LegendItem,{series:'B',name:'Storage',value:'$1.3k'})));}},
+ {n:'ChartTooltip',c:'Data',r:function(){return h(A.ChartTooltip,{title:'7 Jul, 25',rows:[{series:'A',label:'Compute',value:'$2,400'},{series:'B',label:'Storage',value:'$1,500'},{series:'C',label:'Network',value:'$700'}]});}},
+ {n:'Toast',c:'Feedback',k:'col',r:function(){return h(React.Fragment,null,h(A.Toast,{type:'success',title:'Report exported',subtext:'View in Downloads',onClose:null},'Your CSV is ready.'),h(A.Toast,{type:'error',title:'Sync failed',onClose:null},'We couldn’t reach the AWS account.'));}},
+ {n:'Tooltip',c:'Feedback',r:function(){return h('span',{style:{paddingTop:84,marginRight:200,display:'inline-flex',gap:6,alignItems:'center',fontSize:14,color:'var(--text-body-1)'}},'Potential savings',h(A.Tooltip,{open:true,title:'Potential savings',content:'Estimated monthly savings if all open recommendations are applied.'}));}},
+ {n:'Callout',c:'Feedback',w:'w3',k:'col',r:function(){return h(React.Fragment,null,h(A.Callout,{tone:'hint'},'Group by ',h('b',null,'Service'),' to see which teams drive the change.'),h(A.Callout,{tone:'warning'},'Region must be ',h('b',null,'us-east-1'),' for billing data.'));}},
+ {n:'EmptyState',c:'Feedback',w:'w3',k:'col',r:function(){return h(A.EmptyState,{icon:'bar-chart-square-02',title:'No data for this range'},'Pick a longer time range or remove a filter to see the trend.');}},
+ {n:'Modal',c:'Overlays',w:'w3',r:function(){return h(A.Modal,{title:'Confirm status change',confirmLabel:'Apply'},'Mark 12 recommendations as resolved? This updates the savings report for everyone on the team.');}},
+ {n:'Popover',c:'Overlays',w:'w3',r:function(){return h(A.Popover,{title:'Flow settings'},h(A.SelectButton,{label:'Egress',chevron:'chevron-selector-vertical'}),h(A.SegmentedControl,{size:'sm',options:[{icon:'database-01',label:'Data'},{icon:'currency-dollar',label:'Cost'}]}));}},
+ {n:'WizardModal',c:'Overlays',w:'w6',r:function(){return h('div',{style:{width:'100%',maxWidth:934}},h(A.WizardModal,{title:'Connect Amazon Web Services',logo:h(A.ProviderLogo,{name:'AWS',label:false}),current:0,heading:'Onboard your AWS Organization',description:'You’ll be redirected to AWS CloudFormation with pre-filled stack details.',steps:[{title:'Connect your organization',description:'Link your AWS management account.'},{title:'Cross-account access',description:'Deploy a CloudFormation StackSet.'},{title:'Cost & usage reporting',description:'Connect your CUR S3 bucket.'},{title:'Verify permissions',description:'Confirm read access.'}]},h(A.Input,{label:'Integration name',defaultValue:'AWS Prod Integration'}),h(A.Input,{label:'Management account ID',placeholder:'123412341234'}),h(A.Callout,{tone:'warning'},'Region must be ',h('b',null,'us-east-1'),' for billing.')));}},
+ {n:'TileCard',c:'Cards',w:'w3',k:'col',r:function(){return h(React.Fragment,null,h(A.TileCard,{icon:'pie-chart-03',tone:'green',title:'Cost overview',description:'Spend by provider, account and service over time.'}),h(A.TileCard,{icon:'stars-02',tone:'violet',title:'AI spend',description:'Token usage and cost by model, team and application.'}));}},
+ {n:'IntegrationCard',c:'Cards',w:'w3',r:function(){return h('div',{style:{width:250}},h(A.IntegrationCard,{logo:h(A.ExtraIcon,{name:'slack',size:32}),name:'Slack',category:'Messaging',description:'Send alerts and weekly reports to channels.',connected:false}));}},
+ {n:'OptionCard',c:'Cards',w:'w3',k:'col',r:function(){return h(A.OptionCard,{title:'Tag',tag:'Recommended',description:'A forecast for each value of the tags you choose.',value:'12 forecasts',meta:'12 calls / run',defaultSelected:true});}},
+ {n:'ChangeLogCard',c:'Cards',w:'w3',k:'col',r:function(){return h(A.ChangeLogCard,{user:'Jamie Lee',title:'Changed status to Resolved',description:'Rightsized 4 instances in the staging account.',action:'View change'});}}
+];
+/* Fixed widths only where a component fills its container; everything else hugs its content */
+var W={Input:340,'Slider & Progress':300,FileUpload:420,StatsRow:620,BarChart:560,DonutChart:320,DataTable:960,Callout:380,EmptyState:340,
+  WizardModal:880,TileCard:360,OptionCard:340,ChangeLogCard:380};
+var cats=['Actions','Inputs','Navigation','Data','Feedback','Overlays','Cards'];
+/* Data sits in the middle of the field; the rest surround it */
+var PLACE={Inputs:[0,0],Actions:[1,0],Navigation:[2,0],Feedback:[0,1],Data:[1,1],Overlays:[2,1],Cards:[1,2]};
+var pg=document.getElementById('pg'),world=document.getElementById('pgWorld'),cf=document.getElementById('cfilter'),hint=document.getElementById('pgHint');
+cf.innerHTML=cats.map(function(c){return '<button type="button" data-c="'+c+'" aria-pressed="false">'+c+'</button>';}).join('');
+var tiles=[],clusters={};
+C.forEach(function(t){
+  var d=document.createElement('div');d.className='pg-tile';d.dataset.c=t.c;if(W[t.n])d.style.width=W[t.n]+'px';
+  d.innerHTML='<div class="pg-tag">'+t.n+'<em>'+t.c+'</em></div><div class="pg-body '+(t.k||'')+'"></div>';
+  world.appendChild(d);tiles.push(d);
+  var body=d.querySelector('.pg-body');try{var r=ReactDOM.createRoot(body);ReactDOM.flushSync(function(){r.render(h(Safe,null,t.r()));});}catch(e){}
+});
+cats.forEach(function(c){var l=document.createElement('div');l.className='pg-cl';l.innerHTML='<b>'+String(cats.indexOf(c)+1).padStart(2,'0')+'</b> · '+c;world.appendChild(l);clusters[c]={label:l};});
+
+/* Lay out: shelf-pack each category, then place categories on a loose 3-column grid */
+function rnd(n){var x=Math.sin(n*99.13)*43758.5;return x-Math.floor(x);}
+function layout(){
+  var GAP=36,MAXW=1120,k=0;
+  cats.forEach(function(c){
+    /* skyline packing: each tile drops into the lowest spot that fits */
+    var STEP=20,N=Math.ceil(MAXW/STEP),sky=new Array(N).fill(48),w=0,h=0,list=tiles.filter(function(t){return t.dataset.c===c;});
+    list.forEach(function(t){var tw=t.offsetWidth,th=t.offsetHeight,span=Math.min(N,Math.ceil((tw+GAP)/STEP)),bx=0,by=1e9;
+      for(var i=0;i+span<=N||i===0;i++){var y=0;for(var j=i;j<Math.min(N,i+span);j++)y=Math.max(y,sky[j]);if(y<by-8){by=y;bx=i;}if(i+span>=N)break;}
+      for(var j=bx;j<Math.min(N,bx+span);j++)sky[j]=by+th+GAP;
+      var jx=Math.round((rnd(++k)-.5)*24),jy=Math.round((rnd(++k)-.5)*24);t._x=bx*STEP+jx;t._y=by+jy;w=Math.max(w,bx*STEP+tw);h=Math.max(h,by+th);});
+    clusters[c].w=w;clusters[c].h=h;clusters[c].list=list;
+  });
+  var CG=150,colW=[],rowH=[];
+  cats.forEach(function(c){var q=PLACE[c];colW[q[0]]=Math.max(colW[q[0]]||0,clusters[c].w);rowH[q[1]]=Math.max(rowH[q[1]]||0,clusters[c].h);});
+  cats.forEach(function(c){var q=PLACE[c],ox=0,oy=0;for(var a=0;a<q[0];a++)ox+=colW[a]+CG;for(var b=0;b<q[1];b++)oy+=rowH[b]+CG;
+    ox+=(colW[q[0]]-clusters[c].w)/2;oy+=(rowH[q[1]]-clusters[c].h)/2;var cl=clusters[c];cl.x=ox;cl.y=oy;
+    cl.label.style.left=ox+'px';cl.label.style.top=oy+'px';
+    cl.list.forEach(function(t){t.style.left=(ox+t._x)+'px';t.style.top=(oy+t._y)+'px';});});
+}
+layout();
+
+/* View state */
+var V={x:0,y:0,s:1},focused=null,raf=0,until=0;
+function minS(){return pg.clientWidth<600?.28:.5;}
+function homeS(){return pg.clientWidth<600?.62:.78;}
+function set(nx,ny,ns,anim){V.x=nx;V.y=ny;V.s=ns;world.classList.toggle('anim',!!anim);world.style.transform='translate('+nx+'px,'+ny+'px) scale('+ns+')';until=performance.now()+(anim?720:0);if(!raf)raf=requestAnimationFrame(tick);}
+function centre(wx,wy,s,anim){set(pg.clientWidth/2-wx*s,pg.clientHeight/2-wy*s,s,anim);}
+function goCat(c,anim){var cl=clusters[c];var s=Math.max(minS(),Math.min(homeS(),(pg.clientWidth-40)/cl.w,(pg.clientHeight-40)/cl.h));setFocus(null);centre(cl.x+cl.w/2,cl.y+cl.h/2,s,anim);}
+function home(anim){var cl=clusters.Data;setFocus(null);centre(cl.x+cl.w/2,cl.y+cl.h/2,pg.clientWidth<600?.3:.48,anim);}
+function tick(){
+  raf=0;var R=pg.getBoundingClientRect(),cx=R.left+R.width/2,cy=R.top+R.height/2,best=null,bd=1e9;
+  tiles.forEach(function(t){var r=t.getBoundingClientRect(),dx=(r.left+r.width/2-cx)/(R.width/2+r.width/3),dy=(r.top+r.height/2-cy)/(R.height/2+r.height/3),d=Math.sqrt(dx*dx+dy*dy);
+    var b=Math.max(0,Math.min(7,(d-.62)*10));if(focused&&t!==focused)b=Math.max(b,3.5);if(t===focused)b=0;
+    t.style.filter=b>.2?'blur('+b.toFixed(1)+'px)':'';t.style.opacity=String(1-Math.min(.5,Math.max(0,(d-.75)*.6))-(focused&&t!==focused?.15:0));
+    t.classList.toggle('soft',b>.8);});
+  cats.forEach(function(c){var cl=clusters[c],X=V.x+(cl.x+cl.w/2)*V.s,Y=V.y+(cl.y+cl.h/2)*V.s,d=Math.hypot(X-R.width/2,Y-R.height/2);if(d<bd){bd=d;best=c;}});
+  cf.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.c===best));});
+  if(performance.now()<until)raf=requestAnimationFrame(tick);
+}
+function setFocus(t){if(focused)focused.classList.remove('focus');focused=t;if(t)t.classList.add('focus');}
+function focusTile(t){setFocus(t);var s=Math.min(1,(pg.clientWidth-48)/t.offsetWidth,(pg.clientHeight-48)/t.offsetHeight);centre(t.offsetLeft+t.offsetWidth/2,t.offsetTop+t.offsetHeight/2,Math.max(s,.4),true);}
+
+/* Drag to pan; controls inside a sharp tile keep working */
+var drag=null,moved=false;
+pg.addEventListener('pointerdown',function(e){
+  if(e.button!==0||e.target.closest('.pg-ctrl'))return;
+  var tile=e.target.closest('.pg-tile'),sharp=tile&&!tile.classList.contains('soft');
+  if(sharp&&e.target.closest('input,textarea,select,[contenteditable],[role="slider"],.as-slider'))return;
+  drag={x:e.clientX,y:e.clientY,vx:V.x,vy:V.y,id:e.pointerId};moved=false;
+},true);
+pg.addEventListener('pointermove',function(e){
+  if(!drag||e.pointerId!==drag.id)return;var dx=e.clientX-drag.x,dy=e.clientY-drag.y;
+  if(!moved&&Math.hypot(dx,dy)<6)return;
+  if(!moved){moved=true;pg.classList.add('dragging');try{pg.setPointerCapture(e.pointerId);}catch(_){}hint.style.opacity=0;setFocus(null);}
+  set(drag.vx+dx,drag.vy+dy,V.s,false);
+});
+function end(){if(drag){drag=null;pg.classList.remove('dragging');}}
+pg.addEventListener('pointerup',end);pg.addEventListener('pointercancel',end);
+pg.addEventListener('click',function(e){
+  if(moved){e.preventDefault();e.stopPropagation();moved=false;return;}
+  var tile=e.target.closest('.pg-tile');
+  if(tile&&tile.classList.contains('soft')){e.preventDefault();e.stopPropagation();focusTile(tile);}
+  else if(tile&&e.target.closest('.pg-tag')){focusTile(tile);}
+},true);
+/* Blurred tiles shouldn't react to presses until focused */
+pg.addEventListener('pointerdown',function(e){var tile=e.target.closest('.pg-tile');if(tile&&tile.classList.contains('soft'))e.preventDefault();},false);
+pg.addEventListener('focusin',function(e){var tile=e.target.closest('.pg-tile');if(tile&&tile!==focused&&tile.classList.contains('soft'))focusTile(tile);});
+/* Ctrl/Cmd + scroll (and trackpad pinch) zooms around the cursor; plain scroll still scrolls the page */
+pg.addEventListener('wheel',function(e){
+  if(!(e.ctrlKey||e.metaKey))return;e.preventDefault();
+  var R=pg.getBoundingClientRect(),mx=e.clientX-R.left,my=e.clientY-R.top,dy=e.deltaMode===1?e.deltaY*16:e.deltaY;
+  var ns=Math.max(.25,Math.min(1.5,V.s*Math.exp(-dy*.0025)));
+  var wx=(mx-V.x)/V.s,wy=(my-V.y)/V.s;setFocus(null);hint.style.opacity=0;set(mx-wx*ns,my-wy*ns,ns,false);
+},{passive:false});
+document.getElementById('pgIn').onclick=function(){var s=Math.min(1.2,V.s*1.25);centre((pg.clientWidth/2-V.x)/V.s,(pg.clientHeight/2-V.y)/V.s,s,true);};
+document.getElementById('pgOut').onclick=function(){var s=Math.max(.25,V.s/1.25);centre((pg.clientWidth/2-V.x)/V.s,(pg.clientHeight/2-V.y)/V.s,s,true);};
+document.getElementById('pgHome').onclick=function(){home(true);};
+cf.addEventListener('click',function(e){var b=e.target.closest('button');if(b)goCat(b.dataset.c,true);});
+pg.addEventListener('keydown',function(e){var st=60;if(e.target!==pg)return;if(e.key==='ArrowLeft')set(V.x+st,V.y,V.s,true);else if(e.key==='ArrowRight')set(V.x-st,V.y,V.s,true);else if(e.key==='ArrowUp')set(V.x,V.y+st,V.s,true);else if(e.key==='ArrowDown')set(V.x,V.y-st,V.s,true);else return;e.preventDefault();});
+pg.tabIndex=0;
+home(false);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){layout();home(false);});
+var lastW=pg.clientWidth;new ResizeObserver(function(){if(Math.abs(pg.clientWidth-lastW)>2){lastW=pg.clientWidth;home(false);}}).observe(pg);
+
+/* ---------- Icons ---------- */
+m('iline',function(){return h(React.Fragment,null,['home-line','bar-chart-10','pie-chart-03','filter-lines','calendar','bell-01','settings-01','search-md'].map(function(n){return h(A.Icon,{key:n,name:n,size:22});}));});
+m('isolid',function(){return h(React.Fragment,null,['home-line','bar-chart-10','pie-chart-03','filter-lines','calendar','bell-01','settings-01','search-md'].map(function(n){return h(A.Icon,{key:n,name:n,size:22,variant:'solid'});}));});
+m('iextra',function(){return h(React.Fragment,null,['aws','gcp','azure','kubernetes','openai','anthropic','gemini-enterprise','slack'].map(function(n){return h(A.ExtraIcon,{key:n,name:n,size:24});}));});
+m('gallery',function(){return h(A.IconGallery,{});});
+
+/* ---------- Page templates ---------- */
+var PAGES={
+  CostAnalyzerPage:function(){return h(A.AppShell,{selected:'Cost Reporting',height:900,header:h(A.PageHeader,{title:'Cost Analyzer'}),toolbar:h(A.Toolbar,{left:[h(A.SelectButton,{key:1,icon:'globe-02',label:'Global View'}),h(A.SelectButton,{key:2,label:'Select Report'})],right:[h(A.DateRangeButton,{key:1}),h(A.SelectButton,{key:2,icon:'clock',label:'Daily'}),h(A.IconButton,{key:3,icon:'settings-01',label:'Settings'}),h(A.IconButton,{key:4,icon:'filter-lines',label:'Filters'})]})},h(A.Section,null,h(A.StatsRow,{columns:2,items:[{value:'$500K',label:'Total cost'},{value:'$500K',label:'Previous cost',sublabel:'(3 Jan - 18 Jan, 2025)'},{value:'$50K',label:'Cost delta',delta:'25.8%',trend:'up'}]})),h(A.Section,null,h(A.Toolbar,{plain:true,left:[h(A.SplitSelect,{key:1,label:'Group By',placeholder:'Select group-by...'})],right:[h('span',{key:0,style:{font:'500 14px var(--font-sans)'}},'Chart Type'),h(A.SegmentedControl,{key:1,options:[{icon:'bar-chart-01',label:''},{icon:'line-chart-up-01',label:''}]}),h(A.Divider,{key:2}),h(A.Button,{key:3,color:'gray',outline:true,size:'md',leftIcon:'eye-off'},'Hide Chart')]}),h(A.Widget,{title:'Cost Trend Chart'},h(A.BarChart,{height:240,categories:['4 Jul, 25','5 Jul, 25','6 Jul, 25','7 Jul, 25','8 Jul, 25','9 Jul, 25','10 Jul, 25'],series:[{name:'Total Cost',values:[5800,6000,5800,7000,5800,6000,6000]}]}))),h(A.Section,null,h(A.Toolbar,{plain:true,left:[h('div',{key:1,style:{width:480}},h(A.Input,{placeholder:'Search...',leftIcon:'search-md'}))],right:[h(A.Toggle,{key:1,label:'Focus Mode'}),h(A.Divider,{key:2}),h('span',{key:3,style:{font:'500 14px var(--font-sans)'}},'Delta By :'),h(A.SegmentedControl,{key:4,options:[{label:'%'},{label:'$'}]}),h(A.Divider,{key:5}),h(A.SelectButton,{key:6,icon:'upload-01',label:'Export',chevron:'chevron-down'})]}),h(A.DataTable,{footer:false,columns:[{key:'n',label:'Total'},{key:'t',label:'Total cost',sub:'24 Jan - 6 Feb, 2025',type:'number',filter:true},{key:'p',label:'Prev cost',sub:'24 Jan - 23 Jan, 2025',type:'number',filter:true},{key:'d',label:'Delta',type:'delta',filter:true},{key:'a',label:'24 Jan, 2025',type:'number'},{key:'b',label:'25 Jan, 2025',type:'number'}],rows:[{n:'Total Cost',t:'$23.5',p:'$23.5',d:'-12.4%',a:'$5.8',b:'$5.8'}]})));},
+  SavingsOverviewPage:function(){return h(A.AppShell,{selected:'Savings Overview',height:900,header:h(A.PageHeader,{title:'Savings Overview'}),tabs:['Potential Savings','Achieved Progress','Cost Avoidance'],toolbar:h(A.Toolbar,{left:[h(A.SelectButton,{key:1,icon:'globe-02',label:'Global View'})],right:[h(A.DateRangeButton,{key:1}),h(A.SelectButton,{key:2,icon:'clock',label:'Monthly'}),h(A.Divider,{key:3}),h(A.IconButton,{key:4,icon:'filter-lines',label:'Filters'})]})},h(A.Section,null,h(A.StatsRow,{columns:2,items:[{value:'$500K',label:'Cost avoided',icon:'coins-stacked-01',tone:'green'},{value:'1,240',label:'Anomalies acted on',icon:'target-04'},{value:'72%',label:'Avoidance efficiency',icon:'shield-tick'}]})),h(A.Section,null,h(A.Widget,{title:'Cost Avoidance Trend',titleExtra:h(A.TextButton,{size:'small',rightIcon:'chevron-down'},'By Team'),action:[h(A.SegmentedControl,{key:1,size:'sm',options:[{icon:'bar-chart-01',label:''},{icon:'line-chart-up-01',label:''}]})]},h(A.BarChart,{height:220,categories:['4 Jul, 25','5 Jul, 25','6 Jul, 25','7 Jul, 25','8 Jul, 25','9 Jul, 25','10 Jul, 25'],series:[{name:'Astuto_Prod',values:[2400,2600,2400,2800,2400,2500,2400]},{name:'Astuto_GCP_Prod',values:[1200,1300,1300,1300,1300,1200,1200]},{name:'Astuto_Dev',values:[900,1500,1100,1400,1200,1300,900]},{name:'Astuto_Dev_Prod',values:[300,300,300,300,300,300,300]},{name:'Others',values:[100,100,100,100,100,100,100]}]}))),h(A.Section,null,h('div',{style:{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:24}},h(A.Widget,{title:'Cost Avoided By Service',action:h(A.IconButton,{icon:'table',size:'sm',label:'View as table'})},h(A.DonutChart,{size:150,data:[{label:'EC2',value:2240},{label:'Compute Engine',value:2040},{label:'RDS',value:1820},{label:'Others',value:1000}]})),h(A.Widget,{title:'Cost Avoided By Accounts',action:h(A.IconButton,{icon:'table',size:'sm',label:'View as table'})},h(A.DonutChart,{size:150,data:[{label:'Astuto_Prod',value:2240},{label:'Astuto_GCP_Prod',value:2040},{label:'Astuto_Dev',value:1820},{label:'Others',value:1000}]})),h(A.Widget,{title:'Cost Avoided By Source',action:h(A.IconButton,{icon:'table',size:'sm',label:'View as table'})},h(A.DonutChart,{size:150,data:[{label:'AWS',value:2240},{label:'GCP',value:2040},{label:'Oracle',value:1820},{label:'Azure',value:1400}]})))));},
+  RecommendationsPage:function(){return h(A.AppShell,{selected:'All Recommendations',height:900,header:h(A.PageHeader,{title:'All Recommendations'}),toolbar:h(A.Toolbar,{left:[h(A.SelectButton,{key:1,label:'Default View'}),h('div',{key:2,style:{width:320}},h(A.Input,{placeholder:'Search by title...',leftIcon:'search-md'}))],right:[h(A.DateRangeButton,{key:1}),h(A.IconButton,{key:2,icon:'settings-01',label:'Settings'}),h(A.IconButton,{key:3,icon:'filter-lines',label:'Filters'})]})},h(A.Section,null,h('div',{style:{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:24}},h(A.Widget,{title:'Savings Overview',icon:'currency-dollar'},h(A.DonutChart,{layout:'side',size:110,thickness:14,data:[{label:'Achieved Savings',value:40,display:'$123.50',series:'g'},{label:'Potential Savings',value:60,display:'$123.50',series:'e'}]})),h(A.Widget,{title:'Savings by source',icon:'cloud-01'},h(A.DonutChart,{layout:'side',size:110,thickness:14,data:[{label:'AWS',value:40,display:'$123.50',series:'h'},{label:'GCP',value:30,display:'$123.50',series:'g'},{label:'Azure',value:20,display:'$123.50'},{label:'OCI',value:10,display:'$123.50',series:'c'}]})),h(A.Widget,{title:'Savings by ticket type',icon:'ticket-01'},h(A.DonutChart,{layout:'side',size:110,thickness:14,data:[{label:'Policy',value:50,display:'$123.50',series:'k'},{label:'Insight',value:30,display:'$123.50',series:'e'},{label:'Custom',value:20,display:'$123.50',series:'p'}]})))),h(A.Section,null,h(A.DataTable,{actions:['dots-vertical'],perPage:30,total:104,columns:[{key:'s',label:'Source',type:'provider',filter:true},{key:'t',label:'Title',filter:true,sortable:true},{key:'svc',label:'Service',filter:true,sortable:true},{key:'ps',label:'Potential savings',type:'number',filter:true,sortable:true}],rows:[{s:'AWS',t:'Lambda functions should be using Graviton processor',svc:'Amazon EC2',ps:'$1,520.00'},{s:'Azure',t:'Lambda functions should be using Graviton processor',svc:'Amazon EC2',ps:'$1,520.00'},{s:'AWS',t:'Lambda functions should be using Graviton processor',svc:'Amazon EC2',ps:'$1,520.00'},{s:'GCP',t:'Lambda functions should be using Graviton processor',svc:'Amazon EC2',ps:'$1,520.00'},{s:'GCP',t:'Lambda functions should be using Graviton processor',svc:'Amazon EC2',ps:'$1,520.00'}]})));},
+  CatalogPage:function(){return h(A.AppShell,{selected:'Dashboards',height:700,header:h(A.PageHeader,{title:'Pre-built dashboards',breadcrumbs:['Dashboards']})},h('div',{style:{background:'var(--background-primary-1)',borderBottom:'1px solid var(--stroke-primary-1)',padding:'16px 24px',display:'flex',flexDirection:'column',gap:8}},h('div',{style:{font:'600 16px/24px var(--font-sans)',color:'var(--text-header-1)'}},'Pre-built dashboards'),h('div',{style:{font:'400 12px/18px var(--font-sans)',color:'var(--text-body-1)'}},'Explore pre-built dashboards tailored towards answering common questions. Click to preview the dashboard to view details.'),h('div',{style:{width:250,marginTop:4}},h(A.Input,{size:'sm',placeholder:'Search by dashboard name..',leftIcon:'search-md'}))),h(A.Section,null,h('div',{className:'as-group-label'},'Core dashboards · 3 dashboards'),h('div',{style:{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16}},h(A.TileCard,{icon:'bar-chart-01',tone:'green',title:'Cost Allocation',description:'Spend broken down by team, application, or environment.'}),h(A.TileCard,{icon:'coins-stacked-01',tone:'green',title:'Savings Tracker',description:'Opportunities identified vs. savings actually realized.'}),h(A.TileCard,{icon:'database-01',tone:'green',title:'Storage Optimization',description:'Savings from S3 lifecycle and storage class changes.'})),h('div',{className:'as-group-label'},'Persona based dashboards · 3 dashboards'),h('div',{style:{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16}},h(A.TileCard,{icon:'users-01',tone:'teal',title:'Leadership Dashboard',description:'Overall spend vs. budget, savings achieved, and cost by business unit.'}),h(A.TileCard,{icon:'bar-line-chart',tone:'teal',title:'FinOps Team',description:'Tagging health, cost center chargebacks, and RI/savings plan performance.'}),h(A.TileCard,{icon:'server-01',tone:'teal',title:'DevOps',description:'Each team\'s cloud spend plus a queue of optimization tasks to act on.'}))));},
+  IntegrationsPage:function(){return h(A.AppShell,{selected:'Integrations',height:620,header:h(A.PageHeader,{title:'Integrations Marketplace'})},h(A.Section,null,h('div',{style:{width:335}},h(A.Input,{placeholder:'Search for app...',leftIcon:'search-md'})),h('div',{style:{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:16}},h(A.IntegrationCard,{name:'Slack',category:'Alerting',description:'A team messaging app for communication and real-time alerts.',connected:true}),h(A.IntegrationCard,{name:'Microsoft Teams',category:'Alerting',description:'A collaboration tool for chat, video meetings, and alerts.',connected:true}),h(A.IntegrationCard,{name:'Jira',category:'Ticketing',description:'A project management platform for tracking issues and managing tickets.'}),h(A.IntegrationCard,{name:'PagerDuty',category:'Ticketing',description:'An incident response platform for managing alerts and on-call schedules.'}))));},
+  ForecastDrawerPage:function(){return h('div',{style:{position:'relative'}},h(A.AppShell,{selected:'Settings',height:760,header:h(A.PageHeader,{title:'Forecasting',breadcrumbs:['Settings'],back:true})},h(A.Section,{title:null},h('div',null,h('div',{style:{font:'600 14px/20px var(--font-sans)',color:'var(--text-header-1)'}},'Cloud Forecasts'),h('div',{style:{font:'400 12px/18px var(--font-sans)',color:'var(--text-body-1)'}},'OneLens polls each provider\'s forecast API on a schedule.')),h(A.DataTable,{footer:false,actions:['edit-01'],columns:[{key:'p',label:'Provider',type:'provider'},{key:'s',label:'Status',type:'badge'},{key:'l',label:'Levels',type:'chips'},{key:'c',label:'Calls / run',type:'number'},{key:'e',label:'Est. cost / mo',type:'number'}],rows:[{p:'AWS',s:{label:'Enabled',theme:'green',outline:true},l:['Total','Account','Region'],c:'99',e:'$0.99'},{p:'Azure',s:{label:'Disabled',theme:'yellow',outline:true},l:[],c:'—',e:'—'},{p:'GCP',s:{label:'Coming Soon',theme:'gray',outline:true},l:[],c:'—',e:'—'}]}))),h('div',{style:{position:'absolute',inset:0}},h(A.Drawer,{height:760,title:'AWS forecast',width:'62%',badges:[h(A.Badge,{key:1,theme:'green',size:'sm',outline:true},'Enabled'),h(A.Badge,{key:2,theme:'gray',size:'sm'},'Last Run : 21 Sep, 2026 (06:00)')],tabs:['Overview','Logs']},h('div',{className:'as-group-label'},'Enable / disable forecast'),h(A.Toggle,{label:'Forecasting Enabled for AWS',defaultChecked:true}),h(A.Callout,{tone:'info'},'When enabled, OneLens pulls data from the forecasting API that AWS provides.'),h('div',{className:'as-group-label'},'Forecast levels'),h(A.Callout,{tone:'warning',title:'Every forecast level you turn on costs money'},'AWS charges $0.01 for each Cost Explorer API request.'),h('div',{style:{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:12}},h(A.OptionCard,{title:'Total',tag:'Always on',description:'One forecast for the whole organisation.',value:'1 forecast',meta:'1 call / run · $0.01',defaultSelected:true}),h(A.OptionCard,{title:'Account',description:'A forecast for each linked account.',value:'84 accounts',meta:'84 calls / run',defaultSelected:true}),h(A.OptionCard,{title:'Region',description:'A forecast for each region with spend.',value:'14 regions',meta:'14 calls / run',defaultSelected:true}),h(A.OptionCard,{title:'Tag',description:'A forecast for each value of the tags you choose.',value:'Pick tags',meta:'0 calls / run'})),h('div',{className:'as-group-label'},'Forecast permissions'),h(A.CodeBlock,{title:'Permission',code:'{\n  "Effect": "Allow",\n  "Action": ["ce:GetCostForecast"],\n  "Resource": "*"\n}'}))));}
+};
+var TPL=[
+ ['SavingsOverviewPage','Dashboard','Savings Overview','Header with tabs, toolbar, stats, a full-width trend widget, 3-up breakdowns and a top-N table.',900],
+ ['CostAnalyzerPage','Analytics explorer','Cost Analyzer','Toolbar, stats, chart action row, chart widget, table action row and DataTable.',900],
+ ['RecommendationsPage','List / queue','All Recommendations','Saved view and search in the toolbar, summary cards, then a DataTable with row actions.',900],
+ ['CatalogPage','Catalogue','Pre-built dashboards','Breadcrumb header, intro block with search, then grouped TileCard grids.',700],
+ ['IntegrationsPage','Marketplace','Integrations Marketplace','Search and a 4-column IntegrationCard grid, leading into a set-up wizard.',620],
+ ['ForecastDrawerPage','Settings + drawer','Forecasting','A settings sub-page with a status table; editing opens a Drawer over the page.',760]
+];
+function fit(sc){var st=sc.querySelector('.stage');if(!st)return;var k=sc.clientWidth/1440;st.style.transform='scale('+k+')';var hh=+sc.dataset.h||900,vis=+(sc.dataset.vis||hh);sc.style.height=(vis*k)+'px';}
+function render(sc,name,hh,vis){sc.dataset.h=hh;if(vis)sc.dataset.vis=vis;sc.style.aspectRatio='';sc.innerHTML='<div class="stage"></div>';var st=sc.firstChild;if(sc._root){try{sc._root.unmount();}catch(e){}}sc._root=ReactDOM.createRoot(st);sc._root.render(h(Safe,null,PAGES[name]()));fit(sc);}
+var hero=document.querySelector('.cover .scaler');render(hero,'SavingsOverviewPage',900,720);
+var tt=document.getElementById('ttabs'),tf=document.getElementById('tframe');
+tt.innerHTML=TPL.map(function(t,i){return '<button type="button" role="tab" aria-selected="'+(i===0)+'" data-i="'+i+'">'+t[1]+'</button>';}).join('');
+function showT(i){var t=TPL[i];tt.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-selected',String(+b.dataset.i===i));});document.getElementById('tdesc').textContent=t[3];document.getElementById('turl').textContent=t[2]+', built from library components.';render(tf,t[0],t[4]);applyLT();}
+tt.addEventListener('click',function(e){var b=e.target.closest('button');if(b)showT(+b.dataset.i);});
+showT(1);
+var ro=new ResizeObserver(function(es){es.forEach(function(x){fit(x.target);});});ro.observe(hero);ro.observe(tf);
+
+applyLT();
+})();
+</script>
+</body>
+</html>

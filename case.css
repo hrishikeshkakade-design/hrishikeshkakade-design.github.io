@@ -285,8 +285,9 @@ html.cc.cc-in .ccur{opacity:1}
 .reqs{list-style:none;padding:0!important;margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px!important;counter-reset:rq}
 .reqs li{counter-increment:rq;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:.92rem;color:var(--ink);font-weight:500;display:grid;gap:4px}
 .reqs li::before{content:"0" counter(rq);font:500 .66rem var(--f-mono);color:var(--select)}
-@media (max-width:760px){.reqs{grid-template-columns:1fr 1fr}}
-@media (max-width:460px){.reqs{grid-template-columns:1fr}}
+.reqs.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:760px){.reqs,.reqs.four{grid-template-columns:1fr 1fr}}
+@media (max-width:460px){.reqs,.reqs.four{grid-template-columns:1fr}}
 .uc-goal{margin:0;font-size:.95rem;color:var(--ink);display:grid;gap:2px}
 .uc-goal b,.uc-k{font:500 .66rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .uc-k{margin-bottom:-4px}

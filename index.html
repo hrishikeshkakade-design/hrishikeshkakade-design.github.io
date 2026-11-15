@@ -940,12 +940,20 @@ const CASES = [
     brief:[["Problem","A provider bill shows AI spend, not which caller drove it, who owns it or how to control it."],["My role","Senior Product Designer. Product UX, information architecture, interaction and interface design."]]
   },
   {
-    id:"networking", pdf:"", title:"Networking Analysis", product:"OneLens", year:"Astuto.ai",
+    id:"networking", hidden:true, pdf:"", title:"Networking Analysis", product:"OneLens", year:"Astuto.ai",
     tags:["FinOps","Cloud networking","Data visualisation","Onboarding"], cover:"c-blue", ui:"dash", img:"img/net/cover.webp",
     imgAlt:"Networking Analysis in OneLens: networking cost, bytes transferred and a Sankey chart of traffic by resource and route",
     blurb:"Connecting cloud network traffic to its cost, so teams can see which resources and routes sit behind a networking bill.",
     outcomes:[["Sankey","traffic flow by resource and route"],["3-step","guided, validated Flow Logs ingestion"]],
     brief:[["Problem","A bill shows networking spend, not which workloads generated the traffic or where the data went."],["My role","Senior Product Designer. Analysis experience, data visualisation and the Flow Logs ingestion flow."]]
+  },
+  {
+    id:"resource-scheduler", pdf:"", title:"Cloud Resource Scheduling", product:"OneLens", year:"Astuto.ai",
+    tags:["FinOps","Automation","Agentic actions","B2B SaaS"], cover:"c-mint", ui:"dash", img:"img/rs/cover.webp",
+    imgAlt:"Scheduler overview in OneLens: potential savings, schedulable resources, active schedules and savings by account, cost centre and environment",
+    blurb:"Taking OneLens from spotting idle cloud resources to safely scheduling them, with explainable recommendations and a full record of every automated action.",
+    outcomes:[["4","major customers adopted it"],["1st","feature to act in customer environments"]],
+    brief:[["Problem","Teams could see idle resources but acting on them meant tools, tickets and manual changes. Automating it had to stay explainable and observable."],["My role","Senior Product Designer. Designed the overview, recommendation details, schedule creation, schedule management and execution views."]]
   },
   {
     id:"meal-prep", wip:true, pdf:"", title:"Batchwise", product:"Meal prep app", year:"In progress",
@@ -993,7 +1001,7 @@ const MOTION=`<div class="uem uem-card" role="img" aria-label="Animated preview:
 const list = document.getElementById('workList');
 const outs=c=>c.outcomes?`<div class="outcomes"><ul>${c.outcomes.map(o=>`<li class="ob${o[2]?' hi':''}"><b>${o[0]}</b><span>${o[1]}</span></li>`).join('')}</ul></div>`:'';
 const brief=c=>c.brief?`<dl class="brief">${c.brief.map(b=>`<div><dt>${b[0]}</dt><dd>${b[1]}</dd></div>`).join('')}</dl>`:'';
-list.innerHTML = CASES.map((c,i)=>`
+list.innerHTML = CASES.filter(c=>!c.hidden).map((c,i)=>`
   <article class="case${c.soon?' is-soon':''}"${c.soon?'':` data-href="case-${c.id}.html"`}>
     <div class="cover ${c.cover}${c.img?' has-shot':''}">${c.wipMark?'<div class="wip-mark" role="img" aria-label="Work in progress"><span>WIP</span></div>':c.motion?MOTION:c.img?`<img class="cover-shot${c.imgCut?' is-cut':''}" src="${c.img}" alt="${c.imgAlt||''}" width="${c.imgCut?1460:1920}" height="${c.imgCut?1255:1080}" loading="lazy" decoding="async">`:`<div class="cover-ui">${UI[c.ui]}</div>`}</div>
     <div class="case-body">

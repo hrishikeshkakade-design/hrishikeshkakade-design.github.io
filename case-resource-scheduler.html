@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Case study by Hrishikesh Kakade: designing cloud resource scheduling for OneLens by Astuto.ai, the first feature to act directly in customer environments.">
+<title>Cloud Resource Scheduling — Hrishikesh Kakade</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="case.css">
+</head>
+<body>
+<!-- Screenshots come from the Resource Scheduler Figma file, in img/rs/. Account IDs and names were replaced in anonymised copies. -->
+<nav class="cnav" aria-label="Case study">
+  <a class="nbtn back" href="index.html#work" aria-label="Back to all work"><i class="mark" aria-hidden="true"></i><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg><span class="nlabel">All work</span></a>
+  <span class="nsep" aria-hidden="true"></span>
+  <div class="ntitle">OneLens / <b>Resource Scheduling</b></div>
+  <button class="nbtn" id="themeBtn" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+  <a class="nbtn nprimary" href="index.html#contact">Let's talk</a>
+  <span class="nprog" aria-hidden="true"></span>
+</nav>
+
+<main>
+  <header class="hero wrap">
+    <div class="crumb"><b>Case study</b><span>·</span><span>OneLens by Astuto.ai</span><span>·</span><span>Cloud FinOps / B2B SaaS</span></div>
+    <h1>Cloud resource scheduling: from spotting waste to acting on it.</h1>
+    <p class="sum">From identifying cloud waste to taking action in customer environments. Resource Scheduler was the first OneLens feature to deploy an agent and change infrastructure directly in a customer's cloud.</p>
+    <dl class="meta">
+      <div><dt>Product</dt><dd>OneLens by Astuto</dd></div>
+      <div><dt>Area</dt><dd>Cloud cost optimisation, agent-driven automation</dd></div>
+      <div><dt>Role</dt><dd>Senior Product Designer</dd></div>
+      <div><dt>Adoption</dt><dd>Four major customers</dd></div>
+    </dl>
+    <div class="hero-actions">
+      <a class="btn primary" href="#context">Explore the case study ↓</a>
+      <a class="btn" href="index.html#contact">Let's talk</a>
+    </div>
+    <figure class="cover"><img class="shot" src="img/rs/cover.webp" alt="Scheduler overview: potential savings of $12.5K, 18 schedulable resources, 4 active schedules, and savings broken down by account, cost centre and environment" width="1440" height="900" fetchpriority="high" decoding="async"><figcaption class="cover-cap">The opportunity, and the progress made on it, in one view.</figcaption></figure>
+  </header>
+
+  <div class="wrap body">
+    <nav class="toc" aria-label="Contents">
+      <span class="lbl">On this page</span>
+      <a href="#context"><i>01</i>Context</a><a href="#challenge"><i>02</i>The challenge</a><a href="#experience"><i>03</i>Designing the experience</a><a href="#discover"><i>04</i>Discover</a><a href="#evaluate"><i>05</i>Evaluate</a><a href="#configure"><i>06</i>Configure</a><a href="#manage"><i>07</i>Manage</a><a href="#monitor"><i>08</i>Monitor</a><a href="#adoption"><i>09</i>Adoption</a><a href="#unlocked"><i>10</i>What it unlocked</a><a href="#actions-center"><i>11</i>Actions Center</a><a href="#reflection"><i>12</i>Reflection</a>
+    </nav>
+    <article>
+
+      <!-- 01 CONTEXT -->
+      <section class="sec" id="context">
+        <span class="sec-k">01 · Context</span>
+        <h2>Finding savings is not the same as making them.</h2>
+        <p class="lead">Cloud cost platforms help teams see where their money goes and find ways to spend less. But identifying an opportunity and actually implementing it are two very different things.</p>
+        <p>Teams could spot idle or underused resources, but acting on them meant switching between tools, investigating usage, coordinating with engineering and changing infrastructure by hand. We wanted to close that gap.</p>
+        <div class="callout"><b>A first for Astuto</b><p>Resource Scheduler was the first project at Astuto that deployed an agent and made changes directly in a customer's cloud environment. It moved OneLens beyond cost visibility and recommendations, towards taking action.</p></div>
+      </section>
+
+      <!-- 02 CHALLENGE -->
+      <section class="sec" id="challenge">
+        <span class="sec-k">02 · The challenge</span>
+        <h2>Automation that changes infrastructure has to earn trust.</h2>
+        <p class="lead">Cloud resources aren't used around the clock. Development environments, databases and compute instances often stay on long after teams stop using them. Changing infrastructure automatically raises a different set of concerns.</p>
+        <ul class="kv">
+          <li><b>Knowing when to act</b><span>Low utilisation doesn't always mean a resource is safe to stop.</span></li>
+          <li><b>Understanding the impact</b><span>Teams need confidence that a recommendation won't interrupt critical workloads.</span></li>
+          <li><b>Configuring automation</b><span>A schedule needs control over resources, timing, conditions and recurrence.</span></li>
+          <li><b>Maintaining trust</b><span>Teams need to see what the system changed, when, and whether it worked.</span></li>
+        </ul>
+        <div class="callout hmw"><b>The design challenge</b><p>Make cloud optimisation actionable without making automation feel like a black box.</p></div>
+      </section>
+
+      <!-- 03 EXPERIENCE -->
+      <section class="sec" id="experience">
+        <span class="sec-k">03 · Designing the experience</span>
+        <h2>Five connected stages.</h2>
+        <p class="lead">I structured the experience around the questions a team asks on the way from an opportunity to a running, trusted automation.</p>
+        <ol class="thread">
+          <li><b>Discover</b><span>Where can we save, and how far have we got?</span></li>
+          <li><b>Evaluate</b><span>Why is this resource recommended, and is it safe to act?</span></li>
+          <li><b>Configure</b><span>Which resources, which actions, and when?</span></li>
+          <li><b>Manage</b><span>What schedules are running, and what's coming up next?</span></li>
+          <li><b>Monitor</b><span>What ran, did it work, and who changed what?</span></li>
+        </ol>
+      </section>
+
+      <!-- 04 DISCOVER -->
+      <section class="sec" id="discover">
+        <span class="sec-k">04 · Discover</span>
+        <h2>Make optimisation opportunities visible.</h2>
+        <p class="lead">The Scheduler Overview gives teams one view of what they could save by scheduling and of the automation already running.</p>
+        <figure><img class="shot" src="img/rs/overview.webp" alt="Scheduler overview: potential savings, schedulable resources and active schedules; donut charts of potential savings by account, cost centre and environment; prod versus non-prod savings by service; and the top recommendations" width="1440" height="1682" loading="lazy" decoding="async"><figcaption>Potential savings by account, cost centre and environment, prod against non-prod by service, and the top recommendations.</figcaption></figure>
+        <ul class="kv">
+          <li><b>The opportunity</b><span>Potential savings over 30 days, shown against last month's bill, and how many resources can be scheduled.</span></li>
+          <li><b>The progress</b><span>Active schedules and achieved savings, so teams can see their optimisation work paying off.</span></li>
+          <li><b>Where it sits</b><span>Breakdowns by account, cost centre and environment point teams to the owners who need to act.</span></li>
+        </ul>
+      </section>
+
+      <!-- 05 EVALUATE -->
+      <section class="sec" id="evaluate">
+        <span class="sec-k">05 · Evaluate</span>
+        <h2>Make every recommendation explainable.</h2>
+        <p class="lead">A recommendation should do more than tell someone to stop a resource. It should explain why the action is suggested and when it's safe to run.</p>
+        <figure><img class="shot" src="img/rs/insights.webp" alt="Recommendations list: each one with the resource, service, schedule type, monthly savings and a confidence bar, with actions to view details or create a schedule" width="1440" height="1024" loading="lazy" decoding="async"><figcaption>Recommendations ranked by monthly savings, each with a confidence score. A schedule can be created straight from the row.</figcaption></figure>
+        <h3>Recommendation details</h3>
+        <p>Opening a recommendation shows the evidence behind it. For example, a development instance that sits at low utilisation every weeknight is recommended for a weekday stop-and-start schedule.</p>
+        <figure><img class="shot" src="img/rs/rec.webp" alt="Recommendation to stop dev-project-a-instance from 9pm to 6am on weekdays: a 30-day utilisation heatmap by hour and day, an idle probability insight with a possible blocker, potential savings, risk and confidence, and resource details" width="1440" height="1024" loading="lazy" decoding="async"><figcaption>The heatmap shows the idle pattern; the insight card explains it and names a possible blocker.</figcaption></figure>
+        <ul class="kv">
+          <li><b>Usage patterns</b><span>A 30-day heatmap of utilisation by hour and day, with the proposed schedule times highlighted on it.</span></li>
+          <li><b>Idle probability</b><span>How likely the resource is to be idle in that window, and how stable the pattern has been.</span></li>
+          <li><b>Confidence and risk</b><span>A confidence score and a risk level next to the potential savings.</span></li>
+          <li><b>Possible blockers</b><span>Context such as occasional batch jobs that might make a stop unsafe.</span></li>
+        </ul>
+        <p>The supporting data lets people judge a recommendation instead of blindly trusting an automated decision.</p>
+      </section>
+
+      <!-- 06 CONFIGURE -->
+      <section class="sec" id="configure">
+        <span class="sec-k">06 · Configure</span>
+        <h2>Give teams control over the automation.</h2>
+        <p class="lead">Once a recommendation checks out, the user decides how and when it should run. Creating a schedule has two parts: the target scope and the actions.</p>
+        <h3>Choosing the target</h3>
+        <p>Resources can be targeted in two ways. Conditions select by attributes such as account, region and tags, so new matching resources are picked up automatically. Explicit selection lists specific resource IDs, added one by one or uploaded as a CSV.</p>
+        <div class="pair">
+          <figure><span class="pill">Conditions</span><img class="shot" src="img/rs/scope-tags.webp" alt="Create schedule panel with a target scope condition: AWS tags where the key starts with dev" width="1440" height="1024" loading="lazy" decoding="async"><figcaption>Target resources by account, region or tags.</figcaption></figure>
+          <figure><span class="pill">Resource IDs</span><img class="shot" src="img/rs/scope-ids.webp" alt="Create schedule panel opened from a recommendation, targeting a selected instance ID, with start and stop actions on weekdays" width="1440" height="1024" loading="lazy" decoding="async"><figcaption>Or pick exact instances, or upload a CSV of IDs.</figcaption></figure>
+        </div>
+        <h3>Defining the actions</h3>
+        <p>Recurring actions set what happens, how often, at what time and in which timezone, with days to skip. Where a fixed schedule isn't enough, an action can be triggered by idleness instead: CPU and network thresholds, how long the resource must be idle, and when to start it back up.</p>
+        <div class="pair">
+          <figure><span class="pill">Recurring</span><img class="shot" src="img/rs/recurrence.webp" alt="Add action popover: stop instances daily at 1 PM except Saturdays and Sundays, with a note that EC2 instances take 10 to 15 minutes to start" width="1440" height="1212" loading="lazy" decoding="async"><figcaption>The summary repeats the rule in plain words before it's added.</figcaption></figure>
+          <figure><span class="pill">Idle-triggered</span><img class="shot" src="img/rs/idle.webp" alt="Auto stop when idle: idle for 15 minutes with CPU below 15% and network in and out below 100 kbps, start back after 15 hours, only on weekdays between 8 am and 9 pm" width="1440" height="1024" loading="lazy" decoding="async"><figcaption>Stop when CPU and network stay below a threshold, then start back after a set time.</figcaption></figure>
+        </div>
+        <p>Together these cover both predictable working hours and usage-based automation.</p>
+      </section>
+
+      <!-- 07 MANAGE -->
+      <section class="sec" id="manage">
+        <span class="sec-k">07 · Manage</span>
+        <h2>Manage schedules at scale.</h2>
+        <p class="lead">As teams create more schedules, they need one place to understand and manage them without going back through the original recommendation.</p>
+        <figure><img class="shot" src="img/rs/schedules.webp" alt="Schedules list: total schedules, actions scheduled today, successful and failed executions today, and a table with each schedule's service, actions, target scope, status, runs, last run and next run" width="1920" height="640" loading="lazy" decoding="async"><figcaption>Every schedule with its scope, status, run count and next execution, plus today's successes and failures at the top.</figcaption></figure>
+        <h3>Schedule details</h3>
+        <p>Opening a schedule shows its target conditions and actions in the same structure used to create it. Status can be switched between active and paused from the footer, and the schedule can be edited in place. Tabs for the change log and execution logs sit beside the details.</p>
+        <figure><img class="shot" src="img/rs/details.webp" alt="Schedule details panel for Weekday Shutdown: active status, EC2 service, two actions, target conditions on region and tags, and actions to start instances and remove read replicas" width="1440" height="1024" loading="lazy" decoding="async"><figcaption>A schedule's scope and actions, with pause, edit and its logs one tab away.</figcaption></figure>
+      </section>
+
+      <!-- 08 MONITOR -->
+      <section class="sec" id="monitor">
+        <span class="sec-k">08 · Monitor</span>
+        <h2>Build operational trust.</h2>
+        <p class="lead">Automation needs accountability, especially when it changes customer environments. Execution and activity views make every automated action visible and answerable.</p>
+        <figure><img class="shot" src="img/rs/exec-log.webp" alt="Execution log: each run with its ID, schedule, service, run type, number of actions, status (running, completed, partially completed or failed) and run time" width="1440" height="1024" loading="lazy" decoding="async"><figcaption>Every run across all schedules, scheduled or manual, with its result.</figcaption></figure>
+        <div class="pair">
+          <figure><span class="pill">Execution</span><img class="shot" src="img/rs/exec-run.webp" alt="One run of Weekday Shutdown: the start instance action partially completed, with each instance's ID, ARN and status, one failed" width="1440" height="1024" loading="lazy" decoding="async"><figcaption>Drill into a run to see which instances succeeded and which failed.</figcaption></figure>
+          <figure><span class="pill">Change log</span><img class="shot" src="img/rs/changelog.webp" alt="Change log for Weekday Shutdown: a timeline of the schedule being created, activated, paused with a reason, an action edited and activated again, with who did each" width="1440" height="1024" loading="lazy" decoding="async"><figcaption>Every change to the schedule, who made it and why.</figcaption></figure>
+        </div>
+        <p>Together, these answer the questions teams ask once automation is live:</p>
+        <ul class="kv">
+          <li><b>What ran?</b><span>The action, the schedule it belongs to and whether it was scheduled or run manually.</span></li>
+          <li><b>When?</b><span>The run time for each execution, and the next one coming up.</span></li>
+          <li><b>Did it work?</b><span>Completed, partially completed or failed, down to each resource.</span></li>
+          <li><b>What changed?</b><span>A timeline of edits, pauses and activations, with the person behind each.</span></li>
+        </ul>
+      </section>
+
+      <!-- 09 ADOPTION -->
+      <section class="sec" id="adoption">
+        <span class="sec-k">09 · Customer adoption and validation</span>
+        <h2>Customers were ready to let OneLens act.</h2>
+        <div class="stats">
+          <div class="stat"><b>4</b><span>major customers adopted Resource Scheduler</span></div>
+          <div class="stat"><b>$800</b><span>potential savings found by one customer on a single resource</span></div>
+          <div class="stat"><b>1st</b><span>Astuto feature to deploy an agent in customer environments</span></div>
+        </div>
+        <p class="lead">Adoption by four major customers validated the need to go beyond finding savings and help teams act on them.</p>
+        <p>One customer found a scheduling recommendation with the potential to save $800 on a single resource. More importantly, the project showed that customers were willing to use OneLens to move from cost analysis into controlled infrastructure actions.</p>
+        <div class="callout"><b>What it proved</b><p>Optimisation recommendations become much more valuable when users can act on them in the same experience.</p></div>
+      </section>
+
+      <!-- 10 UNLOCKED -->
+      <section class="sec" id="unlocked">
+        <span class="sec-k">10 · What this unlocked</span>
+        <h2>A foundation for agent-driven actions.</h2>
+        <p class="lead">Resource Scheduler was more than an isolated optimisation module. As the first project that deployed an agent and made changes in a customer's environment, it gave OneLens a new capability and raised a broader question.</p>
+        <div class="callout hmw"><b>The next question</b><p>What if users could define how their cloud environment should behave, and let OneLens carry out those decisions through governed actions?</p></div>
+        <p>That thinking is now shaping the next evolution of the product.</p>
+      </section>
+
+      <!-- 11 ACTIONS CENTER -->
+      <section class="sec" id="actions-center">
+        <span class="sec-k">11 · The next evolution</span>
+        <h2>From a scheduler to an Actions Center.</h2>
+        <span class="future">In development · not yet shipped</span>
+        <p class="lead">Resource Scheduler is being upgraded into a broader Actions Center that brings scheduling, workflows and policies together. The aim is one place to define policies and take actions across cloud resources and AI keys.</p>
+        <p>Instead of configuring isolated automations, users will be able to:</p>
+        <ol class="reqs four">
+          <li>Create policies that define when and how actions happen</li>
+          <li>Apply actions across cloud resources and AI keys</li>
+          <li>Build workflows around those actions</li>
+          <li>Add approval flows before sensitive actions run</li>
+        </ol>
+        <p>This moves the product from individual automation features towards a system for governing and carrying out actions across cloud and AI infrastructure.</p>
+      </section>
+
+      <!-- 12 REFLECTION -->
+      <section class="sec" id="reflection">
+        <span class="sec-k">12 · Reflection</span>
+        <h2>Helping teams do something about their costs.</h2>
+        <p class="lead">This project changed how I think about the role of a FinOps platform. Helping users understand their cloud costs is valuable, but the bigger opportunity is helping them do something about those costs.</p>
+        <p>Designing Resource Scheduler meant balancing automation with user control, making recommendations explainable, and keeping actions in customer environments visible and manageable.</p>
+        <p>It also laid the groundwork for a broader direction: moving OneLens from a platform that tells users what to optimise to one that helps them define, govern and carry out those optimisations.</p>
+      </section>
+
+    </article>
+  </div>
+
+  <div class="wrap nextwrap">
+    <a class="next" href="index.html#work"><div><span class="k">More work</span><h3>See all case studies</h3></div><span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+  <footer class="wrap foot"><span>© 2026 Hrishikesh Kakade</span><a href="index.html#work" class="back">Back to all work ↑</a></footer>
+</main>
+<div class="toast" id="toast" hidden></div>
+<script src="case.js"></script>
+</body>
+</html>

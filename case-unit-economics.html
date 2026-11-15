@@ -169,7 +169,7 @@
           <li><b>Reuse existing dimensions</b><span>Use dimensions and cost centres already available in OneLens where possible.</span></li>
           <li><b>Time-aware relationships</b><span>Effective dates let mappings change without rewriting historical periods.</span></li>
         </ul>
-        <div class="pair">
+        <div class="pair stack">
           <figure><span class="pill">List</span><img class="shot" src="img/ue/datasets-list.webp" alt="Datasets list with type, key, grain, input, records, owner and health" width="1600" height="900" loading="lazy" decoding="async"><figcaption>Health, grain, owner and input method for every dataset.</figcaption></figure>
           <figure><span class="pill">Add</span><img class="shot" src="img/ue/add-mapping.webp" alt="Add Mapping panel: mapping name, cardinality, entities, owner, granularity and input method" width="1600" height="900" loading="lazy" decoding="async"><figcaption>Pick the input method: API pull, file upload, S3 bucket or manual entry.</figcaption></figure>
         </div>
@@ -187,9 +187,48 @@
           <li><b>Fallback policies</b><span>Decide what happens to costs that no rule catches.</span></li>
           <li><b>Dry run</b><span>Preview the output before saving or publishing.</span></li>
         </ol>
-        <div class="pair">
-          <figure><span class="pill">Version 1</span><img class="shot" src="img/ue/wizard-1.webp" alt="Version 1 wizard, step 1: targets and contributors, with the live YAML panel" width="1600" height="900" loading="lazy" decoding="async"><figcaption>Targets and contributors.</figcaption></figure>
-          <figure><span class="pill">Version 1</span><img class="shot" src="img/ue/wizard-2.webp" alt="Version 1 wizard, step 2: report computation, with the YAML panel" width="1600" height="900" loading="lazy" decoding="async"><figcaption>Report computation.</figcaption></figure>
+        <h3>How version 1 worked</h3>
+        <p>Here's a single rule built end to end in the wizard: allocating shared costs to each customer and product by database size, then adding a calculated total.</p>
+        <div class="stages landscape" data-viewer="Version 1 wizard steps" aria-roledescription="carousel" aria-label="Building an allocation rule in the version 1 wizard">
+          <div class="stages-bar">
+            <span class="stages-count" aria-live="polite"><span class="pill v1">Version 1</span> Step <b>1</b> of 8</span>
+            <div class="stages-nav"><button type="button" class="sbtn" aria-pressed="true" aria-label="Pause auto-play">❚❚</button><button type="button" class="sbtn" aria-label="Previous step">←</button><button type="button" class="sbtn" aria-label="Next step">→</button></div>
+          </div>
+          <ol class="stages-track">
+            <li class="sc">
+              <img class="shot" src="img/ue/v1/1-target.webp" alt="Step 1, configure cost targets: Customer to Product selected as the target, contributors table with the targets, validations and the report YAML" width="1600" height="900" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 1 <i>of 8</i></span><h4>Choose the cost target</h4><p>Pick the entity that receives cost. Customer → Product creates one output row per customer and product. Validations and a live YAML preview update as the rule takes shape.</p></div>
+            </li>
+            <li class="sc">
+              <img class="shot" src="img/ue/v1/2-contributors.webp" alt="Step 1, set up contributors: DB Size and Revenue metrics added, with a warning that Revenue has no relation to the targets" width="1600" height="900" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 2 <i>of 8</i></span><h4>Add contributors</h4><p>Add the costs and metrics the rule can draw on: datasets, cost centres, virtual tags and Cost360 costs. Revenue is flagged because it has no relation to the targets.</p></div>
+            </li>
+            <li class="sc">
+              <img class="shot" src="img/ue/v1/3-allocate.webp" alt="Allocate Costs dialog: shared cost allocated using the Customer to Product mapping, proportional to the DB Size metric" width="1600" height="900" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 3 <i>of 8</i></span><h4>Allocate a cost</h4><p>Split Shared Cost across the Customer → Product mapping, proportionally by DB Size. Even split, manual weights and fixed percentages are the other strategies, and a plain-language note confirms what will happen.</p></div>
+            </li>
+            <li class="sc">
+              <img class="shot" src="img/ue/v1/4-allocated.webp" alt="Report computation with one healthy allocation rule, the output table showing customer, product and shared product cost columns" width="1600" height="900" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 4 <i>of 8</i></span><h4>Each allocation becomes a column</h4><p>The allocation adds a Shared Product Cost column to the output table and a variable, shared_product_cost, that later steps can use. The YAML gains an ALLOCATE block.</p></div>
+            </li>
+            <li class="sc">
+              <img class="shot" src="img/ue/v1/5-calculate.webp" alt="Calculate Value dialog: total customer cost equals shared product cost plus AWS costs, with available fields, operators and functions" width="1600" height="900" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 5 <i>of 8</i></span><h4>Calculate a value</h4><p>A formula builder combines earlier results. Fields, operators and functions are a click away, and the expression is checked as it's written. Here, total customer cost is shared product cost plus AWS costs.</p></div>
+            </li>
+            <li class="sc">
+              <img class="shot" src="img/ue/v1/6-rules.webp" alt="Computation rules: two allocations and one calculation, all healthy, producing five output columns" width="1600" height="900" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 6 <i>of 8</i></span><h4>Chain the computations</h4><p>Allocations and calculations stack in order, each marked healthy, until the output table has every column the report needs.</p></div>
+            </li>
+            <li class="sc">
+              <img class="shot" src="img/ue/v1/7-fallback.webp" alt="Fallback policies for source and data, and target and eligibility conditions, each with an action and its impact" width="1600" height="900" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 7 <i>of 8</i></span><h4>Set fallback policies</h4><p>Decide what the engine does when data misbehaves: missing sources, stale metrics, unmapped targets. Each choice shows its impact, whether it logs, flags or halts the run.</p></div>
+            </li>
+            <li class="sc">
+              <img class="shot" src="img/ue/v1/8-dry-run.webp" alt="Dry run results: $359,000 cost pool, 24 rows, 12 of 12 validations passed, and an output preview" width="1600" height="900" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 8 <i>of 8</i></span><h4>Dry run before publishing</h4><p>Test the rule on real data for a period without writing any output. Twelve checks run, from weights summing to one to allocated cost matching source cost, alongside a preview of the output rows.</p></div>
+            </li>
+          </ol>
+          <div class="stages-dots" role="tablist" aria-label="Choose a step"><button type="button" role="tab" aria-label="Step 1" data-i="0"></button><button type="button" role="tab" aria-label="Step 2" data-i="1"></button><button type="button" role="tab" aria-label="Step 3" data-i="2"></button><button type="button" role="tab" aria-label="Step 4" data-i="3"></button><button type="button" role="tab" aria-label="Step 5" data-i="4"></button><button type="button" role="tab" aria-label="Step 6" data-i="5"></button><button type="button" role="tab" aria-label="Step 7" data-i="6"></button><button type="button" role="tab" aria-label="Step 8" data-i="7"></button></div>
         </div>
         <div class="learned"><span class="pill">What I learned</span><h3>The wizard made the workflow linear. The problem wasn't.</h3><p>The wizard worked for straightforward rules, but real allocation logic often needed intermediate tables. A result from one calculation could become an input to another. Users needed to understand those relationships across the workflow, not just complete one step at a time. The YAML panel helped technical users inspect the rule, but it exposed implementation rather than explaining the logic to finance users.</p></div>
         <h3>Exploring the in-between</h3>
@@ -251,29 +290,133 @@
         <span class="sec-k">09 · The solution</span>
         <h2>A unified framework for complex allocation workflows.</h2>
         <p class="lead">The canvas lays allocation out from left to right in three stages: contributors, working tables and the final report. Every input, table and output is a node, and connecting lines show what feeds what.</p>
-        <figure><img class="shot" src="img/ue/canvas-build.webp" alt="The canvas in build mode, with the three stages across the top" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>Contributors, working tables and the final report on one canvas.</figcaption></figure>
+        <figure class="anl" id="cvm" data-w="1920" data-h="1080" role="img" aria-label="Animated walkthrough of the canvas: adding three contributors, adding two working tables that combine them, and chaining a second-level working table towards the final report">
+          <div class="anl-stage" style="aspect-ratio:16/9">
+            <img class="anl-f on" src="img/ue/cv/1.webp" alt="" width="1600" height="900" decoding="async" data-f="1">
+            <img class="anl-f" src="img/ue/cv/2.webp" alt="" width="1600" height="900" loading="lazy" decoding="async" data-f="2">
+            <img class="anl-f" src="img/ue/cv/3.webp" alt="" width="1600" height="900" loading="lazy" decoding="async" data-f="3">
+            <img class="anl-f" src="img/ue/cv/4.webp" alt="" width="1600" height="900" loading="lazy" decoding="async" data-f="4">
+            <img class="anl-f" src="img/ue/cv/5.webp" alt="" width="1600" height="900" loading="lazy" decoding="async" data-f="5">
+            <img class="anl-f" src="img/ue/cv/6.webp" alt="" width="1600" height="900" loading="lazy" decoding="async" data-f="6">
+            <span class="anl-ring" aria-hidden="true"></span>
+            <span class="anl-cur" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3l14 7.5-6.2 1.6L10 18.5z" fill="#14171F" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+            <span class="anl-cap" aria-hidden="true"></span>
+          </div>
+          <figcaption>Contributors, working tables and the final report on one canvas.</figcaption>
+        </figure>
         <div class="numcards">
           <div><i>01</i><h4>Prepare the data</h4><p>Bring entities, mappings, metrics and cost inputs into one managed dataset layer. Surface data health and metadata before a rule uses the input.</p></div>
           <div><i>02</i><h4>Build allocation logic</h4><p>Connect contributors, create intermediate working tables and define how costs flow into the final unit economics report.</p></div>
           <div><i>03</i><h4>Transform and validate</h4><p>Use derived datasets, SQL transformations and AI-assisted query generation to prepare data and test calculations before they run.</p></div>
           <div><i>04</i><h4>Analyse and manage</h4><p>Explore allocation reports, compare versions, group and filter by business dimensions, and understand how costs roll up through the hierarchy.</p></div>
         </div>
+        <h3>How version 2 works</h3>
+        <p>The same kind of question, built on the canvas: sharing infrastructure cost across each customer and product by database usage, through working tables that feed the final report.</p>
+        <div class="stages landscape" data-viewer="Version 2 canvas steps" aria-roledescription="carousel" aria-label="Building an allocation rule on the version 2 canvas">
+          <div class="stages-bar">
+            <span class="stages-count" aria-live="polite"><span class="pill v1 v2">Version 2</span> Step <b>1</b> of 9</span>
+            <div class="stages-nav"><button type="button" class="sbtn" aria-pressed="true" aria-label="Pause auto-play">❚❚</button><button type="button" class="sbtn" aria-label="Previous step">←</button><button type="button" class="sbtn" aria-label="Next step">→</button></div>
+          </div>
+          <ol class="stages-track">
+            <li class="sc">
+              <img class="shot" src="img/ue/v2/1-canvas.webp" alt="Empty rule canvas with Customer List, Products List and the Customer to Product mapping as contributors, and empty working table and final report columns" width="1600" height="900" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 1 <i>of 9</i></span><h4>Start on a three-stage canvas</h4><p>A new rule opens as a canvas with three columns: contributors, working tables and the final report. The targets, here customers, products and the mapping between them, are already in place.</p></div>
+            </li>
+            <li class="sc">
+              <img class="shot" src="img/ue/v2/2-contributors.webp" alt="Canvas with eight contributors, including DB size, product costs, DB cost and shared cost with their spend, and the final report node" width="1600" height="900" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 2 <i>of 9</i></span><h4>Add contributors</h4><p>Bring in everything the rule can use: entities, a mapping, a derived dataset, a metric, and costs from a cost centre, a virtual tag and Cost360, each showing its spend. The final report node waits on the right.</p></div>
+            </li>
+            <li class="sc">
+              <img class="shot" src="img/ue/v2/3-describe.webp" alt="Configure Report panel, step 2: a plain-English description of a monthly table that allocates shared infrastructure cost by usage" width="1600" height="900" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 3 <i>of 9</i></span><h4>Describe the logic in plain English</h4><p>Instead of picking an allocation strategy from a form, users describe what the table should calculate. The description guides the table's structure and, later, its SQL.</p></div>
+            </li>
+            <li class="sc">
+              <img class="shot" src="img/ue/v2/4-structure.webp" alt="Configure Report panel, step 3: grain of customer and product, with grain, direct and calculated columns" width="1600" height="900" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 4 <i>of 9</i></span><h4>Define the grain and the columns</h4><p>Choose what each row represents, here customer and product, then add columns. Grain columns identify the row, direct columns bring a value in as it is, and calculated columns describe the maths.</p></div>
+            </li>
+            <li class="sc">
+              <img class="shot" src="img/ue/v2/5-connect.webp" alt="Configure Report panel, step 4: suggested and confirmed connections, using matched columns and look-up values" width="1600" height="900" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 5 <i>of 9</i></span><h4>Connect the contributors</h4><p>OneLens suggests how sources relate. Matching columns joins two contributors on a shared key; a look-up brings in a value for a calculation without adding a column.</p></div>
+            </li>
+            <li class="sc">
+              <img class="shot" src="img/ue/v2/6-safeguards.webp" alt="A working table selected on the canvas, with its safeguards tab listing conditions, what should happen and who should be notified" width="1600" height="900" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 6 <i>of 9</i></span><h4>Chain working tables, each with safeguards</h4><p>Working tables such as Product Cost per Customer and Markup per Customer combine inputs and pass their results on. Each carries its own safeguards: 17 questions about late, missing or unmatched data, and who to notify.</p></div>
+            </li>
+            <li class="sc">
+              <img class="shot" src="img/ue/v2/7-test.webp" alt="Final report test run: 182 rows created, 1 of 27 safeguards triggered, a warning that 3 rows could not be matched, and an output preview" width="1600" height="900" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 7 <i>of 9</i></span><h4>Test each table</h4><p>A test run shows the SQL, rows created, safeguards triggered and any warnings. Here three rows couldn't be matched and stayed unallocated, as the safeguards said. The preview shows the calculated columns: infra cost, markup, total and cost per unit.</p></div>
+            </li>
+            <li class="sc">
+              <img class="shot" src="img/ue/v2/8-run.webp" alt="The full canvas with contributors, two layers of working tables and the final report, and run results saying all tables ran successfully" width="1600" height="900" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 8 <i>of 9</i></span><h4>Run the whole rule</h4><p>Test Run executes every table in order, from the contributors through two layers of working tables to the final report, and confirms the rule is ready to publish.</p></div>
+            </li>
+            <li class="sc">
+              <img class="shot" src="img/ue/v2/9-publish.webp" alt="Publish Report dialog: report name, output table name, purpose, and a monthly run schedule with a retry window" width="1600" height="900" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 9 <i>of 9</i></span><h4>Publish on a schedule</h4><p>Name the output table, say what the report is for, and set how often it runs, on which day of the month and how long to retry.</p></div>
+            </li>
+          </ol>
+          <div class="stages-dots" role="tablist" aria-label="Choose a step"><button type="button" role="tab" aria-label="Step 1" data-i="0"></button><button type="button" role="tab" aria-label="Step 2" data-i="1"></button><button type="button" role="tab" aria-label="Step 3" data-i="2"></button><button type="button" role="tab" aria-label="Step 4" data-i="3"></button><button type="button" role="tab" aria-label="Step 5" data-i="4"></button><button type="button" role="tab" aria-label="Step 6" data-i="5"></button><button type="button" role="tab" aria-label="Step 7" data-i="6"></button><button type="button" role="tab" aria-label="Step 8" data-i="7"></button><button type="button" role="tab" aria-label="Step 9" data-i="8"></button></div>
+        </div>
         <div class="feature">
           <div class="txt"><h3>Keeping the canvas readable, with depth one click away</h3><p>Customers needed to see how intermediate calculations contributed to final costs. Nodes communicate contributor type and relevant cost context at a glance. Selecting a node opens a side panel for its definition, structure, connections, safeguards, SQL and test results. The canvas stays focused on the overall flow while detailed configuration remains accessible when needed.</p></div>
           <img class="shot" src="img/ue/node-panel.webp" alt="A working table selected, with its run details, SQL, warnings and output preview in the side panel" width="1600" height="900" loading="lazy" decoding="async">
         </div>
-        <div class="feature flip">
-          <div class="txt"><h3>Making data transformation accessible</h3><p>The data allocation needs is rarely in one place or one format. Derived datasets let users standardise inconsistent source data before it enters an allocation rule. Users can define transformations, map values to standard entities, normalise metrics and preview the result.</p></div>
-          <img class="shot tall" src="img/ue/derived-sql.webp" alt="Derived dataset step 4: paste SQL, dry-run, map metadata fields and preview the data" width="667" height="1080" loading="lazy" decoding="async">
+        <h3>Making data transformation accessible</h3>
+        <p>The data allocation needs is rarely in one place or one format. Derived datasets let users build a clean entity, mapping or metric from datasets already in OneLens, before it enters an allocation rule.</p>
+        <p>Allocation logic used to live in SQL that only data engineers could change. Here, users describe what they need in plain language and OneLens turns it into a guide for an LLM. Technical users can still inspect, edit and dry-run the SQL before anything is created.</p>
+        <div class="stages" data-viewer="Derived dataset steps" aria-roledescription="carousel" aria-label="Creating a derived dataset">
+          <div class="stages-bar">
+            <span class="stages-count" aria-live="polite"><span class="pill v1">Derived dataset</span> Step <b>1</b> of 7</span>
+            <div class="stages-nav"><button type="button" class="sbtn" aria-pressed="true" aria-label="Pause auto-play">❚❚</button><button type="button" class="sbtn" aria-label="Previous step">←</button><button type="button" class="sbtn" aria-label="Next step">→</button></div>
+          </div>
+          <ol class="stages-track">
+            <li class="sc">
+              <img class="shot" src="img/ue/derived/1-basics.webp" alt="Add Derived Dataset, step 1: Entity type selected, Customers name, cost target role, owner and owner team" width="864" height="1080" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 1 <i>of 7</i></span><h4>Basic details</h4><p>Choose what the derived dataset is: an entity, a mapping or a metric. Here it's a Customers entity with the cost target role, so it becomes rows in the output report. Name, owner and team are set up front.</p></div>
+            </li>
+            <li class="sc">
+              <img class="shot" src="img/ue/derived/2-sources.webp" alt="Step 2: the list of source datasets with their type and available columns" width="864" height="1080" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 2 <i>of 7</i></span><h4>Pick the sources</h4><p>Every dataset already in OneLens is listed with its type and available columns, so users can see what each source offers before choosing it.</p></div>
+            </li>
+            <li class="sc">
+              <img class="shot" src="img/ue/derived/3-logic.webp" alt="Step 2 with Customer, DB Size and Revenue selected, and a field to describe what the dataset should do" width="864" height="1080" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 3 <i>of 7</i></span><h4>Describe the logic</h4><p>Select the sources, here Customer, DB Size and Revenue, then optionally say what the dataset should do, including rules, exclusions and edge cases.</p></div>
+            </li>
+            <li class="sc">
+              <img class="shot" src="img/ue/derived/4-guide.webp" alt="Step 3: a generated guide to copy into an LLM, describing the data and the required output" width="864" height="1080" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 4 <i>of 7</i></span><h4>Get a guide for your LLM</h4><p>OneLens builds a guide from the selected datasets: how they're stored, what the query must return and the user's requirements. Users copy it into the LLM of their choice.</p></div>
+            </li>
+            <li class="sc">
+              <img class="shot" src="img/ue/derived/5-sql.webp" alt="Step 4: the derivation query pasted in, with a Dry-run button" width="864" height="1080" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 5 <i>of 7</i></span><h4>Paste the SQL</h4><p>The SQL the LLM returns goes back into OneLens, written with OneLens functions such as ALIAS and RENAME rather than raw SQL equivalents.</p></div>
+            </li>
+            <li class="sc">
+              <img class="shot" src="img/ue/derived/6-dry-run.webp" alt="Step 4 after a dry run: metadata fields with their types and required toggles, and a data preview" width="864" height="1080" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 6 <i>of 7</i></span><h4>Dry-run and map the fields</h4><p>A dry run detects the output columns and previews the data. Users check each field's type, such as a unique entity ID or a number, and mark which are required.</p></div>
+            </li>
+            <li class="sc">
+              <img class="shot" src="img/ue/derived/7-review.webp" alt="Step 5: review of the dataset's details, derivation query, metadata fields and data preview, with Create Entity" width="864" height="1080" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 7 <i>of 7</i></span><h4>Review and create</h4><p>Everything in one place before it's saved: name, type, source datasets, the query, field mapping and a sample of the data.</p></div>
+            </li>
+          </ol>
+          <div class="stages-dots" role="tablist" aria-label="Choose a step"><button type="button" role="tab" aria-label="Step 1" data-i="0"></button><button type="button" role="tab" aria-label="Step 2" data-i="1"></button><button type="button" role="tab" aria-label="Step 3" data-i="2"></button><button type="button" role="tab" aria-label="Step 4" data-i="3"></button><button type="button" role="tab" aria-label="Step 5" data-i="4"></button><button type="button" role="tab" aria-label="Step 6" data-i="5"></button><button type="button" role="tab" aria-label="Step 7" data-i="6"></button></div>
         </div>
-        <div class="feature">
-          <div class="txt"><h3>Lowering the SQL barrier</h3><p>Allocation logic lived in SQL that only data engineers could change. For users who don't write SQL, the AI-assisted query flow turns a plain-language description into a starting query. Technical users can inspect, edit and test the generated SQL before it runs.</p></div>
-          <img class="shot tall" src="img/ue/ai-guide.webp" alt="Derived dataset step 3: a generated guide to hand to an LLM, which returns the SQL" width="864" height="1080" loading="lazy" decoding="async">
-        </div>
-        <div class="feature flip">
-          <div class="txt"><h3>From allocation to analysis</h3><p>Allocated costs only matter if people can read and act on them. The analytics view turns allocation outputs into charts and tables. Users can compare columns, group and filter by dimensions, switch report versions, save views and add report widgets to dashboards. Hierarchy management shows how costs roll up across the business.</p></div>
-          <img class="shot" src="img/ue/analytics.webp" alt="Analytics: cost per customer by month, grouped by customer, with the data table below" width="1600" height="977" loading="lazy" decoding="async">
-        </div>
+        <h3>From allocation to analysis</h3>
+        <p>Allocated costs only matter if people can read and act on them. The analytics view turns allocation outputs into charts and tables. Users can compare columns, group and filter by dimensions, switch report versions, save views and add report widgets to dashboards. Hierarchy management shows how costs roll up across the business.</p>
+        <figure class="anl" id="anl" role="img" aria-label="Animated walkthrough of the analytics view: grouping cost per customer by product, comparing AWS cost with customer cost, and loading a saved view">
+          <div class="anl-stage">
+            <img class="anl-f on" src="img/ue/anl/1-default.webp" alt="" width="1600" height="977" decoding="async" data-f="1">
+            <img class="anl-f" src="img/ue/anl/2-groupby.webp" alt="" width="1600" height="977" loading="lazy" decoding="async" data-f="2">
+            <img class="anl-f" src="img/ue/anl/3-product.webp" alt="" width="1600" height="977" loading="lazy" decoding="async" data-f="3">
+            <img class="anl-f" src="img/ue/anl/4-compare.webp" alt="" width="1600" height="977" loading="lazy" decoding="async" data-f="4">
+            <img class="anl-f" src="img/ue/anl/5-views.webp" alt="" width="1600" height="977" loading="lazy" decoding="async" data-f="5">
+            <img class="anl-f" src="img/ue/anl/6-saved.webp" alt="" width="1600" height="977" loading="lazy" decoding="async" data-f="6">
+            <span class="anl-ring" aria-hidden="true"></span>
+            <span class="anl-cur" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3l14 7.5-6.2 1.6L10 18.5z" fill="#14171F" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+            <span class="anl-cap" aria-hidden="true"></span>
+          </div>
+          <figcaption>Group by a second dimension, compare two measures side by side, and load a saved view.</figcaption>
+        </figure>
       </section>
 
       <!-- 07 TRUST -->
@@ -347,5 +490,6 @@
 <div class="toast" id="toast" hidden></div>
 <script src="case.js"></script>
 <script src="motion.js"></script>
+<script src="anl-motion.js"></script>
 </body>
 </html>

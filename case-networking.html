@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Case study by Hrishikesh Kakade: making cloud network and data transfer costs visible in OneLens by Astuto.ai.">
+<title>Networking Analysis — Hrishikesh Kakade</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="case.css">
+<link rel="stylesheet" href="ds/tokens.css">
+<link rel="stylesheet" href="ds/bundle.css">
+<style>
+/* Interactive prototype (net-demo.js), built with the Astuto library */
+.nd{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:var(--r);background:var(--background-secondary-2);color:var(--text-header-1);font:500 14px/20px var(--font-sans);box-shadow:0 18px 40px -28px rgba(20,23,31,.45);aspect-ratio:16/10;max-width:100%}
+.nd button{font-family:inherit}
+.nd h4{font:600 16px/24px var(--font-sans);letter-spacing:0;color:var(--text-brand-1);margin:0}
+.nd-app{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto minmax(0,1fr);height:100%}
+/* Desktop: lay the app out on a 1280×800 screen and scale it to the 16:10 frame */
+@media (min-width:641px){.nd-app{width:1280px;height:800px;transform:scale(var(--k,1));transform-origin:0 0}}
+.nd-app>.nd-body{overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;align-content:start}
+.nd-app>*,.nd-body>*{min-width:0}
+.nd-head>:last-child{overflow-x:auto;scrollbar-width:none}
+.nd-head{background:var(--background-primary-1);padding:16px 20px 0;border-bottom:1px solid var(--stroke-primary-1);display:grid;gap:10px}
+.nd-title{font:600 16px/24px var(--font-sans)}
+.nd-head .as-tabs,.nd-head [role="tablist"]{margin-bottom:-1px}
+.nd-tool{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:12px 20px;background:var(--background-primary-1);border-bottom:1px solid var(--stroke-primary-1)}
+.nd-period{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 12px;border:1px solid var(--stroke-primary-1);border-radius:6px;color:var(--text-body-1);font-size:13px}
+.nd-period span{color:var(--text-header-1)}.nd-period b{font-weight:400}
+.nd-body{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;padding:16px 20px 20px;min-width:0}
+.nd-kpis{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.nd-kpi{display:flex;gap:12px;align-items:center;padding:12px;background:var(--background-primary-1);border:1px solid var(--stroke-primary-1);border-radius:8px;min-width:0}
+.nd-ic{width:36px;height:36px;border-radius:6px;display:grid;place-items:center;background:var(--background-primary-2);border:1px solid var(--stroke-primary-1);flex:none}
+.nd-kv{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font:600 15px/22px var(--font-sans)}
+.nd-kl{font:500 10px/16px var(--font-sans);letter-spacing:.04em;color:var(--text-body-1)}
+.nd-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.nd-bar-r{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.nd-seq{display:flex;flex-wrap:wrap;align-items:center;gap:6px;min-height:36px;padding:4px 6px;border:1px solid var(--stroke-primary-1);border-radius:6px;background:var(--background-primary-1)}
+.nd-seq-l{color:var(--text-brand-1);padding:0 6px 0 4px;border-right:1px solid var(--stroke-primary-1);margin-right:2px}
+.nd-chip{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 6px 0 8px;border-radius:5px;background:var(--background-primary-2);border:1px solid var(--stroke-primary-1);font-size:12px}
+.nd-chip button,.nd-filter button{display:grid;place-items:center;width:18px;height:18px;border:0;border-radius:4px;background:none;color:var(--text-body-1);cursor:pointer;padding:0}
+.nd-chip button:hover,.nd-filter button:hover{background:var(--hover-primary-1)}
+.nd-arrow{color:var(--text-body-2)}
+.nd-add{display:grid;place-items:center;width:26px;height:26px;border-radius:5px;border:1px dashed var(--stroke-primary-2);background:none;color:var(--text-body-1);cursor:pointer}
+.nd-add:hover{border-color:var(--stroke-brand-1);color:var(--text-brand-1)}
+.nd-anchor{position:relative}
+.nd-menu{position:absolute;z-index:20;top:calc(100% + 6px);left:0;min-width:220px;padding:6px;background:var(--background-primary-1);border:1px solid var(--stroke-primary-1);border-radius:8px;box-shadow:var(--shadow-lg);display:grid}
+.nd-menu.right{left:auto;right:0}
+.nd-mg{font:500 10px/16px var(--font-sans);letter-spacing:.04em;color:var(--text-body-2);padding:8px 8px 4px}
+.nd-mi{display:flex;align-items:center;gap:8px;width:100%;padding:8px;border:0;border-radius:6px;background:none;color:var(--text-header-1);font:500 14px/20px var(--font-sans);text-align:left;cursor:pointer}
+.nd-mi:hover{background:var(--hover-primary-1)}.nd-mi.on{color:var(--text-brand-1)}.nd-mi .as-icon:last-child{margin-left:auto}
+.nd-mi.add{color:var(--text-brand-1);border-top:1px solid var(--stroke-primary-1);border-radius:0 0 6px 6px;margin-top:4px}
+.nd-pop{display:grid;gap:12px;width:240px;padding:6px}
+.nd-pop-h{font:500 10px/16px var(--font-sans);letter-spacing:.04em;color:var(--text-body-2)}
+.nd-pop-f,.nd-field{display:grid;gap:6px}
+.nd-label{font:500 14px/20px var(--font-sans);color:var(--text-header-2)}
+.nd-sub{font:400 12px/18px var(--font-sans);color:var(--text-body-2)}
+.nd-pop-a{display:flex;justify-content:flex-end;gap:4px;border-top:1px solid var(--stroke-primary-1);padding-top:8px}
+.nd-chart{background:var(--background-primary-1);border:1px solid var(--stroke-primary-1);border-radius:8px;padding:14px 16px}
+.nd-empty{padding:18px;text-align:center;font:400 12px/18px var(--font-sans);color:var(--text-body-1)}
+.nd-sankey{width:100%;overflow:hidden}
+.nd-sankey svg{display:block}
+.nd-colh{font:500 10px var(--font-sans);letter-spacing:.04em;fill:var(--text-body-1)}
+.nd-link{opacity:.28;transition:opacity .15s;cursor:pointer}.nd-link.on{opacity:.42}
+.nd-sankey svg:hover .nd-link:not(.on){opacity:.08}
+.nd-node{cursor:pointer;outline:none;transition:opacity .15s}.nd-node.dim{opacity:.35}
+.nd-node:focus-visible rect{stroke:var(--text-header-1);stroke-width:2}
+.nd-node.sel rect{stroke:var(--text-header-1);stroke-width:2}
+.nd-nl{font:500 11px var(--font-sans);fill:var(--text-header-1);paint-order:stroke;stroke:var(--background-primary-1);stroke-width:3px;stroke-linejoin:round}
+.nd-nl .v{fill:var(--text-body-1);font-weight:400}
+.nd-search{flex:1 1 220px;max-width:360px;min-width:0}
+.nd-filter{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 4px 0 10px;border-radius:999px;background:var(--success-bg-1);border:1px solid var(--stroke-brand-1);color:var(--text-header-1);font-size:12px}
+.nd-filter b{font-weight:600}
+.nd-table{background:var(--background-primary-1);border:1px solid var(--stroke-primary-1);border-radius:8px;overflow-x:auto}
+.nd-table table{width:100%;border-collapse:collapse;font:400 13px/18px var(--font-sans);white-space:nowrap}
+.nd-table th{background:var(--background-primary-2);text-align:left;font:500 11px/16px var(--font-sans);letter-spacing:.04em;text-transform:uppercase;color:var(--text-body-1);padding:10px 14px;border-bottom:1px solid var(--stroke-primary-1)}
+.nd-table td{padding:11px 14px;border-bottom:1px solid var(--stroke-primary-1);color:var(--text-header-1)}
+.nd-table .num{text-align:right}
+.nd-table th.num .nd-th{justify-content:flex-end;width:100%}
+.nd-th{display:inline-flex;align-items:center;gap:4px;border:0;background:none;padding:0;font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;cursor:pointer}
+.nd-th.on{color:var(--text-brand-1)}
+.nd-table tfoot td{font-weight:600;background:var(--background-primary-2);border-bottom:0}
+.nd-table tr.link{cursor:pointer}.nd-table tr.link:hover td,.nd-table tr.link:focus-visible td{background:var(--hover-primary-1)}
+.nd-table tr.dis td{color:var(--text-disabled-1)}
+.nd-table td.mono{font-family:ui-monospace,Menlo,monospace;font-size:12px}
+.nd-table td.clip{max-width:200px;overflow:hidden;text-overflow:ellipsis}
+.nd-table td.brand{color:var(--text-brand-1)}
+.nd-table th.cb,.nd-table td.cb{width:36px;padding-right:0}
+.nd-ln{display:inline-flex;align-items:center;gap:8px}
+.nd-ins{display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border-radius:6px;border:0;background:var(--badge-orange-2);color:var(--badge-orange-1);font:600 12px var(--font-sans);cursor:pointer}
+.nd-ins[aria-expanded="true"]{outline:2px solid var(--badge-orange-1);outline-offset:-2px}
+.nd-none{color:var(--text-body-2)}
+.nd-insrow td{background:var(--background-primary-2);white-space:normal}
+.nd-insrow ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.nd-insrow li{display:flex;gap:8px;align-items:flex-start;color:var(--text-header-1);font-size:13px}
+.nd-insrow li .as-icon{color:var(--badge-orange-1);margin-top:2px}
+.nd-emptyrow{text-align:center;color:var(--text-body-1)!important;padding:24px!important}
+.nd-st{font:600 11px var(--font-sans);color:var(--success-primary-1)}.nd-st.off{color:var(--text-body-2)}
+.nd-toast{position:absolute;z-index:40;right:16px;bottom:16px;max-width:calc(100% - 32px)}
+.nd-overlay{position:absolute;inset:0;z-index:30;background:rgba(0,0,0,.4);display:grid;place-items:center;grid-template-columns:minmax(0,1fr);padding:16px;overflow:auto}
+.nd-modal{width:min(860px,100%);max-height:100%;display:grid;grid-template-rows:auto minmax(0,1fr) auto;background:var(--background-primary-1);border-radius:12px;box-shadow:var(--shadow-xl);overflow:hidden}
+.nd-mh{position:relative;display:flex;justify-content:center;align-items:center;height:48px;border-bottom:1px solid var(--stroke-primary-1)}
+.nd-prog{display:flex;gap:8px}.nd-prog i{width:36px;height:4px;border-radius:2px;background:var(--background-secondary-1)}.nd-prog i.on{background:var(--background-brand-1)}
+.nd-doc{position:absolute;right:52px;color:var(--text-brand-1);text-decoration:none;font-size:13px}
+.nd-x{position:absolute;right:12px;width:32px;height:32px;display:grid;place-items:center;border:0;border-radius:6px;background:none;color:var(--text-body-1);cursor:pointer}.nd-x:hover{background:var(--hover-primary-1)}
+.nd-mb{padding:18px 22px;overflow:auto;display:grid;gap:6px;align-content:start}
+.nd-msub{margin:0 0 10px;padding-bottom:14px;border-bottom:1px solid var(--stroke-primary-1);font:400 13px/20px var(--font-sans);color:var(--text-body-1)}
+.nd-split{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.nd-split>.nd-form{border-left:1px solid var(--stroke-primary-1);padding-left:24px}
+.nd-form{display:grid;gap:14px;align-content:start;min-width:0}
+.nd-reqs-h{font:500 13px var(--font-sans);margin-bottom:12px}
+.nd-reqs ol{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.nd-reqs li{position:relative;padding-left:28px;display:grid;gap:2px}
+.nd-reqs li i{position:absolute;left:0;top:2px;width:16px;height:16px;border-radius:50%;border:2px solid var(--stroke-primary-2);background:var(--background-primary-1)}
+.nd-reqs li.done i{border-color:var(--success-bg-2);background:var(--success-bg-1)}
+.nd-reqs li.on i{border-color:var(--background-brand-1);box-shadow:inset 0 0 0 3px var(--background-primary-1);background:var(--background-brand-1)}
+.nd-reqs b{font:500 13px/18px var(--font-sans)}
+.nd-reqs span{font:400 12px/18px var(--font-sans);color:var(--text-body-1)}
+.nd-reqs a{font-size:12px;color:var(--text-brand-1)}
+.nd-select{display:flex;align-items:center;height:36px;border:1px solid var(--stroke-primary-2);border-radius:6px;background:var(--background-primary-1);padding:0 8px}
+.nd-select select{flex:1;border:0;background:none;color:var(--text-header-1);font:500 14px var(--font-sans);height:100%;outline:none;min-width:0}
+.nd-select:focus-within{border:2px solid var(--data-g1)}
+.nd-note{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:10px;padding:8px 10px;border:1px solid var(--stroke-primary-1);border-radius:8px;background:var(--background-primary-2);font:400 12px/18px var(--font-sans);color:var(--text-body-1)}
+.nd-note span{flex:1 1 220px}
+.nd-manual{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}.nd-manual>:first-child{flex:1 1 220px}
+.nd-check{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:10px;padding:10px 12px;border-radius:8px;background:var(--background-primary-2);font:500 12px var(--font-sans);color:var(--text-body-1)}
+.nd-check span{display:inline-flex;gap:6px;align-items:center}.nd-check span.ok{color:var(--success-primary-1)}
+.nd-check span:not(.ok) .as-icon{animation:ndspin 1s linear infinite}
+@keyframes ndspin{to{transform:rotate(360deg)}}
+.nd-quota{display:grid;gap:8px;padding:12px;border:1px solid var(--stroke-primary-1);border-radius:8px;background:var(--background-primary-2);font:400 12px var(--font-sans);color:var(--text-body-1)}
+.nd-qh{display:flex;justify-content:space-between;font:500 11px var(--font-sans);letter-spacing:.04em}.nd-qh b{color:var(--warning-primary-1);font-weight:500;letter-spacing:0}
+.nd-qbar{display:flex;height:10px;border-radius:3px;background:var(--background-secondary-1);overflow:hidden}
+.nd-qbar i{display:block;height:100%;background:var(--warning-primary-1);transition:width .2s}.nd-qbar i.sel{background:var(--background-brand-1)}.nd-qbar i.over{background:var(--error-primary-1)}
+.nd-dates{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.nd-mf{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px 22px;border-top:1px solid var(--stroke-primary-1)}
+.nd-mf .as-btn{width:100%;justify-content:center}
+@media (max-width:640px){.nd{aspect-ratio:auto;height:min(640px,82vh)}.nd-kpis,.nd-split,.nd-dates{grid-template-columns:1fr}.nd-split>.nd-form{border-left:0;padding-left:0;border-top:1px solid var(--stroke-primary-1);padding-top:16px}.nd-body,.nd-tool{padding-left:12px;padding-right:12px}.nd-head{padding:12px 12px 0}.nd-doc{display:none}.nd-bar-r{margin-left:0}.nd-search{max-width:none}.nd-mb{padding:14px}.nd-mf{padding:12px 14px}}
+</style>
+</head>
+<body>
+<!-- Content source: the "Networking Analysis" tab of the Portfolio Case Studies doc.
+     Screenshots come from anonymised copies on the "Portfolio – Networking case study exports (anonymised)" page
+     of the Data Transfer - Networking Figma file, in img/net/. -->
+<nav class="cnav" aria-label="Case study">
+  <a class="nbtn back" href="index.html#work" aria-label="Back to all work"><i class="mark" aria-hidden="true"></i><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg><span class="nlabel">All work</span></a>
+  <span class="nsep" aria-hidden="true"></span>
+  <div class="ntitle">OneLens / <b>Networking Analysis</b></div>
+  <button class="nbtn" id="themeBtn" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+  <a class="nbtn" href="#" data-pdf=""><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L12.5 4.5v10h-8.5z M9.5 1.5v3h3"/></svg><span class="nlabel">View PDF</span></a>
+  <a class="nbtn nprimary" href="index.html#contact">Let's talk</a>
+  <span class="nprog" aria-hidden="true"></span>
+</nav>
+
+<main>
+  <header class="hero wrap">
+    <div class="crumb"><b>Case study</b><span>·</span><span>OneLens by Astuto.ai</span><span>·</span><span>FinOps / Cloud networking</span></div>
+    <h1>Making cloud network costs visible.</h1>
+    <p class="sum">Designing network traffic analysis and data transfer cost intelligence for OneLens, so teams can see the network activity behind a networking bill.</p>
+    <dl class="meta">
+      <div><dt>Product</dt><dd>OneLens by Astuto</dd></div>
+      <div><dt>Area</dt><dd>Cost observability for cloud networking</dd></div>
+      <div><dt>Role</dt><dd>Senior Product Designer</dd></div>
+      <div><dt>Scope</dt><dd>Networking analysis, Flow Logs ingestion, cost attribution and data transfer</dd></div>
+    </dl>
+    <div class="hero-actions">
+      <a class="btn primary" href="#overview">Explore the case study ↓</a>
+      <a class="btn" href="#" data-pdf="">View PDF ↗</a>
+    </div>
+    <figure class="cover"><div class="nd" id="netDemo" role="region" aria-label="Interactive prototype of Networking Analysis"><noscript><img class="shot" src="img/net/cover.webp" alt="Networking Analysis in OneLens: networking cost and bytes transferred, with a Sankey chart of traffic by resource and route" width="1440" height="840"></noscript></div><figcaption class="cover-cap">Interactive prototype, built with the Astuto library. Switch ingestions, change the flow, click a Sankey node to filter, or add a Flow Log.</figcaption></figure>
+  </header>
+
+  <div class="wrap body">
+    <nav class="toc" aria-label="Contents">
+      <span class="lbl">On this page</span>
+      <a href="#overview"><i>01</i>Overview</a><a href="#problem"><i>02</i>The problem</a><a href="#users"><i>03</i>The users</a><a href="#goals"><i>04</i>Design goals</a><a href="#analysis"><i>05</i>Cost analysis</a><a href="#ingestion"><i>06</i>Flow Logs ingestion</a><a href="#decisions"><i>07</i>Key decisions</a><a href="#journey"><i>08</i>The broader experience</a><a href="#outcome"><i>09</i>Outcome</a><a href="#reflection"><i>10</i>Reflection</a>
+    </nav>
+    <article>
+
+      <!-- 01 OVERVIEW -->
+      <section class="sec" id="overview">
+        <span class="sec-k">01 · Overview</span>
+        <h2>A bill shows what networking costs, not why.</h2>
+        <p class="lead">Cloud networking costs are hard to understand because the activity behind them happens across many resources, services and network routes.</p>
+        <p>A bill might show how much an organisation spends on data transfer, NAT gateways or internet traffic. It doesn't explain which workloads generated that traffic, where the data travelled or what drove the expense.</p>
+        <p>I designed a networking analysis experience for OneLens that connects network activity with its cloud costs. It brings together data ingestion, traffic analysis, resource-level attribution and cost insights, so FinOps and infrastructure teams can investigate network spend with more context.</p>
+        <div class="callout hmw"><b>The central design question</b><p>How might we help teams move from seeing networking costs as an aggregated billing figure to understanding the network activity behind those costs?</p></div>
+      </section>
+
+      <!-- 02 PROBLEM -->
+      <section class="sec" id="problem">
+        <span class="sec-k">02 · The problem</span>
+        <h2>Networking costs lacked operational context.</h2>
+        <p class="lead">A networking charge is usually the result of traffic moving between resources, availability zones, regions or external destinations. Understanding it means connecting financial information with infrastructure activity.</p>
+        <p>Three challenges shaped the design direction.</p>
+        <div class="numcards five">
+          <div><i>01</i><h4>Limited cost attribution</h4><p>Teams could see networking spend, but finding which resources contributed to it took deeper investigation.</p></div>
+          <div><i>02</i><h4>Complex traffic relationships</h4><p>Traffic spans many resources and routes, and disconnected metrics or tables make it hard to follow how data moves.</p></div>
+          <div><i>03</i><h4>Fragmented data availability</h4><p>Analysis depends on infrastructure logs that must be enabled, configured, collected and ingested first.</p></div>
+        </div>
+        <p>So the experience had to solve two connected problems: getting the right data into OneLens, and making that data useful once it was there.</p>
+      </section>
+
+      <!-- 03 USERS -->
+      <section class="sec" id="users">
+        <span class="sec-k">03 · Understanding the users</span>
+        <h2>Two groups, one shared question.</h2>
+        <p class="lead">The experience was designed around two complementary groups, each holding half of the picture.</p>
+        <div class="duo">
+          <div class="card"><span class="k">FinOps practitioners</span><h4>Financial visibility and cost accountability</h4><ul>
+            <li>Understand networking spend across cloud environments.</li>
+            <li>Identify resources driving high data transfer costs.</li>
+            <li>Investigate changes in networking spend.</li>
+            <li>Support cost allocation and optimisation.</li></ul></div>
+          <div class="card"><span class="k">Infrastructure &amp; DevOps engineers</span><h4>Infrastructure visibility and traffic behaviour</h4><ul>
+            <li>Understand how traffic moves across infrastructure.</li>
+            <li>Identify resources and routes generating traffic.</li>
+            <li>Configure and maintain VPC Flow Logs.</li>
+            <li>Validate that the data is available.</li></ul></div>
+        </div>
+        <div class="callout"><b>The shared need</b><p>FinOps teams needed the cost implications of infrastructure activity; engineers needed enough technical context to investigate the traffic behind it. The design had to make both perspectives accessible without overwhelming either audience.</p></div>
+      </section>
+
+      <!-- 04 GOALS -->
+      <section class="sec" id="goals">
+        <span class="sec-k">04 · Design goals</span>
+        <h2>Four experience goals.</h2>
+        <div class="numcards">
+          <div><i>01</i><h4>Connect cost with traffic</h4><p>Go beyond aggregated spend to the resources and routes behind it.</p></div>
+          <div><i>02</i><h4>Make network relationships understandable</h4><p>Show where data originates and where it travels.</p></div>
+          <div><i>03</i><h4>Simplify data ingestion</h4><p>Guide users through configuring and importing the logs analysis needs.</p></div>
+          <div><i>04</i><h4>Provide investigation paths</h4><p>Let users move from high-level cost to granular resource and network detail.</p></div>
+        </div>
+      </section>
+
+      <!-- 05 ANALYSIS -->
+      <section class="sec" id="analysis">
+        <span class="sec-k">05 · Networking cost analysis</span>
+        <h2>From the cost, to the traffic, to the resource.</h2>
+        <p class="lead">The analysis view gives an overview of networking spend while letting users investigate the traffic underneath. It's organised into Network Flow Analysis, Flow Logs and Insights &amp; Opportunities, so each level of investigation has its own place.</p>
+
+        <h3>1. A financial starting point</h3>
+        <p>A compact summary leads with Total Networking Cost, including its share of the period's billed cost, and Total Bytes Transferred. Users understand the financial scale and traffic volume before they go deeper.</p>
+        <figure><img class="shot" src="img/net/default.webp" alt="Network Flow Analysis with total networking cost of $84.10, 915 GB transferred, and a resource table; the chart area explains that a flow needs more than one step" width="1440" height="810" loading="lazy" decoding="async"><figcaption>The summary sets the financial context first. With a one-step flow sequence, the chart explains what it needs instead of drawing nothing.</figcaption></figure>
+        <div class="callout"><b>Design decision</b><p>Separate financial indicators from detailed traffic analysis. Rather than packing everything into one dense visualisation, the summary establishes the financial context first.</p></div>
+
+        <h3>2. Making traffic relationships visible</h3>
+        <p>A table can list records, but it's weak at showing how data moves between stages. I designed a Sankey-style flow that connects source resources, network routes and destination infrastructure, with traffic volume carried by the width of each connection.</p>
+        <figure><img class="shot" src="img/net/sankey.webp" alt="Sankey chart: three resources flowing into NAT (605 GB) and IGW (310 GB) routes, above a table of resource, route, bytes transferred, networking cost and insights" width="1440" height="1258" loading="lazy" decoding="async"><figcaption>Users choose the flow sequence, such as resource then network route, and the chart follows it.</figcaption></figure>
+        <div class="feature">
+          <div class="txt"><h3>Flow settings</h3><p>Flow direction and flow rate sit in a small settings panel beside the chart. Switching the rate from data to cost redraws the same flow by spend, so users can see where traffic volume and cost diverge.</p></div>
+          <img class="shot tall" src="img/net/flow-settings.webp" alt="Flow settings popover over the Sankey chart: flow direction set to egress, flow rate toggled between data and cost" width="800" height="600" loading="lazy" decoding="async">
+        </div>
+        <div class="callout"><b>Design decision</b><p>Use a flow-based visualisation to communicate relationships, not just quantities. It gives users a more intuitive way to see where significant traffic is concentrated.</p></div>
+
+        <h3>3. Granular resource attribution</h3>
+        <p>The flow shows the overall picture, but detailed investigation needs precision. A structured table below the chart lists each resource with its network route, bytes transferred, networking cost and insights, with a total row.</p>
+        <div class="callout"><b>Design decision</b><p>Pair visual exploration with structured data. The Sankey communicates relationships; the table supports precise inspection, comparison and finding individual resources.</p></div>
+
+        <h3>4. Supporting deeper investigation</h3>
+        <p>Each analysis is tied to an ingestion, and users can switch between ingestions from AWS and GCP Flow Logs without leaving the page. Flow Logs and Insights &amp; Opportunities sit beside the analysis as their own tabs, a progression from overall spend to traffic records and potential savings.</p>
+        <figure><img class="shot" src="img/net/ingestion-switch.webp" alt="Ingestion switcher open over the analysis: searchable list of ingestions grouped by Flow Logs (AWS) and Flow Logs (GCP)" width="1440" height="1258" loading="lazy" decoding="async"><figcaption>Ingestions are grouped by provider and searchable.</figcaption></figure>
+      </section>
+
+      <!-- 06 INGESTION -->
+      <section class="sec" id="ingestion">
+        <span class="sec-k">06 · Flow Logs ingestion &amp; configuration</span>
+        <h2>Getting the right data in, before it's needed.</h2>
+        <p class="lead">VPC Flow Logs need infrastructure-level configuration: logs must be enabled, accessible and tied to the right networking resources. I designed an onboarding flow that makes those requirements explicit and guides users through ingestion.</p>
+        <div class="stages landscape" aria-roledescription="carousel" aria-label="The three steps of adding a Flow Log">
+          <div class="stages-bar">
+            <span class="stages-count" aria-live="polite">Step <b id="stageNow">1</b> of 3</span>
+            <div class="stages-nav"><button type="button" class="sbtn" id="stagePlay" aria-pressed="true" aria-label="Pause auto-play">❚❚</button><button type="button" class="sbtn" id="stagePrev" aria-label="Previous step">←</button><button type="button" class="sbtn" id="stageNext" aria-label="Next step">→</button></div>
+          </div>
+          <ol class="stages-track" id="stageTrack">
+            <li class="sc" id="stage-1">
+              <img class="shot" src="img/net/wizard-1.webp" alt="Step 1, Add Flow Log: setup requirements on the left, and flow log name, log source, account and region on the right" width="1148" height="758" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 1 <i>of 3</i></span><h4>Add Flow Log</h4><p>Name the ingestion and choose the source, account and region. Setup requirements stay visible alongside, with a link to the AWS setup guide.</p></div>
+            </li>
+            <li class="sc" id="stage-2">
+              <img class="shot" src="img/net/wizard-2.webp" alt="Step 2, Select Flow Logs to ingest: detected logs with name, ID, associated resource, status and S3 destination, plus Add Manually" width="1148" height="758" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 2 <i>of 3</i></span><h4>Select Flow Logs</h4><p>OneLens detects active Flow Logs in the account and region. Only logs for VPCs with NAT Gateways are listed, and any that are missing can be added manually.</p></div>
+            </li>
+            <li class="sc" id="stage-3">
+              <img class="shot" src="img/net/wizard-3.webp" alt="Step 3, Select analysis window: quarter usage of 5 of 15 days used, start and end dates, and a confirmation that 6 days fit within quota" width="1148" height="758" loading="lazy" decoding="async">
+              <div class="sc-txt"><span class="sc-n">Step 3 <i>of 3</i></span><h4>Select analysis window</h4><p>Pick the start and end dates while the quarter's usage stays in view: days used, days left and whether the selection fits.</p></div>
+            </li>
+          </ol>
+          <div class="stages-dots" role="tablist" aria-label="Choose a step"><button type="button" role="tab" aria-label="Step 1" data-i="0"></button><button type="button" role="tab" aria-label="Step 2" data-i="1"></button><button type="button" role="tab" aria-label="Step 3" data-i="2"></button></div>
+        </div>
+
+        <h3>1. Detecting available Flow Logs</h3>
+        <p>Instead of asking users to enter every Flow Log identifier, the flow detects active logs in the selected account and region and lists their name, ID, associated resource, status and S3 destination. Manual entry covers logs that aren't detected.</p>
+        <div class="callout"><b>Design decision</b><p>Prioritise automatic discovery while keeping manual control. Listing only logs tied to VPCs with NAT Gateways keeps the selection within the supported analysis scope.</p></div>
+
+        <h3>2. Making prerequisites explicit</h3>
+        <p>Not everyone arrives with the infrastructure in place. Setup guidance lists what's needed outside OneLens: VPC Flow Logs enabled in AWS, logging for VPCs that contain NAT Gateways, and delivery to an S3 bucket.</p>
+        <div class="callout"><b>Design decision</b><p>Surface technical dependencies before the user reaches an ingestion failure.</p></div>
+
+        <h3>3. Validating data before ingestion</h3>
+        <p>Selecting a log doesn't guarantee it can be analysed. The flow checks that each Flow Log is active, that its logs are accessible and that the associated VPCs contain NAT Gateways.</p>
+        <div class="callout"><b>Design decision</b><p>Make data readiness part of onboarding, rather than treating ingestion as a simple upload.</p></div>
+
+        <h3>4. Analysis-window guardrails</h3>
+        <p>Log ingestion can involve large volumes of data, so analysis is limited to 15 days per quarter. While picking dates, users see the quarter's usage, the days already used and left, and the length of their selection. In the designed state, 5 of 15 days are used and a 6-day window fits within quota.</p>
+        <div class="callout"><b>Design decision</b><p>Make limits visible during configuration, not after an import fails, so users decide before they commit.</p></div>
+
+        <h3>5. Ingestion transparency</h3>
+        <p>A Flow Logs view lists every ingestion with its billing account, region, period cost, period start and end, and who uploaded it and when. A note makes clear that only logs from confirmed Flow Logs are processed, so stale data from unused VPCs or other accounts in the same bucket isn't analysed.</p>
+        <figure><img class="shot" src="img/net/flow-logs.webp" alt="Flow Logs tab: ingestions with log name, billing account, region, period cost, period start and end, uploaded on and uploaded by, and a note on flow log ID tracking" width="1920" height="650" loading="lazy" decoding="async"><figcaption>Every ingestion, where it came from and who added it.</figcaption></figure>
+        <div class="callout"><b>Design decision</b><p>Treat ingestion history and data validity as part of the product. Users need to know not only what data exists, but what was processed and where it came from.</p></div>
+      </section>
+
+      <!-- 07 DECISIONS -->
+      <section class="sec" id="decisions">
+        <span class="sec-k">07 · Key design decisions</span>
+        <h2>Balancing cost, infrastructure and configuration.</h2>
+        <div class="tscroll"><table class="ctable">
+          <thead><tr><th scope="col">Design challenge</th><th scope="col">Design response</th></tr></thead>
+          <tbody>
+            <tr><td>Aggregated networking costs lacked context</td><td>Resource-level cost attribution</td></tr>
+            <tr><td>Traffic relationships were hard to understand</td><td>A Sankey-style flow visualisation</td></tr>
+            <tr><td>Users needed different levels of detail</td><td>High-level KPIs, visual analysis and structured tables together</td></tr>
+            <tr><td>Flow Log setup had technical dependencies</td><td>Guided onboarding with explicit prerequisites</td></tr>
+            <tr><td>Detected logs might not cover every case</td><td>Manual log addition</td></tr>
+            <tr><td>Invalid or inaccessible logs could compromise analysis</td><td>Validation checks before ingestion</td></tr>
+            <tr><td>Large ingestion windows could consume excessive resources</td><td>Quarterly analysis-window limits, shown upfront</td></tr>
+            <tr><td>Past ingestions needed traceability</td><td>An ingestion history view</td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <!-- 08 JOURNEY -->
+      <section class="sec" id="journey">
+        <span class="sec-k">08 · The broader experience</span>
+        <h2>Configure, analyse, investigate.</h2>
+        <p class="lead">The networking experience wasn't designed as an isolated dashboard. It connects the technical work of making data available with the financial goal of understanding networking spend.</p>
+        <ol class="thread">
+          <li><b>Configure</b><span>Identify, validate and import the network logs analysis needs.</span></li>
+          <li><b>Analyse</b><span>Understand traffic, routes, data volumes and their costs.</span></li>
+          <li><b>Investigate</b><span>Explore individual resources, attribution and optimisation opportunities.</span></li>
+        </ol>
+      </section>
+
+      <!-- 09 OUTCOME -->
+      <section class="sec" id="outcome">
+        <span class="sec-k">09 · Outcome</span>
+        <h2>Network-level cost visibility, from ingestion to insight.</h2>
+        <p class="lead">The delivered designs established a structured networking analysis experience in OneLens, connecting data ingestion with network-level cost visibility.</p>
+        <div class="outs">
+          <div><span class="k">Analyse</span><h4>Cost, traffic and flow</h4><p>A consolidated view of networking spend and data transferred, with a Sankey flow of traffic by resource and route.</p></div>
+          <div><span class="k">Attribute</span><h4>Resource-level cost</h4><p>Bytes, cost and insights per resource and route, ready to compare and export.</p></div>
+          <div><span class="k">Ingest</span><h4>Guided, validated Flow Logs</h4><p>Discovery, prerequisites, validation, a quarterly window and a traceable ingestion history.</p></div>
+        </div>
+      </section>
+
+      <!-- 10 REFLECTION -->
+      <section class="sec" id="reflection">
+        <span class="sec-k">10 · Reflection</span>
+        <h2>Understandable is more than simpler.</h2>
+        <p class="lead">Making complex technical systems understandable takes more than simplifying the interface. It takes understanding the relationships between data, infrastructure, business objectives and the decisions users need to make.</p>
+        <p>The most important consideration was connecting two perspectives that are often kept apart: network behaviour and financial spend. Combining traffic visualisation, structured attribution and guided ingestion made networking costs easier to investigate within one product workflow.</p>
+      </section>
+
+    </article>
+  </div>
+
+  <div class="wrap nextwrap">
+    <a class="next" href="index.html#work"><div><span class="k">More work</span><h3>See all case studies</h3></div><span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+  <footer class="wrap foot"><span>© 2026 Hrishikesh Kakade</span><a href="index.html#work" class="back">Back to all work ↑</a></footer>
+</main>
+<div class="toast" id="toast" hidden></div>
+<script src="case.js"></script>
+<script src="ds/lib/react.production.min.js"></script>
+<script src="ds/lib/react-dom.production.min.js"></script>
+<script src="ds/lib/astuto-icons-line.js"></script>
+<script src="ds/lib/astuto-icons-solid.js"></script>
+<script src="ds/lib/astuto-icons-extra.js"></script>
+<script src="ds/bundle.js"></script>
+<script src="net-demo.js"></script>
+</body>
+</html>

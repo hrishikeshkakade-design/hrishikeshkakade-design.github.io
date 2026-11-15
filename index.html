@@ -323,6 +323,8 @@ section{padding-block:clamp(44px,6.5vw,84px)}
 .case.tbd .cover{min-height:180px}
 .metric b.todo{display:table;font:500 .9rem var(--f-mono);color:var(--muted);border:1px dashed color-mix(in srgb,var(--muted) 50%,transparent);border-radius:6px;padding:6px 9px;margin-bottom:6px}
 .case.tbd:hover{transform:none;border-color:var(--line)}
+.wip-mark{display:grid;place-items:center;width:100%;aspect-ratio:16/10;border-radius:10px;border:1.5px dashed color-mix(in srgb,var(--muted) 45%,transparent)}
+.wip-mark span{font:800 clamp(3.5rem,9vw,6.5rem)/1 var(--f-display);letter-spacing:-.04em;color:var(--ink);opacity:.18}
 .soon{display:grid;justify-items:center;gap:10px;color:var(--muted);font:500 .8rem var(--f-mono)}
 .soon-badge{font:700 2.4rem/1 var(--f-display);letter-spacing:-.02em;color:var(--ink);opacity:.25}
 /* Earlier work (Behance) */
@@ -482,6 +484,7 @@ section{padding-block:clamp(44px,6.5vw,84px)}
 .brief div{display:grid;grid-template-columns:88px 1fr;gap:12px}
 .brief dt{font:500 .68rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:2px}
 .brief dd{margin:0;font-size:.92rem}
+.case-actions .soon-chip.wip{margin-top:0;align-self:center}
 .soon-chip{align-self:flex-start;margin-top:auto;font:500 .78rem var(--f-mono);padding:7px 12px;border-radius:999px;border:1px dashed var(--muted);color:var(--muted)}
 .case.is-soon{cursor:default}
 .case.is-soon:hover{transform:none}
@@ -675,15 +678,15 @@ html.cc.cc-in .ccur{opacity:1}
 
   <section class="wrap" aria-label="Introduction">
     <div class="intro">
-      <span class="eyebrow">In one breath</span>
+      <span class="eyebrow">The short version</span>
       <p>I enjoy working on problems that don't come with obvious answers. <span>From understanding unfamiliar domains to structuring complex workflows, I bring clarity to ambiguous ideas and turn them into scalable product experiences. I work closely with product and engineering to make sure what we design works in the real world.</span></p>
     </div>
   </section>
 
   <section id="work" class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Selected work</span>
-      <h2>Things I've shipped</h2>
+      <span class="eyebrow">Case studies</span>
+      <h2>From ambiguous problems to shipped products</h2>
       <p>A closer look at the products and workflows I've helped shape, from enterprise cost allocation to AI observability and governance.</p>
     </div>
     <div class="work-list" id="workList"></div>
@@ -806,8 +809,8 @@ html.cc.cc-in .ccur{opacity:1}
 
   <section id="experience" class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Experience</span>
-      <h2>Where I've grown</h2>
+      <span class="eyebrow">Career</span>
+      <h2>My journey so far</h2>
       <p>From fintech to cloud and AI products, here's a little of what I've learned along the way.</p>
     </div>
     <div class="path" id="path">
@@ -818,7 +821,7 @@ html.cc.cc-in .ccur{opacity:1}
           <div class="when"><b>2021</b></div>
           <div class="card">
             <span class="dates">Oct 2021 — May 2023 · Where it started</span>
-            <h3>Associate UI/UX Designer <em>@ Kristal.AI</em></h3>
+            <h3>Associate UI/UX Designer <em>· Kristal.AI</em></h3>
             <p>Worked across multiple financial products, contributing to user research, interaction design and high-fidelity prototyping for B2B and B2C experiences.</p>
             <ul><li>Found friction points through research and usability testing</li><li>Built interactive prototypes that sped up stakeholder and user validation</li></ul>
             <div class="tags"><span class="tag">Fintech</span><span class="tag">Research</span><span class="tag">Prototyping</span></div>
@@ -829,7 +832,7 @@ html.cc.cc-in .ccur{opacity:1}
           <div class="when"><b>2023</b><span class="promo">↑ Promoted · May 2023</span></div>
           <div class="card">
             <span class="dates">May 2023 — Sep 2023</span>
-            <h3>UI/UX Designer <em>@ Kristal.AI</em></h3>
+            <h3>UI/UX Designer <em>· Kristal.AI</em></h3>
             <p>Redesigned key investment platform experiences across mobile and web, with a focus on onboarding, usability and consistency.</p>
             <ul><li>Reduced onboarding drop-offs by 40% through improved user flows and data collection</li><li>Built a responsive component library for consistent design and cleaner handoff</li><li>Created product demos that supported the company's UAE trade licensing approval</li></ul>
             <div class="tags"><span class="tag">Onboarding</span><span class="tag">Component library</span><span class="tag">Mobile + web</span></div>
@@ -840,7 +843,7 @@ html.cc.cc-in .ccur{opacity:1}
           <div class="when"><b>2023</b><span class="promo">Founding team · Sep 2023</span></div>
           <div class="card">
             <span class="dates">Sep 2023 — 2024</span>
-            <h3>Founding Product Designer <em>@ Astuto.ai</em></h3>
+            <h3>Founding Product Designer <em>· Astuto.ai</em></h3>
             <p>Joined Astuto.ai as its first product designer, helping shape the early product experience, establish design foundations and bring the company's visual identity to life.</p>
             <ul><li>Established the product design system using Tailwind CSS and Material UI</li><li>Defined core interaction patterns and information architecture across OneLens</li><li>Shaped early product direction with the founders and engineering through research and iterative validation</li></ul>
             <div class="tags"><span class="tag">0 → 1</span><span class="tag">Design system</span><span class="tag">Brand</span></div>
@@ -851,7 +854,7 @@ html.cc.cc-in .ccur{opacity:1}
           <div class="when"><b>2024</b><span class="promo">↑ Promoted · 2024</span></div>
           <div class="card">
             <span class="dates">2024 — Present</span>
-            <h3>Senior Product Designer <em>@ Astuto.ai</em></h3>
+            <h3>Senior Product Designer <em>· Astuto.ai</em></h3>
             <p>Leading product design across OneLens, a multi-cloud FinOps and AI cost observability platform, translating complex technical and financial problems into cohesive product experiences.</p>
             <ul><li>Lead end-to-end design across cloud cost observability, optimisation, cost allocation and AI governance</li><li>Translate complex technical workflows and financial data into intuitive, actionable experiences</li><li>Shape product direction and prioritisation in collaboration with founders, product and engineering</li><li>Evolve the design system and interaction patterns as the platform expands across new capabilities</li><li>Mentor and support a team of three designers</li></ul>
             <div class="tags"><span class="tag">Design direction</span><span class="tag">Systems thinking</span><span class="tag">Mentorship</span></div>
@@ -874,7 +877,7 @@ html.cc.cc-in .ccur{opacity:1}
   <section class="wrap" aria-labelledby="toolkitH">
     <div class="sec-head">
       <span class="eyebrow">Capabilities</span>
-      <h2 id="toolkitH">What I bring to a team</h2>
+      <h2 id="toolkitH">Where I add the most value</h2>
     </div>
     <div class="caps">
       <div><span class="cap-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg></span><h3>Product thinking</h3><p>Product discovery, UX strategy, systems thinking, information architecture</p></div>
@@ -937,10 +940,18 @@ const CASES = [
     brief:[["Problem","A provider bill shows AI spend, not which caller drove it, who owns it or how to control it."],["My role","Senior Product Designer. Product UX, information architecture, interaction and interface design."]]
   },
   {
-    id:"kristal", soon:true, title:"Kristal.AI Platform & Onboarding", product:"Kristal.AI", year:"2021 – 2023",
-    tags:["Fintech","UX redesign"], cover:"c-peach", ui:"onboard",
-    blurb:"Improving investment platform experiences through better information architecture, onboarding and responsive design systems.",
-    brief:[["Problem","Too many new investors dropped off during onboarding."],["My role","UI/UX Designer across the client app and web portal."],["Outcome","40% fewer onboarding drop-offs, with better data collection."]]
+    id:"networking", pdf:"", title:"Networking Analysis", product:"OneLens", year:"Astuto.ai",
+    tags:["FinOps","Cloud networking","Data visualisation","Onboarding"], cover:"c-blue", ui:"dash", img:"img/net/cover.webp",
+    imgAlt:"Networking Analysis in OneLens: networking cost, bytes transferred and a Sankey chart of traffic by resource and route",
+    blurb:"Connecting cloud network traffic to its cost, so teams can see which resources and routes sit behind a networking bill.",
+    outcomes:[["Sankey","traffic flow by resource and route"],["3-step","guided, validated Flow Logs ingestion"]],
+    brief:[["Problem","A bill shows networking spend, not which workloads generated the traffic or where the data went."],["My role","Senior Product Designer. Analysis experience, data visualisation and the Flow Logs ingestion flow."]]
+  },
+  {
+    id:"meal-prep", wip:true, pdf:"", title:"Batchwise", product:"Meal prep app", year:"In progress",
+    tags:["Health & nutrition","Mobile app","0 → 1"], cover:"c-peach", ui:"dash", wipMark:true,
+    blurb:"A nutrition assistant built around batch cooking: high-protein weekly plans, recipes crafted from the ingredients and equipment you have, and intake tracked against burn. No single serves.",
+    outcomes:[["Protein","first, not calories"],["Batch","every recipe, a week of portions"]]
   }
 ];
 
@@ -984,13 +995,16 @@ const outs=c=>c.outcomes?`<div class="outcomes"><ul>${c.outcomes.map(o=>`<li cla
 const brief=c=>c.brief?`<dl class="brief">${c.brief.map(b=>`<div><dt>${b[0]}</dt><dd>${b[1]}</dd></div>`).join('')}</dl>`:'';
 list.innerHTML = CASES.map((c,i)=>`
   <article class="case${c.soon?' is-soon':''}"${c.soon?'':` data-href="case-${c.id}.html"`}>
-    <div class="cover ${c.cover}${c.img?' has-shot':''}">${c.motion?MOTION:c.img?`<img class="cover-shot${c.imgCut?' is-cut':''}" src="${c.img}" alt="${c.imgAlt||''}" width="${c.imgCut?1460:1920}" height="${c.imgCut?1255:1080}" loading="lazy" decoding="async">`:`<div class="cover-ui">${UI[c.ui]}</div>`}</div>
+    <div class="cover ${c.cover}${c.img?' has-shot':''}">${c.wipMark?'<div class="wip-mark" role="img" aria-label="Work in progress"><span>WIP</span></div>':c.motion?MOTION:c.img?`<img class="cover-shot${c.imgCut?' is-cut':''}" src="${c.img}" alt="${c.imgAlt||''}" width="${c.imgCut?1460:1920}" height="${c.imgCut?1255:1080}" loading="lazy" decoding="async">`:`<div class="cover-ui">${UI[c.ui]}</div>`}</div>
     <div class="case-body">
       <div class="meta"><span>Case study ${String(i+1).padStart(2,'0')}</span><span>·</span><span>${c.product}</span><span>·</span><span>${c.year}</span></div>
       <h3>${c.title}</h3>
       <p>${c.blurb}</p>
       ${outs(c)}
-      ${c.soon?'<span class="soon-chip">Case study coming soon</span>':`<div class="case-actions">
+      ${c.soon?'<span class="soon-chip">Case study coming soon</span>':c.wip?`<div class="case-actions">
+        <a class="btn primary read-btn" href="case-${c.id}.html">Take a peek →</a>
+        <span class="soon-chip wip">Full case study coming soon</span>
+      </div>`:`<div class="case-actions">
         <a class="btn primary read-btn" href="case-${c.id}.html">Read case study →</a>
         <a class="btn pdf-btn" href="${c.pdf||'#'}"${c.pdf?' target="_blank" rel="noopener"':' data-nopdf'}>View PDF ↗</a>
       </div>`}

@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-labelledby="t d">
+  <title id="t">Meal prep assistant: work in progress</title>
+  <desc id="d">A construction site where a crane lowers a stack of meal prep containers onto a half-built tower of containers, with traffic cones, a striped barrier and a work in progress sign.</desc>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#E6DCCF" stroke-width="1.5"/></pattern>
+    <pattern id="stripes" width="44" height="44" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="44" height="44" fill="#14171F"/><rect width="22" height="44" fill="#F2A33A"/></pattern>
+    <g id="box">
+      <!-- a meal prep container: tray with three compartments and a lid -->
+      <rect x="0" y="14" width="200" height="92" rx="16" fill="#FFFFFF" stroke="#14171F" stroke-width="6"/>
+      <rect x="14" y="28" width="92" height="64" rx="10" fill="#F3D9A4"/>
+      <rect x="114" y="28" width="72" height="30" rx="8" fill="#5BBF8A"/>
+      <rect x="114" y="64" width="72" height="28" rx="8" fill="#C77B47"/>
+      <circle cx="40" cy="50" r="6" fill="#FFF6E0"/><circle cx="62" cy="68" r="5" fill="#FFF6E0"/><circle cx="82" cy="46" r="5" fill="#FFF6E0"/>
+      <rect x="-6" y="0" width="212" height="22" rx="10" fill="#FFD9C2" stroke="#14171F" stroke-width="6"/>
+    </g>
+    <g id="cone">
+      <path d="M44 0 L82 150 H6 Z" fill="#F2560B" stroke="#14171F" stroke-width="6" stroke-linejoin="round"/>
+      <path d="M30 56 H58 L64 82 H24 Z" fill="#FFFFFF"/>
+      <rect x="-14" y="146" width="116" height="20" rx="6" fill="#14171F"/>
+    </g>
+  </defs>
+
+  <!-- ground and blueprint grid -->
+  <rect width="1600" height="1000" fill="#FBF6EF"/>
+  <rect width="1600" height="1000" fill="url(#grid)"/>
+  <circle cx="1310" cy="210" r="96" fill="#FFE3CF"/>
+  <rect y="842" width="1600" height="158" fill="#EFE3D3"/>
+  <path d="M0 842 H1600" stroke="#14171F" stroke-width="6"/>
+
+  <!-- tower crane -->
+  <g stroke="#14171F" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" fill="none">
+    <rect x="250" y="190" width="70" height="652" fill="#F2A33A"/>
+    <path d="M250 250 L320 310 M320 310 L250 370 M250 370 L320 430 M320 430 L250 490 M250 490 L320 550 M320 550 L250 610 M250 610 L320 670 M320 670 L250 730 M250 730 L320 790"/>
+    <rect x="150" y="150" width="830" height="44" fill="#F2A33A"/>
+    <path d="M190 150 L230 194 L270 150 L310 194 L350 150 L390 194 L430 150 L470 194 L510 150 L550 194 L590 150 L630 194 L670 150 L710 194 L750 150 L790 194 L830 150 L870 194 L910 150 L950 194"/>
+    <path d="M285 150 L285 70 M285 70 L170 150 M285 70 L980 150"/>
+    <rect x="96" y="194" width="90" height="70" fill="#14171F"/>
+    <rect x="240" y="200" width="90" height="62" rx="8" fill="#FFFFFF"/>
+    <rect x="262" y="214" width="46" height="30" rx="4" fill="#BFE4F7"/>
+    <rect x="200" y="842" width="170" height="30" fill="#14171F"/>
+  </g>
+  <!-- trolley, cable, hook and the load -->
+  <g stroke="#14171F" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="770" y="194" width="60" height="26" rx="6" fill="#FFFFFF"/>
+    <path d="M800 220 V320" fill="none"/>
+    <path d="M800 320 L708 360 M800 320 L892 360" fill="none"/>
+    <path d="M790 308 a14 14 0 1 0 20 0" fill="none"/>
+  </g>
+  <use href="#box" x="700" y="362"/>
+  <use href="#box" x="700" y="476"/>
+
+  <!-- half-built tower of containers with scaffolding -->
+  <g>
+    <use href="#box" x="1040" y="740"/>
+    <use href="#box" x="1250" y="740"/>
+    <use href="#box" x="1040" y="626"/>
+    <use href="#box" x="1250" y="626"/>
+    <use href="#box" x="1145" y="512"/>
+    <g fill="none" stroke="#14171F" stroke-width="6" stroke-dasharray="2 16" stroke-linecap="round">
+      <rect x="1250" y="512" width="200" height="106" rx="16"/>
+      <rect x="1145" y="398" width="200" height="106" rx="16"/>
+    </g>
+    <g stroke="#8E95A3" stroke-width="8" stroke-linecap="round">
+      <path d="M1010 842 V480 M1490 842 V480 M1010 600 H1490 M1010 720 H1490 M1010 480 H1490"/>
+      <path d="M1010 600 L1100 480 M1490 720 L1400 600" stroke-width="5"/>
+    </g>
+  </g>
+
+  <!-- barrier and sign -->
+  <g stroke="#14171F" stroke-width="6" stroke-linejoin="round">
+    <rect x="430" y="742" width="460" height="56" rx="10" fill="url(#stripes)"/>
+    <rect x="450" y="798" width="22" height="50" fill="#14171F"/>
+    <rect x="848" y="798" width="22" height="50" fill="#14171F"/>
+    <rect x="512" y="620" width="296" height="104" rx="14" fill="#FFFFFF"/>
+    <rect x="648" y="724" width="24" height="18" fill="#14171F"/>
+  </g>
+  <text x="660" y="664" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,monospace" font-size="30" font-weight="600" fill="#14171F" letter-spacing="2">WORK IN</text>
+  <text x="660" y="702" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,monospace" font-size="30" font-weight="600" fill="#F2560B" letter-spacing="2">PROGRESS</text>
+
+  <!-- cones -->
+  <use href="#cone" x="120" y="690"/>
+  <use href="#cone" x="930" y="690"/>
+  <use href="#cone" x="1500" y="690"/>
+
+  <!-- a few ingredients waiting on site -->
+  <g stroke="#14171F" stroke-width="6" stroke-linejoin="round">
+    <path d="M1520 560 q30 -40 60 0 q20 30 -10 52 h-40 q-30 -22 -10 -52z" fill="#5BBF8A"/>
+    <rect x="1538" y="606" width="24" height="40" rx="6" fill="#8CCB6B"/>
+    <ellipse cx="1080" cy="900" rx="44" ry="30" fill="#FFF3D6"/>
+    <ellipse cx="1170" cy="912" rx="36" ry="26" fill="#FFF3D6"/>
+    <path d="M1250 930 q40 -70 90 0 z" fill="#E3533D"/>
+  </g>
+</svg>

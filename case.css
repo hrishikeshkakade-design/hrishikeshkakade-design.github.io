@@ -226,7 +226,7 @@ html.cc.cc-in .ccur{opacity:1}
 .sc{position:relative;overflow:hidden}
 .sc-prog{position:absolute;left:0;right:0;bottom:0;height:3px;background:color-mix(in srgb,var(--line) 70%,transparent)}
 .sc-prog i{display:block;height:100%;background:var(--select);transform-origin:0 50%;transform:scaleX(0)}
-#stagePlay{font-size:.7rem;letter-spacing:-.1em}
+#stagePlay,.stages-nav .sbtn[aria-pressed]{font-size:.7rem;letter-spacing:-.1em}
 /* Step viewer */
 .sv{position:fixed;inset:0;z-index:130;background:rgba(10,12,16,.9);display:grid;place-items:center;padding:max(20px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) max(20px,env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
 .sv-in{position:relative;width:min(1200px,100%);max-height:100%;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(260px,1fr);gap:32px;align-items:center;background:var(--surface);color:var(--ink);border-radius:18px;padding:28px;overflow:auto}
@@ -304,3 +304,25 @@ html.cc.cc-in .ccur{opacity:1}
 .stages.landscape .sc{min-width:0}
 .stages.landscape .sc .shot{min-width:0;height:auto}
 .sec{grid-template-columns:minmax(0,1fr)}
+
+.stages-count .pill.v1{display:inline-block;margin-right:8px;font:500 .66rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:var(--line);color:var(--muted)}
+.stages-count .pill.v2{background:color-mix(in srgb,var(--select) 14%,transparent);color:var(--select)}
+
+/* Allocation-to-analysis motion: screen states crossfade while a cursor drives the UI */
+.anl{margin:0}
+.anl-stage{position:relative;aspect-ratio:1600/977;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#fff;box-shadow:0 18px 40px -28px rgba(20,23,31,.45)}
+.anl-f{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .45s ease}
+.anl-f.on{opacity:1}
+.anl-cur{position:absolute;left:0;top:0;width:clamp(16px,2.2%,26px);aspect-ratio:1;transform:translate(-20%,-10%);transition:left .9s cubic-bezier(.45,.05,.25,1),top .9s cubic-bezier(.45,.05,.25,1),scale .12s;z-index:3;filter:drop-shadow(0 2px 3px rgba(0,0,0,.25));pointer-events:none}
+.anl-cur svg{width:100%;height:100%;display:block}
+.anl-cur.down{scale:.82}
+.anl-ring{position:absolute;width:clamp(26px,3.6%,44px);aspect-ratio:1;border-radius:50%;border:2px solid var(--select);transform:translate(-50%,-50%) scale(.4);opacity:0;z-index:2;pointer-events:none}
+.anl-ring.go{animation:anlring .55s ease-out}
+@keyframes anlring{0%{opacity:.9;transform:translate(-50%,-50%) scale(.4)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.5)}}
+.anl-cap{position:absolute;left:2.5%;bottom:4%;z-index:3;padding:8px 14px;border-radius:999px;background:#14171F;color:#F2F2F2;font:500 clamp(.7rem,1.3vw,.85rem) var(--f-body);opacity:0;translate:0 6px;transition:opacity .3s,translate .3s;pointer-events:none}
+.anl-cap.on{opacity:1;translate:0 0}
+.anl figcaption{margin-top:10px}
+
+/* Pairs whose screens need full width to read: stack them, label, image and caption aligned on one left edge */
+.pair.stack{grid-template-columns:minmax(0,1fr);gap:28px}
+.pair figure{align-content:start}

@@ -33,7 +33,7 @@
   el.innerHTML='<div class="cc-o"></div><div class="cc-tag"></div>'; document.body.append(el); root.classList.add('cc');
   const tag=el.querySelector('.cc-tag');
   const RULES=[['[data-pdf]',a=>a.dataset.pdf?'Open PDF ↗':'PDF coming soon'],['.next',()=>'Next case study'],['.toc a',()=>'Jump to section'],
-    ['#stagePlay',b=>b.getAttribute('aria-pressed')==='true'?'Pause':'Play'],['.sv-close',()=>'Close'],['.sbtn',b=>/Previous/.test(b.getAttribute('aria-label'))?'Previous step':'Next step'],['.sc .shot',()=>'Open full screen'],['.stages-dots button',()=>'Go to step'],['img.shot',()=>'View full size'],['#themeBtn',()=>'Switch theme'],['.back',()=>'Back to work'],['a[target="_blank"]',()=>'Opens in new tab ↗'],['a,button',()=>'']];
+    ['.stages-nav .sbtn[aria-pressed]',b=>b.getAttribute('aria-pressed')==='true'?'Pause':'Play'],['.sv-close',()=>'Close'],['.sbtn',b=>/Previous/.test(b.getAttribute('aria-label'))?'Previous step':'Next step'],['.sc .shot',()=>'Open full screen'],['.stages-dots button',()=>'Go to step'],['img.shot',()=>'View full size'],['#themeBtn',()=>'Switch theme'],['.back',()=>'Back to work'],['a[target="_blank"]',()=>'Opens in new tab ↗'],['a,button',()=>'']];
   let x=-99,y=-99,cx=-99,cy=-99,raf=0;
   const loop=()=>{raf=0;const k=calm?1:.35;cx+=(x-cx)*k;cy+=(y-cy)*k;el.style.transform=`translate(${cx}px,${cy}px)`;if(Math.abs(x-cx)>.2||Math.abs(y-cy)>.2)raf=requestAnimationFrame(loop)};
   addEventListener('pointermove',e=>{
@@ -64,12 +64,13 @@
   addEventListener('keydown',e=>{if(e.key==='Escape') close()});
 })();
 
-/* Seven-stage card slider: auto-advances, pauses on hover, focus or when off screen; opens a full-screen step viewer */
-(function(){
-  const track=document.getElementById('stageTrack'); if(!track) return;
-  const cards=[...track.children], dots=[...document.querySelectorAll('.stages-dots button')];
-  const prev=document.getElementById('stagePrev'), next=document.getElementById('stageNext'), now=document.getElementById('stageNow');
-  const wrap=track.closest('.stages'), playBtn=document.getElementById('stagePlay');
+/* Step card sliders (any number per page): auto-advances, pauses on hover, focus or when off screen; opens a full-screen step viewer */
+document.querySelectorAll('.stages').forEach(function(wrap){
+  const track=wrap.querySelector('.stages-track'); if(!track) return;
+  const cards=[...track.children], dots=[...wrap.querySelectorAll('.stages-dots button')];
+  const prev=wrap.querySelector('.stages-nav .sbtn[aria-label^="Previous"]'), next=wrap.querySelector('.stages-nav .sbtn[aria-label^="Next"]'), now=wrap.querySelector('.stages-count b');
+  const playBtn=wrap.querySelector('.stages-nav .sbtn[aria-pressed]');
+  const label=wrap.dataset.viewer||'Steps';
   const calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const DUR=6000, N=cards.length;
   let cur=0, playing=!calm, hover=false, visible=false, viewerOpen=false, t0=0, elapsed=0, raf=0;
@@ -120,7 +121,7 @@
   }
   function open(i){
     lastFocus=document.activeElement; viewerOpen=true; mark(i);
-    v=document.createElement('div'); v.className='sv'; v.setAttribute('role','dialog'); v.setAttribute('aria-modal','true'); v.setAttribute('aria-label','Working table steps');
+    v=document.createElement('div'); v.className='sv'; v.setAttribute('role','dialog'); v.setAttribute('aria-modal','true'); v.setAttribute('aria-label',label);
     v.innerHTML=`<div class="sv-in">
       <figure class="sv-fig"><img class="sv-img" alt=""></figure>
       <div class="sv-side">
@@ -141,7 +142,7 @@
     if(e.key==='Escape') close(); else if(e.key==='ArrowRight'){e.preventDefault();go(cur+1,true)} else if(e.key==='ArrowLeft'){e.preventDefault();go(cur-1,true)} });
   cards.forEach((c,k)=>{const img=c.querySelector('img'); img.tabIndex=0; img.setAttribute('role','button'); img.setAttribute('aria-label','Open step '+(k+1)+' full screen');
     img.addEventListener('click',()=>open(k)); img.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(k)}})});
-})();
+});
 
 /* Always open at the hero. In-page links scroll without writing a #hash, so the viewer's
    address bar never remembers a section and reopening the page doesn't jump to it. */

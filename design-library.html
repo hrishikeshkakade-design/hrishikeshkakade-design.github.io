@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="The Astuto Design Library by Hrishikesh Kakade: foundations, 68 coded components, 2,801 icons and page templates for OneLens.">
+<meta name="description" content="The Astuto Design Library by Hrishikesh Kakade: foundations, 68 coded components, 2,801 icons, page templates, and its evolution into an AI-assisted product exploration tool for OneLens.">
 <title>Astuto Design Library — Hrishikesh Kakade</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
@@ -129,6 +129,20 @@
 .pipe code{font:500 .78rem var(--f-mono);color:var(--ink)}
 @media (max-width:860px){.pipe{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:520px){.pipe{grid-template-columns:1fr}}
+.aiflow{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);gap:10px;align-items:stretch}
+.aiflow>div{border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:6px;align-content:start;background:var(--glass,transparent)}
+.aiflow>div:first-child{border-color:color-mix(in srgb,var(--select) 45%,var(--line))}
+.ai-k{font:500 .7rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--select)}
+.aiflow h4{font-size:1rem;font-weight:600}
+.aiflow p{font-size:.88rem}
+.ai-arrow{align-self:center;font-style:normal;color:var(--muted);font-size:1.1rem}
+.ai-tags{list-style:none;padding:0!important;margin:4px 0 0;display:flex!important;flex-wrap:wrap;gap:6px!important}
+.ai-tags li{font:500 .7rem var(--f-mono);padding:3px 8px;border-radius:999px;background:var(--line);color:var(--ink)}
+.aiflow .ai-then{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;border-style:dashed;background:none}
+.ai-then b{font:500 .7rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ai-then span{font-size:.88rem;color:color-mix(in srgb,var(--ink) 82%,var(--muted))}
+#ai .numcards>div{grid-template-columns:1fr;gap:6px}#ai .numcards i{grid-row:auto;font-size:1.2rem}
+@media (max-width:700px){.aiflow{grid-template-columns:minmax(0,1fr)}.ai-arrow{transform:rotate(90deg);justify-self:center}}
 pre.code{margin:0;padding:18px 20px;border-radius:12px;background:#14171F;color:#E6E8EC;font:400 .82rem/1.65 var(--f-mono);overflow-x:auto}
 pre.code .c{color:#7D8494}pre.code .k{color:#FF8A45}pre.code .s{color:#9BE3BF}
 .gaps{columns:2;column-gap:28px}
@@ -145,8 +159,7 @@ pre.code .c{color:#7D8494}pre.code .k{color:#FF8A45}pre.code .s{color:#9BE3BF}
   <a class="nbtn back" href="index.html#earlier" aria-label="Back to all work"><i class="mark" aria-hidden="true"></i><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg><span class="nlabel">All work</span></a>
   <span class="nsep" aria-hidden="true"></span>
   <div class="ntitle">OneLens / <b>Astuto Design Library</b></div>
-  <button class="nbtn" id="themeBtn" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
-  <a class="nbtn" href="#" data-pdf=""><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L12.5 4.5v10h-8.5z M9.5 1.5v3h3"/></svg><span class="nlabel">View PDF</span></a>
+  <button class="ttog" id="themeBtn" type="button" role="switch" aria-checked="false" aria-label="Dark mode"><span class="ttog-track"><i class="ttog-knob" aria-hidden="true"></i><svg class="ttog-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="ttog-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span></button>
   <a class="nbtn nprimary" href="index.html#contact">Let's talk</a>
   <span class="nprog" aria-hidden="true"></span>
 </nav>
@@ -155,7 +168,7 @@ pre.code .c{color:#7D8494}pre.code .k{color:#FF8A45}pre.code .s{color:#9BE3BF}
   <header class="hero wrap">
     <div class="crumb"><b>Case study</b><span>·</span><span>OneLens by Astuto.ai</span><span>·</span><span>Design systems / B2B SaaS</span></div>
     <h1>One library for a calm, data-dense cloud cost product.</h1>
-    <p class="sum">The Astuto Design Library is the system behind OneLens: tokens, components, icons and page patterns, built in Figma and mirrored in code. Everything on this page is rendered live from that coded library.</p>
+    <p class="sum">The Astuto Design Library is the foundation behind OneLens: tokens, components, icons and page patterns, built in Figma and mirrored in code. Made available within Claude, it also became a shared foundation for faster product ideation, stakeholder alignment and customer conversations. Everything on this page is rendered live from the coded library.</p>
     <dl class="meta">
       <div><dt>Product</dt><dd>OneLens by Astuto</dd></div>
       <div><dt>Area</dt><dd>Design system</dd></div>
@@ -164,7 +177,6 @@ pre.code .c{color:#7D8494}pre.code .k{color:#FF8A45}pre.code .s{color:#9BE3BF}
     </dl>
     <div class="hero-actions">
       <a class="btn primary" href="#overview">Explore the case study ↓</a>
-      <a class="btn" href="#" data-pdf="">View PDF ↗</a>
     </div>
     <figure class="cover"><div class="scaler live" role="img" aria-label="Savings Overview page built entirely from library components: side nav, header with tabs, toolbar, stats and a stacked bar chart" style="aspect-ratio:1440/720"></div><figcaption class="cover-cap">A full OneLens page, assembled only from library components.</figcaption></figure>
   </header>
@@ -172,7 +184,7 @@ pre.code .c{color:#7D8494}pre.code .k{color:#FF8A45}pre.code .s{color:#9BE3BF}
   <div class="wrap body">
     <nav class="toc" aria-label="Contents">
       <span class="lbl">On this page</span>
-      <a href="#overview"><i>01</i>Overview</a><a href="#challenge"><i>02</i>The challenge</a><a href="#principles"><i>03</i>Principles</a><a href="#foundations"><i>04</i>Foundations</a><a href="#components"><i>05</i>Components</a><a href="#icons"><i>06</i>Iconography</a><a href="#templates"><i>07</i>Page templates</a><a href="#code"><i>08</i>Figma to code</a><a href="#outcome"><i>09</i>Outcome</a><a href="#next"><i>10</i>What's next</a>
+      <a href="#overview"><i>01</i>Overview</a><a href="#challenge"><i>02</i>The challenge</a><a href="#principles"><i>03</i>Principles</a><a href="#foundations"><i>04</i>Foundations</a><a href="#components"><i>05</i>Components</a><a href="#icons"><i>06</i>Iconography</a><a href="#templates"><i>07</i>Page templates</a><a href="#code"><i>08</i>Figma to code</a><a href="#ai"><i>09</i>AI-assisted exploration</a><a href="#outcome"><i>10</i>Outcome</a><a href="#next"><i>11</i>What's next</a>
     </nav>
     <article>
 
@@ -185,11 +197,11 @@ pre.code .c{color:#7D8494}pre.code .k{color:#FF8A45}pre.code .s{color:#9BE3BF}
         <div class="stats">
           <div class="stat"><b>68</b><span>coded components, from buttons to set-up wizards</span></div>
           <div class="stat"><b>2,801</b><span>icons across line, solid and full-colour sets</span></div>
-          <div class="stat"><b>161</b><span>colour tokens, defined for Light and Dark</span></div>
+          <div class="stat"><b>161</b><span>semantic colour tokens, defined for Light and Dark</span></div>
         </div>
         <div class="duo">
           <div class="card"><span class="k">My role</span><p>Senior Product Designer. I defined the foundations and component set, documented usage and page patterns, and kept the Figma library and its coded mirror in sync.</p></div>
-          <div class="card"><span class="k">Who it serves</span><p>Designers composing new OneLens flows, and engineers building them from the same tokens and component names.</p></div>
+          <div class="card"><span class="k">Who it serves</span><p>Designers composing new OneLens flows, engineers building them from the same tokens and component names, and product team members exploring early concepts in Claude.</p></div>
         </div>
       </section>
 
@@ -291,21 +303,45 @@ pre.code .c{color:#7D8494}pre.code .k{color:#FF8A45}pre.code .s{color:#9BE3BF}
 { key: <span class="s">'c'</span>, label: <span class="s">'Compliance'</span>, type: <span class="s">'meter'</span> }</pre>
       </section>
 
-      <!-- 09 OUTCOME -->
+      <!-- 09 AI -->
+      <section class="sec" id="ai">
+        <span class="sec-k">09 · AI-assisted exploration</span>
+        <h2>From Design System to AI-assisted Product Exploration.</h2>
+        <p class="lead">The design system was made available within Claude. That let Claude reference established components, design patterns and visual conventions when generating early ideations and simple UI mock-ups.</p>
+        <p>An idea no longer had to wait for a design cycle to become something people could look at. A shareholder input, a customer's feature request or a product idea could be turned into an early concept in the OneLens visual language, discussed, and then handed to design for detailed work.</p>
+        <div class="aiflow" role="group" aria-label="How an idea becomes an early concept">
+          <div><span class="ai-k">Input</span><h4>An idea or a request</h4><p>Shareholder inputs, emerging requirements, customer feature requests or a product team idea.</p></div>
+          <i class="ai-arrow" aria-hidden="true">→</i>
+          <div><span class="ai-k">Generate</span><h4>Claude, with the design system</h4><p>Claude references the library's components, patterns and conventions to draft a mock-up.</p><ul class="ai-tags"><li>68 coded components</li><li>161 semantic colour tokens</li><li>Page patterns</li></ul></div>
+          <i class="ai-arrow" aria-hidden="true">→</i>
+          <div><span class="ai-k">Discuss</span><h4>An early concept</h4><p>A mock-up that looks like OneLens, used to align, demonstrate and gather feedback.</p></div>
+          <div class="ai-then"><b>Then</b><span>Design review, detailed UX and development, for the directions worth pursuing.</span></div>
+        </div>
+        <h3>What it changed in practice</h3>
+        <div class="numcards five">
+          <div><i>01</i><h4>Accelerating stakeholder alignment</h4><p>Shareholder inputs and emerging requirements could be translated into tangible visual concepts sooner, helping stakeholders understand and respond to proposed directions.</p></div>
+          <div><i>02</i><h4>Customer-facing proofs of concept</h4><p>When customers requested new features, the product team could use Claude to generate early interface concepts and demonstrate possible solutions, making feature discussions concrete before committing to detailed design and development.</p></div>
+          <div><i>03</i><h4>Empowering the product team</h4><p>Product team members could use Claude on their own to generate early mock-ups, explore different approaches and gather feedback, with less dependency on the design team for initial visual exploration.</p></div>
+        </div>
+        <div class="callout"><b>Early concepts, not finished screens</b><p>Generated screens are early concepts and proof-of-concept material, not production-ready interfaces. They open the conversation; design judgement, detailed UX work and design review still decide what gets built.</p></div>
+      </section>
+
+      <!-- 10 OUTCOME -->
       <section class="sec" id="outcome">
-        <span class="sec-k">09 · Outcome</span>
+        <span class="sec-k">10 · Outcome</span>
         <h2>One system from foundations to full pages.</h2>
-        <p class="lead">The library gives OneLens one source for how the product looks and behaves, from a single colour token to a complete page.</p>
-        <div class="outs">
-          <div><span class="k">Foundations</span><h4>Tokens for both themes</h4><p>161 colour tokens plus type, spacing, radius, line and shadow scales, defined for Light and Dark.</p></div>
+        <p class="lead">The library gives OneLens one source for how the product looks and behaves, from a single colour token to a complete page. It evolved into a shared foundation for both design execution and AI-assisted product exploration.</p>
+        <div class="outs two">
+          <div><span class="k">Foundations</span><h4>Tokens for both themes</h4><p>161 semantic colour tokens plus type, spacing, radius, line and shadow scales, defined for Light and Dark.</p></div>
           <div><span class="k">Components</span><h4>68 coded components</h4><p>Named and structured like their Figma counterparts, with props that map to variants.</p></div>
           <div><span class="k">Patterns</span><h4>Documented page types</h4><p>Layout recipes for dashboards, explorers, queues, catalogues, marketplaces and settings.</p></div>
+          <div><span class="k">AI-assisted exploration</span><h4>A shared foundation for ideation</h4><p>Available within Claude, so stakeholders, customers and the product team can see early concepts in the OneLens design language sooner.</p></div>
         </div>
       </section>
 
       <!-- 10 NEXT -->
       <section class="sec" id="next">
-        <span class="sec-k">10 · What's next</span>
+        <span class="sec-k">11 · What's next</span>
         <h2>What still lives only in Figma.</h2>
         <p>The library is honest about its gaps. These patterns exist in the Figma file but are not yet coded components:</p>
         <ul class="gaps">

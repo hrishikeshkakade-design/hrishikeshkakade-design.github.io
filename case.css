@@ -327,3 +327,21 @@ html.cc.cc-in .ccur{opacity:1}
 /* Pairs whose screens need full width to read: stack them, label, image and caption aligned on one left edge */
 .pair.stack{grid-template-columns:minmax(0,1fr);gap:28px}
 .pair figure{align-content:start}
+
+/* Theme toggle: sun / moon switch */
+.ttog{flex:none;display:inline-flex;align-items:center;padding:0;margin:0 2px;border:0;background:none;color:inherit;cursor:pointer;border-radius:999px}
+.ttog:focus-visible{outline:2px solid var(--select,#F2560B);outline-offset:2px}
+.ttog-track{position:relative;display:grid;grid-template-columns:28px 28px;align-items:center;justify-items:center;width:56px;height:28px;border-radius:999px;background:color-mix(in srgb,currentColor 16%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,currentColor 18%,transparent)}
+.ttog-track svg{position:relative;z-index:1;width:14px;height:14px;opacity:.6;transition:color .25s ease,opacity .25s ease}
+.ttog-knob{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:var(--select,#F2560B);box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .25s cubic-bezier(.3,.7,.4,1)}
+.ttog-sun{color:#fff;opacity:1!important}
+.ttog:hover .ttog-track{background:color-mix(in srgb,currentColor 24%,transparent)}
+:root[data-theme="dark"] .ttog-knob{transform:translateX(28px)}
+:root[data-theme="dark"] .ttog-sun{color:inherit;opacity:.6!important}
+:root[data-theme="dark"] .ttog-moon{color:#fff;opacity:1}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .ttog-knob{transform:translateX(28px)}
+  :root:not([data-theme="light"]) .ttog-sun{color:inherit;opacity:.6!important}
+  :root:not([data-theme="light"]) .ttog-moon{color:#fff;opacity:1}
+}
+@media (prefers-reduced-motion:reduce){.ttog-knob,.ttog-track svg{transition:none}}

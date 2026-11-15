@@ -4,7 +4,8 @@
   try{const t=localStorage.getItem('pf-theme'); if(t) root.dataset.theme=t}catch(e){}
   const isDark=()=>root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
   const tb=document.getElementById('themeBtn');
-  if(tb) tb.onclick=()=>{const n=isDark()?'light':'dark'; root.dataset.theme=n; try{localStorage.setItem('pf-theme',n)}catch(e){}};
+  const sync=()=>{if(tb) tb.setAttribute('aria-checked',String(isDark()))};
+  if(tb){sync(); tb.onclick=()=>{const n=isDark()?'light':'dark'; root.dataset.theme=n; try{localStorage.setItem('pf-theme',n)}catch(e){} sync()}; try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',sync)}catch(e){}}
 
   const toast=document.getElementById('toast'); let tt;
   const say=m=>{toast.textContent=m; toast.hidden=false; clearTimeout(tt); tt=setTimeout(()=>toast.hidden=true,2200)};

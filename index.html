@@ -565,6 +565,24 @@ html.cc.cc-in .ccur{opacity:1}
   box-shadow:inset 0 1px 0 color-mix(in srgb,#FFFFFF 35%,transparent),0 12px 32px -22px rgba(20,23,31,.35)}
 .stop.next .card{background:color-mix(in srgb,var(--surface) 25%,transparent)}
 .vignette{background:var(--glass-inner);border-color:var(--glass-edge)}
+
+/* Theme toggle: sun / moon switch */
+.ttog{flex:none;display:inline-flex;align-items:center;padding:0;margin:0 2px;border:0;background:none;color:inherit;cursor:pointer;border-radius:999px}
+.ttog:focus-visible{outline:2px solid var(--select,#F2560B);outline-offset:2px}
+.ttog-track{position:relative;display:grid;grid-template-columns:28px 28px;align-items:center;justify-items:center;width:56px;height:28px;border-radius:999px;background:color-mix(in srgb,currentColor 16%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,currentColor 18%,transparent)}
+.ttog-track svg{position:relative;z-index:1;width:14px;height:14px;opacity:.6;transition:color .25s ease,opacity .25s ease}
+.ttog-knob{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:var(--select,#F2560B);box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .25s cubic-bezier(.3,.7,.4,1)}
+.ttog-sun{color:#fff;opacity:1!important}
+.ttog:hover .ttog-track{background:color-mix(in srgb,currentColor 24%,transparent)}
+:root[data-theme="dark"] .ttog-knob{transform:translateX(28px)}
+:root[data-theme="dark"] .ttog-sun{color:inherit;opacity:.6!important}
+:root[data-theme="dark"] .ttog-moon{color:#fff;opacity:1}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .ttog-knob{transform:translateX(28px)}
+  :root:not([data-theme="light"]) .ttog-sun{color:inherit;opacity:.6!important}
+  :root:not([data-theme="light"]) .ttog-moon{color:#fff;opacity:1}
+}
+@media (prefers-reduced-motion:reduce){.ttog-knob,.ttog-track svg{transition:none}}
 </style>
 </head>
 <body>
@@ -587,7 +605,7 @@ html.cc.cc-in .ccur{opacity:1}
         <div class="fig-file">Hrishikesh Kakade / <b>Portfolio</b> ⌄</div>
         <div class="fig-actions">
           <div class="avatars" aria-label="2 people viewing"><span style="background:#B46CFF">R</span><span style="background:#7B61FF">H</span></div>
-          <button class="tool theme" id="themeBtn" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span class="tip">Theme</span></button>
+          <button class="ttog" id="themeBtn" type="button" role="switch" aria-checked="false" aria-label="Dark mode"><span class="ttog-track"><i class="ttog-knob" aria-hidden="true"></i><svg class="ttog-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="ttog-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span></button>
           <a class="share" href="#contact">Let's talk</a>
         </div>
       </header>
@@ -700,7 +718,7 @@ html.cc.cc-in .ccur{opacity:1}
         <a class="ew ew-ds" href="design-library.html">
           <div class="ew-cover has-img"><img src="img/ds/cover.webp" alt="Astuto Design Library: buttons, status badges, a donut chart, stats and a toast from the OneLens component set" width="1228" height="959" loading="lazy" decoding="async"></div>
           <div class="ew-body">
-            <span class="ew-meta">Astuto.ai · Design system</span>
+            <span class="ew-meta">Astuto.ai · Design system · AI-ready</span>
             <h4>Astuto Design Library</h4>
             <span class="ew-link">Explore the library →</span>
           </div>
@@ -924,15 +942,15 @@ html.cc.cc-in .ccur{opacity:1}
 /* ---- Replace this sample content with your own projects ---- */
 const CASES = [
   {
-    id:"unit-economics", pdf:"", title:"Advanced Cost Allocation", product:"OneLens", year:"Astuto.ai",
+    id:"unit-economics", pdf:"pdf/Hrishikesh_Kakade_Advanced_Cost_Allocation.pdf", title:"Advanced Cost Allocation", product:"OneLens", year:"Astuto.ai",
     tags:["FinOps","B2B SaaS","Customer discovery","Systems design"], cover:"c-blue", ui:"unit", img:"img/ue/cover-card.webp", imgCut:true, motion:true,
     imgAlt:"The allocation canvas in OneLens: contributors, intermediate tables and the final report",
     blurb:"Turning four enterprise customers' allocation workflows into one scalable framework for understanding the true cost of serving a customer.",
-    outcomes:[["2","enterprise deals contributed to",true],["4","customers interviewed"],["6 → 1","capabilities unified"]],
+    outcomes:[["2","enterprise deals contributed to",true],["4","customers interviewed"],["6","capabilities unified to 1"]],
     brief:[["Problem","A bill says what you spent, not what one customer costs. The logic to split shared costs lived in spreadsheets and custom SQL."],["My role","Senior Product Designer. Led customer conversations with four SPOCs, problem definition, UX strategy and end-to-end design."]]
   },
   {
-    id:"ai-costs", pdf:"", title:"AI Costs & Usage", product:"OneLens", year:"Astuto.ai",
+    id:"ai-costs", pdf:"pdf/Hrishikesh_Kakade_AI_Costs_and_Usage.pdf", title:"AI Costs & Usage", product:"OneLens", year:"Astuto.ai",
     tags:["AI FinOps","B2B SaaS","Governance","Data UX"], cover:"c-lilac", ui:"ai", img:"img/ai/inventory.webp",
     imgAlt:"Keys and Caller Inventory in OneLens AI Governance",
     blurb:"Helping teams understand AI spend, trace usage to its source, connect it to business ownership and establish governance controls.",
@@ -948,11 +966,11 @@ const CASES = [
     brief:[["Problem","A bill shows networking spend, not which workloads generated the traffic or where the data went."],["My role","Senior Product Designer. Analysis experience, data visualisation and the Flow Logs ingestion flow."]]
   },
   {
-    id:"resource-scheduler", pdf:"", title:"Cloud Resource Scheduling", product:"OneLens", year:"Astuto.ai",
+    id:"resource-scheduler", pdf:"pdf/Hrishikesh_Kakade_Cloud_Resource_Scheduling.pdf", title:"Cloud Resource Scheduling", product:"OneLens", year:"Astuto.ai",
     tags:["FinOps","Automation","Agentic actions","B2B SaaS"], cover:"c-mint", ui:"dash", img:"img/rs/cover.webp",
     imgAlt:"Scheduler overview in OneLens: potential savings, schedulable resources, active schedules and savings by account, cost centre and environment",
     blurb:"Taking OneLens from spotting idle cloud resources to safely scheduling them, with explainable recommendations and a full record of every automated action.",
-    outcomes:[["4","major customers adopted it"],["1st","feature to act in customer environments"]],
+    outcomes:[["5","major customers adopted it"],["1st","feature to act in customer environments"]],
     brief:[["Problem","Teams could see idle resources but acting on them meant tools, tickets and manual changes. Automating it had to stay explainable and observable."],["My role","Senior Product Designer. Designed the overview, recommendation details, schedule creation, schedule management and execution views."]]
   },
   {
@@ -1058,9 +1076,14 @@ window.addEventListener('hashchange',routeHash); routeHash();
 const root=document.documentElement;
 function currentDark(){const t=root.dataset.theme; return t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches}
 try{const s=localStorage.getItem('pf-theme'); if(s) root.dataset.theme=s}catch(e){}
-document.getElementById('themeBtn').onclick=()=>{
+const themeBtn=document.getElementById('themeBtn');
+const syncTheme=()=>themeBtn.setAttribute('aria-checked',String(currentDark()));
+syncTheme();
+try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',syncTheme)}catch(e){}
+themeBtn.onclick=()=>{
   const next=currentDark()?'light':'dark'; root.dataset.theme=next;
   try{localStorage.setItem('pf-theme',next)}catch(e){}
+  syncTheme();
 };
 
 /* Clock */
